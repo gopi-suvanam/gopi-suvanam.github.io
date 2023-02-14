@@ -1,4 +1,7 @@
-## Gopi Krishna Suvanam
+---
+layout: post
+title: Gopi Krishna Suvanam
+---
 
 I’m an entrepreneur in the Fintech and AI/ML space, with a rich experience of eighteen years. I’m a Co-Founder and Director of [G-Square Solutions](https://g-square.in), a fast-growing fintech start-up offering AI and analytics services to Financial Institutions. I have an MBA from the IIM, Ahmedabad, and a B.Tech degree in Computer Science from the IIT Madras. Before starting my journey as an entrepreneur, I worked with Deutsche Bank as Vice President in the global markets division in London and New York City. I have also served as a visiting faculty in finance in various institutions including my alma mater IIM-A.
 
