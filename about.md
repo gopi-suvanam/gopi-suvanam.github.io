@@ -20,3 +20,6 @@ My projects outside of my company's work include:
 3. Suvanam, Gopi Krishna. "Functional Augmented State Transfer (FAST) Architecture for Computationally Intensive Network Applications." arXiv preprint arXiv:1607.05075 (2016). Available at: https://arxiv.org/ftp/arxiv/papers/1607/1607.05075.pdf
 4. Suvanam, Gopi Krishna. Liberty & Prosperity: Liberal economics for achieving universal prosperity. Vernon Press, 2021.
 
+### Media Mentions
+1. [AI fast disrupting the world of finance as you know it, 26th June, 2018, Economic Times (India)](https://economictimes.indiatimes.com/markets/stocks/news/ai-fast-disrupting-your-world-of-finances-right-under-your-nose/articleshow/64746659.cms)
+2. [G-Square brings in a bot and plug-and-play element into analytics, 25th October, 2016, YourStory](https://yourstory.com/2016/10/g-square)
