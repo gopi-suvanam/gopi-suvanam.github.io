@@ -1,42 +1,45 @@
-title: "Decentralized Intelligence"
-author: "Gopi Krishna Suvanam"
-description: "My thoughts on decentralization, AI/ML, Geo-Libertarianism. Includes articles on liberal economic policy and technology." # This will show up in places like twitter, linkedin, etc, if you share your sites url as a post.
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely edit after that. If you find
+# yourself editing this file very often, consider using Jekyll's data files
+# feature for the data you need to update frequently.
+#
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
 
-# Email / Social media user names used by the minima theme:
-# All of these are optional and can be removed or commented out
-# email: "example@mail.com"
-twitter_username: "gopisuvanam"
-github_username: "gopi-suvanam"
-linkedin_username: "gopi-suvanam"
-#facebook_username: username
-#flickr_username: username
-#instagram_username: username
-#pinterest_username: username
-#youtube_username: username
-#googleplus_username: +username
+# Site settings
+# These are used to personalize your new site. If you look in the HTML files,
+# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
+# You can create any custom variable you would like, and they will be accessible
+# in the templates via {{ site.myvariable }}.
+title: Hitchens
+email: hello@patdryburgh.com
+description: >- # this means to ignore newlines until "baseurl:"
+  An inarguably well-designed Jekyll theme.
+baseurl: "/hitchens" # the subpath of your site, e.g. /blog
+url: "https://patdryburgh.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+icon: /assets/images/icon-512.png
+twitter_username: patdryburgh
+github_username:  patdryburgh
 
-#########################################################################################
-######### Nothing below needs to be changed (unless you know what you're doing) #########
-#########################################################################################
-remote_theme: "patdryburgh/hitchens"
+# Build settings
+markdown: kramdown
 
-rss: rss
+# Exclude from processing.
+# The following items will not be processed, by default. Create a custom list
+# to override the default setting.
+# exclude:
+#   - Gemfile
+#   - Gemfile.lock
+#   - node_modules
+#   - vendor/bundle/
+#   - vendor/cache/
+#   - vendor/gems/
+#   - vendor/ruby/
 
-kramdown:
-  syntax_highlighter_opts:
-    disable: true
-    
 plugins:
-  - jekyll-feed
-  - jekyll-sitemap
+  - jekyll-paginate
 
-titles_from_headings:
-  strip_title: true
-  collections: true
-
-defaults:
-  - scope:
-      path: ""
-      type: post
-    values:
-      tags: Other
+paginate: 3
+paginate_path: "/page/:num/"
