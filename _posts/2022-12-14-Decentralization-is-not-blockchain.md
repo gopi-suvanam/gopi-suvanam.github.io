@@ -1,7 +1,8 @@
 ---
-  layout:post
-  title:Decentralization!=Blockchain
+layout: post
+title: Decentralization != Blockchain
 ---
+
 Blockchain (with or without cryptocurrencies) is touted as THE solution for decentralizing financial and technological services. The hype around Blockchain (and the related term Web3) is so much that all other solutions for decentralization get drowned in it. For example below is a snapshot of search results when I did a search on Google news for the word “decentralization”. Most of the results are around Web3 and Blockchain.
 
  ![Google search for decentralization](/assets/images/post_images/decent.webp)
