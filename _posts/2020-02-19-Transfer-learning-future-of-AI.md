@@ -1,3 +1,8 @@
+---
+layout: post
+title: Transfer Learning - The Future of AI
+---
+
 End to end learning is paradigm in machine learning where an algorithm takes inputs and desired actions, to learn a function that maps input to output. An example is an end to end autonomous driving system which takes millions of hours of car videos to learn driving. AI practitioners prefer this paradigm of machine learning because they do not have to get external expertise. Also as everything is learnt from data, there will be very little “hard coding”. There are several problems with this logic:
 
 1. It requires way too much of data
