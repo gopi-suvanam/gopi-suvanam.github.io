@@ -2,6 +2,7 @@
 layout: post
 title: JavaScript Notebook (JSNB)
 ---
+[Jump to the tool](/jsnb)
 
 Jupyter Notebook is very popular amongst python developers and data scientists. It gives a simple interface for experimenting in python for testing code or for experimental analysis. Jupyter Notebook provides this application by running what is known as a “kernel” in the backend and giving back the results to the ui for display. It is an open source and free to use tool. Thus it has become extremely popular.
 
