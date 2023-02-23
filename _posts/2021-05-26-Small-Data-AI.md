@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Small Data AI
+description: Most Machine Learning and AI problems can be solved using small data sets. This article explores how and why Small Data approach is important.
 ---
 There is a fascinating story about horse manure paraphrased in the TV series “Silicon Valley”:
 
