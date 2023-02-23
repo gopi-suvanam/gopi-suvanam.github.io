@@ -1,10 +1,11 @@
 ---
 title: Geo-libertarianism
 layout: post
+description: Geo-libertarianism combines libertarianism with Georgism, a philosophy that advocates for the taxation of land and natural resources wiht the goal of promoting individual freedom and economic growth while ensuring that natural resources are used fairly and sustainably.
 ---
 I've been struggling with forming a political philosophy for my world view. I like having a liberal approach to both economic activities and living life. Libertarianism is a philosophy that suits well for this purpose. But there is a thorn in this philosophy that has been stinging me for a while. Libertarianism assumes that one gains rights over land by appropriating it through making some improvements on it. So for example, by a piece of barren land belongs to the person who ploughs it. This is well and good if there is abundance of land but in the current world where land (and other natural resources) is constrained, this philosophy presents a problem. This is where I've been leaning towards Geo-libertarianism for a while now.
 
-Geo-libertarianism is combines libertarianism with Georgism, a philosophy that advocates for the taxation of land and natural resources to promote economic efficiency and social justice. The goal of Geo-libertarianism is to promote individual freedom and economic growth while ensuring that natural resources are used fairly and sustainably. In this article, we will explore the principles of Geo-libertarianism and its potential benefits.
+Geo-libertarianism combines libertarianism with Georgism, a philosophy that advocates for the taxation of land and natural resources to promote economic efficiency and social justice. The goal of Geo-libertarianism is to promote individual freedom and economic growth while ensuring that natural resources are used fairly and sustainably. In this article, we will explore the principles of Geo-libertarianism and its potential benefits.
 
 ### Principles of Geo-libertarianism
 
