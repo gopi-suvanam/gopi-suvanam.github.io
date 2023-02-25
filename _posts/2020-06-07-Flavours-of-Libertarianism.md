@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Flavours of libertarianism
+description: Libertarianism is a political philosophy that prioritizes individual freedom and liberty. There are several nuances to it though.
 ---
 Political discourse requires much more nuance than the current left-right divide that all views are split into. As a construct, the left-right divide is an easy to understand framework for political discussions. But the single dimensional spectrum has become out dated.
 ![1D Political Spectrum](/assets/images/post_images/1d_political_spectrum.webp)
