@@ -1,8 +1,8 @@
 ---
 layout: post
 title: AI is not Science Fiction Anymore
+description: Artificial Intellingence (AI) has come a long way from the pages of science fiction books. The evolution of AI has not been in the same lines as predicted by SciFi.
 ---
-
 
 Artificial Intelligence is facing its optimism and pessimism in the recent times. The optimists are the ones who have first hand knowledge about AI, and are the crowd who believe the fear pessimists face is misinformed. As AI becomes more common and sophisticated, it will clarify all the doubts about unemployment it could create, and also will show that the power, value and utilization of AI is not to replace humans. The pessimists, on the other hand, are hypothesising on how AI could end jobs for humans and also may be humankind itself.
 
