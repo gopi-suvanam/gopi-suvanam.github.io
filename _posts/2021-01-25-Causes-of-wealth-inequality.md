@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Causes of wealth inequality
+description: Inequality of wealth and income in an economy arises because of various factors. Some of them are addressable through policy measures.
 ---
 
 Up until mid 19th century (about the time of Karl Marx) inequality of wealth came about as result of monopolisation of land and other resources. In communist terminology concentration of means of production is the cause of inequality. Communists believed violent redistribution of wealth is the only solution to this problem. Nevertheless, history shows that democracy and economic freedom eventually reduced inequality to a large extent by giving the poor the opportunity to have control on their political and economic lives.
