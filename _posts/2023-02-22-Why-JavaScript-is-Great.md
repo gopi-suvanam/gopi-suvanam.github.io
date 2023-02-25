@@ -13,3 +13,5 @@ JavaScript is a dynamic and versatile programming language that has taken the we
 
 In conclusion, JavaScript is a powerful and dynamic programming language that has become an essential part of modern web development. Its client-side scripting capabilities, cross-platform compatibility, rich libraries and frameworks, ease of use, versatility, and growing demand make it a great choice for developers looking to build fast, responsive, and engaging web applications.
 More important the features of the language, JavaScript is great because of the philosophy it embed: Programming should be easy and code should be accessible to everyone.
+
+You can easily experiment in JavaScript using tool that I'm building called [JavaScript Notebook of simply JSNB](/jsnb).
