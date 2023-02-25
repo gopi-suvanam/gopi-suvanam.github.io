@@ -11,5 +11,5 @@ With fog computing exploding, Javascript is going to lead the programming langua
 From a programming paradigm perspective, Javascript can support imperative, object-oriented and functional paradigms. Thus it can accommodate a wide variety of developer mindsets.
 
 I’m building a set of Javascript libraries that can help in computationally intensive tasks, which can be used in a fog computing framework. Checkout the git repository:
-https://github.com/gopi-suvanam/di-libs/
+https://github.com/gopi-suvanam/di-libs/. You can easily experiment in JavaScript using tool that I'm building called [JavaScript Notebook of simply JSNB](/jsnb).
 
