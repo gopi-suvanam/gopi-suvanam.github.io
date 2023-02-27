@@ -4,7 +4,7 @@ title: Decentralized Artificial Intelligence (AI)
 description: Decentralized artificial intelligence (AI) is a new paradigm that promises to revolutionize the way we develop and deploy AI systems. 
 ---
 
-Decentralized artificial intelligence (AI) is a new paradigm that promises to revolutionize the way we develop and deploy AI systems. Traditional AI systems rely on centralized architectures that require large amounts of data and computing power to function effectively. In contrast, decentralized AI systems leverage distributed networks to achieve their objectives. Decentralized AI is an especially powerful tool for [Small Data AI](/2021/05/26/Small-Data-AI.html). In this article, we will explore what decentralized AI is, its advantages, and its potential impact on various industries.
+Decentralized artificial intelligence (AI) is a new paradigm that promises to revolutionize the way we develop and deploy AI systems. Traditional AI systems rely on centralized architectures that require large amounts of data and computing power to function effectively. In contrast, decentralized AI systems leverage distributed networks to achieve their objectives. Decentralized AI is an especially powerful tool for [Small Data AI](/2021/05/26/Small-Data-AI.html). In this article, we will explore what decentralized AI is, its advantages, and its potential impact on various industries. Google search of Decentralized AI will give lot of results where AI is built on top on Blockchain. This approch is not fruitful as [Decentralization!=Blockchain](/2022/12/14/Decentralization-is-not-blockchain.html).
 
 ### Decentralized AI: What is it?
 
