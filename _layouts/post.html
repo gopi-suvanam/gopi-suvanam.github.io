@@ -26,9 +26,14 @@ layout: default
     {% endif %}
     <time class="post-date dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%B %-d, %Y" }}</time>
   </div>
+  <h5>
+      <a href="https://forms.gle/o8GEgAXLVaTJ3iti8"> Sign up for a newsletter </a>
+      </h5>
 
   {% if site.disqus.shortname %}
     {% include disqus-comments.html %}
   {% endif %}
+  
+     
 
 </article>
