@@ -19,69 +19,7 @@ Transfer learning is already being put to use in several areas of AI. A good exa
 This modularization of learning suddenly helps in scaling AI to massive levels. entities like Google, who scrape content across the internet can build the low level models of processing raw data. Specialized entities can build the next layer. For example layers to detect/recognize faces, get sentiment and intent from text etc. there could be higher layers who can build models for applications. These include stock market trading, fraud detection and autonomous driving.
 ![Transfer Learning Architecture](/assets/images/post_images/transfer-learning.png)
 
-### Code Examples of Transfer Learning
-Transfer learning can be implemented using various machine learning frameworks in both JavaScript and Python. Here are some examples:
-#### Tensorflow.js
-Transfer learning can be implemented in JavaScript using the TensorFlow.js library. Here's an example:
-    // Load the MobileNet model
-    const mobileNet = await tf.loadLayersModel('https://storage.googleapis.com/tfjs-models/tfjs/mobilenet_v1_0.25_224/model.json');
 
-    // Freeze all the layers except the last one
-    for (let i = 0; i < mobileNet.layers.length - 1; i++) {
-      mobileNet.layers[i].trainable = false;
-    }
-
-    // Create a new model that takes the MobileNet as input
-    const model = tf.sequential();
-    model.add(mobileNet);
-    model.add(tf.layers.flatten());
-    model.add(tf.layers.dense({ units: 256, activation: 'relu' }));
-    model.add(tf.layers.dropout({ rate: 0.5 }));
-    model.add(tf.layers.dense({ units: 1, activation: 'sigmoid' }));
-
-    // Compile the model
-    model.compile({
-      optimizer: tf.train.adam(),
-      loss: 'binaryCrossentropy',
-      metrics: ['accuracy'],
-    });
-
-    // Train the model using transfer learning
-    model.fit(dataset, {
-      epochs: 10,
-      stepsPerEpoch: Math.ceil(numExamples / batchSize),
-      callbacks: {
-        onEpochEnd: async (epoch, logs) => {
-          console.log(`Epoch ${epoch + 1}: loss = ${logs.loss.toFixed(4)}, accuracy = ${logs.acc.toFixed(4)}`);
-        },
-      },
-    });
-    
-#### Tensorflow in Python
-    # Load the MobileNet model
-    base_model = tf.keras.applications.MobileNetV2(input_shape=(224, 224, 3), include_top=False, weights='imagenet')
-
-    # Freeze all the layers except the last one
-    for layer in base_model.layers[:-1]:
-        layer.trainable = False
-
-    # Add a new classifier on top
-    x = base_model.output
-    x = tf.keras.layers.GlobalAveragePooling2D()(x)
-    x = tf.keras.layers.Dense(256, activation='relu')(x)
-    x = tf.keras.layers.Dropout(0.5)(x)
-    predictions = tf.keras.layers.Dense(1, activation='sigmoid')(x)
-
-    # Create the new model
-    model = tf.keras.models.Model(inputs=base_model.input, outputs=predictions)
-
-    # Compile the model
-    model.compile(optimizer=tf.keras.optimizers.Adam(lr=0.001), loss='binary_crossentropy', metrics=['accuracy'])
-
-    # Train the model using transfer learning
-    history = model.fit(train_dataset, epochs=10, steps_per_epoch=train_steps_per_epoch, validation_data=val_dataset, validation_steps=val_steps_per_epoch)
-
-Note: These are just examples and may need to be modified based on the specific use case and dataset being used.
 
 
 
