@@ -9,21 +9,21 @@ Machine learning in JavaScript could be a powerful paradign for building [decent
 ### ML Libraries in JavaScript
 Here's a list of some popular machine learning libraries in JavaScript:
 
-1. TensorFlow.js - A library for building and training machine learning models in JavaScript and deploying them in the browser or on Node.js.
+1. [TensorFlow.js](https://www.tensorflow.org/js) - A library for building and training machine learning models in JavaScript and deploying them in the browser or on Node.js.
 
-2. Brain.js - A flexible neural network library for JavaScript that supports both backpropagation and reinforcement learning.
+2. [Brain.js](https://brain.js.org/#/) - A flexible neural network library for JavaScript that supports both backpropagation and reinforcement learning.
 
-3. Synaptic - A simple and lightweight neural network library for browser and Node.js that supports various types of neural networks including multi-layer perceptrons, Hopfield networks, and self-organizing maps.
+3. [Synaptic](https://caza.la/synaptic/#/) - A simple and lightweight neural network library for browser and Node.js that supports various types of neural networks including multi-layer perceptrons, Hopfield networks, and self-organizing maps.
 
-4. ConvNetJS - A library for training deep neural networks in the browser or on Node.js that supports various types of layers and activation functions.
+4. [ConvNetJS](https://cs.stanford.edu/people/karpathy/convnetjs/started.html) - A library for training deep neural networks in the browser or on Node.js that supports various types of layers and activation functions.
 
-5. ML.js - A collection of machine learning algorithms implemented in JavaScript that includes regression, clustering, and classification models.
+5. [ML.js](https://github.com/mljs/ml) - A collection of machine learning algorithms implemented in JavaScript that includes regression, clustering, and classification models.
 
-6. Neataptic - A neat and modular neural network library for JavaScript that allows easy building and training of various types of neural networks.
+6. [Neataptic](https://wagenaartje.github.io/neataptic/) - A neat and modular neural network library for JavaScript that allows easy building and training of various types of neural networks.
 
-7. Keras-js - A library that allows running Keras models in the browser or on Node.js using WebGL.
+7. [Keras-js](https://transcranial.github.io/keras-js/#/) - A library that allows running Keras models in the browser or on Node.js using WebGL.
 
-8. Weka.js - A JavaScript port of the popular machine learning library Weka that provides various algorithms for data mining, machine learning, and predictive modeling.
+8. [Weka.js](https://github.com/MtnFranke/node-weka) - A JavaScript port of the popular machine learning library Weka that provides various algorithms for data mining, machine learning, and predictive modeling.
 
 There are many other machine learning libraries available in JavaScript, and this is just a selection of popular ones.
 
@@ -85,7 +85,6 @@ This code loads a pre-trained text classification model that was trained using U
 This is just another example of how TensorFlow.js can be used to perform machine learning tasks in JavaScript, and there are many other models and tasks that can be tackled with this library.
 
 ### Machine Learning in JavaScript using Scikit-Learn
-
 There are several other libraries other than TensorFlow for machine learning. Scikit-learn is another popular library. Below is example of using scikit-learn library for a simple classification problem in JavaScript using the scikit-js library:
 
 	<html>
