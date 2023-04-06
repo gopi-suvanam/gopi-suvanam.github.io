@@ -17,9 +17,11 @@ JavaScript can be used to implment Black-Scholes - a closed-form solution to opt
 Where S is the current stock price, K is the strike price, r is the risk-free interest rate, t is the time until expiration (in years), and N() is the cumulative normal distribution function.
 
 Implement the cumulative normal distribution function: You can use a library like jStat or a custom implementation to calculate the cumulative normal distribution function. Alternatively, you can use an approximation like the one provided by the Abramowitz and Stegun handbook. Standard normal density function can be calculated as:
+
 	ndist=function(z) {
 	  return (1.0/(Math.sqrt(2*Math.PI)))*Math.exp(-0.5*z);
 	}
+	
 Cumulative normal distribution does not have a closed form formula. But it can be approximated through:
 	normalcdf=function(X){   //Approximation for cumulative standard normal distribution.
 		var T=1/(1+.2316419*Math.abs(X));
@@ -47,6 +49,7 @@ Black-Scholes price can be obtained using the code:
 	  result['rho'] = K*t*ert*Nd2;
 	  return (result );
 	} //end of black_scholes call
+	
 The above code not only gives the price of the option but also gives "greeks" i.e. sensitivities of the prices to various factors. The above code is part of the library <a href="https://github.com/gopi-suvanam/di-libs/"> Di-Libs </a>. For experimenting use the notebook: [https://decentralized-intelligence.com/jsnb/#./examples/Black-Scholes.jsnb](https://decentralized-intelligence.com/jsnb/#./examples/Black-Scholes.jsnb).
 
 
