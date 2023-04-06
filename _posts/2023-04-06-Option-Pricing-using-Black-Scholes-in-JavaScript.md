@@ -23,6 +23,7 @@ Implement the cumulative normal distribution function: You can use a library lik
 	}
 	
 Cumulative normal distribution does not have a closed form formula. But it can be approximated through:
+
 	normalcdf=function(X){   //Approximation for cumulative standard normal distribution.
 		var T=1/(1+.2316419*Math.abs(X));
 		var D=.3989423*Math.exp(-X*X/2);
@@ -33,6 +34,7 @@ Cumulative normal distribution does not have a closed form formula. But it can b
 		return Prob
 	}   
 Black-Scholes price can be obtained using the code:
+
 	black_scholes.call_price=function(S,K,r,v,t) { 
 	  var sqt = Math.sqrt(t);
 	  d1 = (Math.log(S/K) + r*t)/(v*sqt) + 0.5*(v*sqt);
