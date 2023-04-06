@@ -33,6 +33,7 @@ Cumulative normal distribution does not have a closed form formula. But it can b
 		}
 		return Prob
 	}   
+	
 Black-Scholes price can be obtained using the code:
 
 	black_scholes.call_price=function(S,K,r,v,t) { 
