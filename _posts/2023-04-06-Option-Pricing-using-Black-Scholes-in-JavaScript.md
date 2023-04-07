@@ -4,7 +4,7 @@ layout: post
 description: Black-Scholes is a closed-form solution to option pricing and can easily be implemented in JavaScript for web-app development or experimetnation.
 ---
 
-JavaScript can be used to implment Black-Scholes - a closed-form solution to option pricing.To price options using the Black-Scholes formula in JavaScript, you can follow these steps:
+JavaScript can be used to implement Black-Scholes - a closed-form solution to option pricing.To price options using the Black-Scholes formula in JavaScript, you can follow these steps:
 
 1. Define the necessary variables: You will need to define the current stock price, the strike price, the time until expiration (in years), the risk-free interest rate, and the stock's annualized volatility.
 
