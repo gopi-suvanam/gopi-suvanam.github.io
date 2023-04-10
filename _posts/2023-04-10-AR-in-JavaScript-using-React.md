@@ -4,7 +4,7 @@ description: JavaScript and React are ideal for creating augmented reality (AR) 
 layout: post
 ---
 ### AR in JS using React
-JavaScript and React are ideal for creating augmented reality (AR) experiences because they are both flexible and powerful tools for building web applications, which can run on a variety of devices with web browsers. Here are some reasons why:
+JavaScript and React are ideal for creating augmented reality (AR) experiences. Here are some reasons why:
 
 Cross-platform support: JavaScript and React allow you to create AR experiences that can run on multiple devices and platforms, including smartphones, tablets, laptops, and desktops.
 
