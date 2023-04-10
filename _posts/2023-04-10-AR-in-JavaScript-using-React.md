@@ -83,26 +83,23 @@ Here's an example using AR.js to display a 3D model in AR:
 
 ### An Example of AR using WebAR.js using only HTML
 Here's an example of how to use the WebAR.js library to create an augmented reality experience with JavaScript:
-1. First, you'll need to include the WebAR.js/AR.js library in your HTML file:
+First, you'll need to include the WebAR.js/AR.js library in your HTML file:
 
 	<script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
 
-2. Next, you'll need to create a new A-Frame scene with the AR.js component:
+Next, you'll need to create a new A-Frame scene with the AR.js component:
 
 	<a-scene embedded arjs>
 	  <!-- AR content goes here -->
 	</a-scene>
 
-The arjs attribute enables AR.js support in the scene, and the embedded attribute allows the scene to be embedded within the web page.
-
-3. Now you can add AR content to the scene. For example, you can add a 3D model that will appear in the camera view when a marker is detected:
+The arjs attribute enables AR.js support in the scene, and the embedded attribute allows the scene to be embedded within the web page. Now you can add AR content to the scene. For example, you can add a 3D model that will appear in the camera view when a marker is detected:
 
 	<a-marker preset="hiro">
 	  <a-box position="0 0.5 0" material="color: red;"></a-box>
 	</a-marker>
 
-Here, we're using the "hiro" marker preset, which is a pre-defined marker pattern that can be used to trigger AR content. When the camera detects the "hiro" marker, it will place a red box at the position specified.
-4. Finally, you can add a camera element to the scene to allow the user to view the AR content:
+Here, we're using the "hiro" marker preset, which is a pre-defined marker pattern that can be used to trigger AR content. When the camera detects the "hiro" marker, it will place a red box at the position specified. Finally, you can add a camera element to the scene to allow the user to view the AR content:
 
 	<a-entity camera></a-entity>
 
