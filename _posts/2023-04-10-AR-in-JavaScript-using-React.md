@@ -36,8 +36,11 @@ Run your app: Start your React app and test your AR experience in a supported br
 ### Code Examples for AR using React 
 Here's an example using AR.js to display a 3D model in AR:
 1. Install AR.js and A-Frame:
+
 	npm install ar.js aframe
+	
 2. Create a new React component for the AR view:
+
 	import React, { Component } from 'react';
 	import 'aframe';
 	import 'ar.js';
@@ -60,7 +63,9 @@ Here's an example using AR.js to display a 3D model in AR:
 	}
 	
 	export default ARView;
+
 3. Import the ARView component in your app and render it:
+
 	import React from 'react';
 	import ARView from './ARView';
 	
@@ -73,28 +78,38 @@ Here's an example using AR.js to display a 3D model in AR:
 	}
 	
 	export default App;
+
 4. Start your React app and test the AR view in a supported browser or device. When you point your device's camera at a Hiro marker, the 3D model will be displayed in AR.
 
 ### An Example of AR using WebAR.js using only HTML
 Here's an example of how to use the WebAR.js library to create an augmented reality experience with JavaScript:
 1. First, you'll need to include the WebAR.js/AR.js library in your HTML file:
+
 	<script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+
 2. Next, you'll need to create a new A-Frame scene with the AR.js component:
+
 	<a-scene embedded arjs>
 	  <!-- AR content goes here -->
 	</a-scene>
+
 The arjs attribute enables AR.js support in the scene, and the embedded attribute allows the scene to be embedded within the web page.
 
 3. Now you can add AR content to the scene. For example, you can add a 3D model that will appear in the camera view when a marker is detected:
+
 	<a-marker preset="hiro">
 	  <a-box position="0 0.5 0" material="color: red;"></a-box>
 	</a-marker>
+
 Here, we're using the "hiro" marker preset, which is a pre-defined marker pattern that can be used to trigger AR content. When the camera detects the "hiro" marker, it will place a red box at the position specified.
 4. Finally, you can add a camera element to the scene to allow the user to view the AR content:
+
 	<a-entity camera></a-entity>
+
 This will add a camera element to the scene, which will display the AR content when the camera is pointed at a marker.
 
 Here's the complete code for a simple AR.js example:
+
 	<!DOCTYPE html>
 	<html>
 	  <head>
@@ -111,6 +126,7 @@ Here's the complete code for a simple AR.js example:
 	    </a-scene>
 	  </body>
 	</html>
+
 When you open this HTML file in a browser that supports AR.js, it will display the AR content when the camera is pointed at the "hiro" marker. You can try this out by printing the "hiro" marker from the AR.js website and holding it up to your device's camera.
 
 
