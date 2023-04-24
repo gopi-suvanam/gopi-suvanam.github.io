@@ -4,6 +4,39 @@ layout: post
 description: Black-Scholes is a closed-form solution to option pricing and can easily be implemented in JavaScript for web-app development or experimetnation.
 ---
 
+### Options in Finance
+In finance, an option is a financial contract between two parties, where the buyer of the option has the right, but not the obligation, to buy or sell an underlying asset at a predetermined price and time in the future. The underlying asset can be a stock, index, commodity, or currency, and the predetermined price is called the strike price or exercise price.
+
+There are two main types of options: call options and put options. A call option gives the buyer the right to buy the underlying asset at the strike price, while a put option gives the buyer the right to sell the underlying asset at the strike price.
+
+The price of an option is determined by various factors, including the current price of the underlying asset, the strike price, the time to expiration, the volatility of the underlying asset, and the interest rate. The Black-Scholes model is a mathematical formula used to calculate the theoretical price of an option based on these factors.
+
+Options can be used for various purposes, such as hedging against potential losses or speculating on the future price movements of the underlying asset. However, options trading can be complex and involves various risks, including the risk of losing the entire investment. It is important to understand the underlying asset and the risks involved before trading options
+
+### Black-Scholes Model
+The Black-Scholes formula, also known as the Black-Scholes-Merton model, is a mathematical formula used in finance to calculate the theoretical price of European-style options. It was developed by Fischer Black, Myron Scholes, and Robert Merton in the 1970s and has become a widely used model in option pricing theory. The Black-Scholes formula assumes that the underlying asset follows a geometric Brownian motion, and it does not take into account factors such as dividends, transaction costs, or early exercise of options. It is used to estimate the theoretical price of European-style options, which can only be exercised at the expiration date.
+
+The Black-Scholes formula for calculating the theoretical price of a call option is as follows:
+C = S * N(d1) - X * e^(-r * T) * N(d2)
+And the formula for calculating the theoretical price of a put option is:
+P = X * e^(-r * T) * N(-d2) - S * N(-d1)
+where:
+
+C: The theoretical price of the call option
+P: The theoretical price of the put option
+S: The current stock price
+X: The strike price of the option
+T: The time to expiration of the option (in years)
+r: The risk-free interest rate
+N(d1) and N(d2): The cumulative distribution functions of the standard normal distribution, calculated based on the values of d1 and d2.
+e: The mathematical constant Euler's number, approximately equal to 2.71828
+d1 = (ln(S / X) + (r + (σ^2) / 2) * T) / (σ * sqrt(T))
+d2 = d1 - σ * sqrt(T)
+ln: The natural logarithm
+σ: The volatility of the underlying asset
+
+### Black-Scholes Implementation in JavaScript
+
 JavaScript can be used to implement Black-Scholes - a closed-form solution to option pricing.To price options using the Black-Scholes formula in JavaScript, you can follow these steps:
 
 1. Define the necessary variables: You will need to define the current stock price, the strike price, the time until expiration (in years), the risk-free interest rate, and the stock's annualized volatility.
