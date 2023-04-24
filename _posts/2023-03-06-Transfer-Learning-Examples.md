@@ -22,6 +22,7 @@ Overall, transfer learning is a powerful technique that can save time and resour
 Transfer learning can be implemented using various machine learning frameworks in both JavaScript and Python. Here are some examples:
 #### Tensorflow.js
 Transfer learning can be implemented in JavaScript using the TensorFlow.js library. Here's an example:
+
     // Load the MobileNet model
     const mobileNet = await tf.loadLayersModel('https://storage.googleapis.com/tfjs-models/tfjs/mobilenet_v1_0.25_224/model.json');
 
