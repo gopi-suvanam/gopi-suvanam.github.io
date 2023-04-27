@@ -1,8 +1,9 @@
 ---
-title: Manifesto for Decentralization, Empowering Individuals and Communities in the Digital Age
+title: Manifesto for Decentralization
 layout: post
 description: We, the advocates of the Decentralization movement, believe that centralized systems and power structures in the digital realm pose significant risks to individual autonomy, diversity, and innovation. We advocate for a paradigm shift towards decentralized, distributed, and community-driven technologies.
 ---
+#  Empowering Individuals and Communities in the Digital Age
 We, the advocates of the Decentralization movement, believe that centralized systems and power structures in the digital realm pose significant risks to individual autonomy, diversity, and innovation. We advocate for a paradigm shift towards decentralized, distributed, and community-driven technologies. We envision a future where individuals and communities have the freedom to participate, create, and thrive in a decentralized digital ecosystem. We assert the following principles as the foundation of our manifesto:
 
 Empowerment of Individuals and Communities: We believe that technology should empower individuals and communities, rather than concentrate power in the hands of a few entities. We advocate for technologies that give users control over their data, digital assets, and online interactions. We support the principles of self-sovereign identity, where individuals have the right to own, control, and share their personal information as they see fit.
