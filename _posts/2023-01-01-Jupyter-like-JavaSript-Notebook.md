@@ -1,7 +1,7 @@
 ---
 layout: post
-title: JavaScript Notebook (JSNB)
-description: JSNB is tool to do experimentation in JavaScript. JavaScript Notebooks can be used to test code while developing and also for scientific calculations.
+title: Jupyter like JavaScript Notebook (JSNB)
+description: JSNB is tool to do experimentation in JavaScript like Jupyter for Python. JavaScript Notebooks can be used to test code while developing and also for scientific calculations.
 ---
 [Jump to the tool](/jsnb/#./examples/Hello-world.jsnb)
 
