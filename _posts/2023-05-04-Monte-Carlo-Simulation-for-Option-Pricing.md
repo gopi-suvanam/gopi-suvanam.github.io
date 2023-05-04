@@ -101,7 +101,7 @@ Here's an example implementation of this method in JavaScript (it does 100k simu
 	const optionPrice = optionPriceMC(strikePrice, expirationDays, volatility, riskFreeRate, spotPrice, numSimulations);
 	console.log("Option price: " + optionPrice);
 
-You can play around with the code here: [JavaScript Notebook for Option Pricing using Monte-Carlo Simulation](/jsnb/#./examples/Option-Pricing-MC.jsnb).
+You can play around with the code here: [JavaScript Notebook for Option Pricing using Monte-Carlo Simulation](/jsnb/#./examples/Option-Pricing-MC.jsnb). Although this code replicates Geometric-Brownian motion, it can be modified to incorporate other processes of price movement.
 
 ### Using Python
 Here's an example Python code for pricing a European call option using Monte Carlo simulation:
