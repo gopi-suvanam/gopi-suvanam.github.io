@@ -142,3 +142,6 @@ Here's an example Python code for pricing a European call option using Monte Car
 	    return call_price
 	print(100,100,0.05,0.15,30,100000)
 
+This code uses the numpy library to generate random normal numbers, which are used to simulate the underlying asset's price movements over time. It then calculates the payoffs for the call option based on the simulated prices, and discounts the payoffs back to the present value using the risk-free interest rate. Finally, it returns the estimated price of the call option based on the simulated payoffs.
+
+
