@@ -83,7 +83,7 @@ Here's an example implementation of this method in JavaScript (it does 100k simu
 	  return optionPrice;
 	}
 	
-	function normalRandom() { //Approximation to normal distribution
+	function normalRandom() { //Generating Normally Dstributed variables: https://en.wikipedia.org/wiki/Box%E2%80%93Muller_transform
 	  let u = 0, v = 0;
 	  while (u === 0) u = Math.random(); // ensure u is not 0
 	  while (v === 0) v = Math.random(); // ensure v is not 0
