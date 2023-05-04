@@ -4,7 +4,7 @@ layout: post
 description: Monte-Carlo simulation can be used to price financial options and the code can be implemented in any programming language including Python and JavaScript.
 ---
 
-# Option Pricing
+### Option Pricing
 
 We have looked at [Monte-Carlo simulation](/2023/04/25/Scientific-Simulation-in-JavaScript.html) and pricing of options using [Black-Scholes formula](/2023/04/06/Option-Pricing-using-Black-Scholes-in-JavaScript.html). In this article we look at option pricing using Monte-Carlo simulation. This is a useful technique especially if the option being priced has some exotic/structured terms or if the underlying financial factors do not follow Brownian motion. 
 
@@ -28,7 +28,7 @@ The price of an option is determined by several factors, including:
 
 These factors can interact in complex ways, and different pricing models may give different results depending on their assumptions about these factors. As a result, the pricing of options is often complex and can involve sophisticated mathematical models, such as the Black-Scholes model or more advanced methods like Monte Carlo simulation.
 
-# Why Monte-Carlo Simulation for Option Pricing
+### Monte-Carlo Simulation for Option Pricing
 Monte Carlo simulation is often used to price options because it allows for a more flexible and realistic approach to modeling the complex interactions between the various factors that determine option prices.
 
 Monte Carlo simulation involves using random variables to simulate possible future outcomes for the underlying asset's price, and then using these simulated outcomes to calculate the expected value of the option payoff. This approach can be particularly useful for modeling options on assets with complex, non-linear price behavior, or when there is uncertainty about the future value of the underlying asset.
@@ -60,7 +60,7 @@ Z is a random variable from a normal distribution with mean 0 and standard devia
 
 5. Take the average of the discounted payoffs to obtain the option price.
 
-# Using JavaScript
+### Using JavaScript
 Here's an example implementation of this method in JavaScript (it does 100k simulated paths):
 
 	function optionPriceMC(strike, expiration, volatility, riskFreeRate, spot, simulations) {
@@ -101,9 +101,9 @@ Here's an example implementation of this method in JavaScript (it does 100k simu
 	const optionPrice = optionPriceMC(strikePrice, expirationDays, volatility, riskFreeRate, spotPrice, numSimulations);
 	console.log("Option price: " + optionPrice);
 
-You can play around with the code here: [JavaScript Notebook for Option Pricing using Monte-Carlo Simulation](/jsnb/#github:gopi-suvanam/jsnb/examples/Option-Pricing-MC.jsnb).
+You can play around with the code here: [JavaScript Notebook for Option Pricing using Monte-Carlo Simulation](/jsnb/#./examples/Option-Pricing-MC.jsnb).
 
-# Using Python
+### Using Python
 Here's an example Python code for pricing a European call option using Monte Carlo simulation:
 
 	import numpy as np
