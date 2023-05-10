@@ -1,5 +1,5 @@
 ﻿---
-title: Decentralization in the Future: Anticipating Opportunities and Challenges
+title: Decentralization in the Future, Anticipating Opportunities and Challenges
 layout: post
 description: The concept of decentralization has been gaining increasing attention and momentum in various domains, from technology and governance to finance and social systems. As we look towards the future, the potential opportunities and challenges of decentralization become critical areas of exploration.
 ---
