@@ -7,6 +7,7 @@ layout: post
 There are several data visualization techniques that can be used to represent and communicate data effectively. Below are some commonly used techniques. These examples use the libraries: [D3.js](https://d3js.org/), [chart.js](https://www.chartjs.org/), [vis.js](https://visjs.org/) and [Plotly.js](https://plotly.com/javascript/).
 
 Bar Charts: Bar charts use rectangular bars to represent data values. They are suitable for comparing discrete categories or showing the distribution of data across different groups. Bar Chart using Chart.js:
+
 	// HTML: <canvas id="barChart"></canvas>
 	const ctx = document.getElementById('barChart').getContext('2d');
 	const data = {
@@ -43,6 +44,7 @@ Line Charts: Line charts connect data points with straight lines, commonly used 
 
 
 Pie Charts: Pie charts display data as proportional slices of a circle, useful for showing the composition or relative proportions of different categories within a whole. Pie Chart using Chart.js:
+
 	// HTML: <canvas id="pieChart"></canvas>
 	const ctx = document.getElementById('pieChart').getContext('2d');
 	const data = {
@@ -87,6 +89,7 @@ Scatter Plots: Scatter plots use Cartesian coordinates to display individual dat
 
 
 Area Charts: Area charts are similar to line charts but filled with color, allowing the visualization of cumulative data or the comparison of multiple data series. Area Chart using Chart.js:
+
 // HTML: <canvas id="areaChart"></canvas>
 const ctx = document.getElementById('areaChart').getContext('2d');
 const data = {
@@ -115,6 +118,7 @@ new Chart(ctx, {
 
 
 Heat Maps: Heat maps represent data using color gradients on a matrix. They are effective for displaying patterns or correlations within large datasets. Heat Map using D3.js:
+
 	// HTML: <svg id="heatMap"></svg>
 	const data = [
 	  [1, 2, 3],
@@ -137,6 +141,7 @@ Heat Maps: Heat maps represent data using color gradients on a matrix. They are 
 
 
 Tree Maps: Tree maps use nested rectangles to represent hierarchical data. They are useful for showing the proportions of different categories at multiple levels. Tree Map using D3.js:
+
 	// HTML: <svg id="treeMap"></svg>
 	const data = {
 	  name: 'Root',
@@ -169,6 +174,7 @@ Tree Maps: Tree maps use nested rectangles to represent hierarchical data. They 
 
 
 Bubble Charts: Bubble charts use circles to represent data points, with the size of the circles indicating the value of a third variable. They are suitable for visualizing three dimensions of data. Bubble Chart using D3.js:
+
 	// HTML: <svg id="bubbleChart"></svg>
 	const data = [
 	  { x: 10, y: 20, r: 15 },
@@ -199,6 +205,7 @@ Bubble Charts: Bubble charts use circles to represent data points, with the size
 
 
 Gauge Charts: Gauge charts resemble the dial of a gauge and are commonly used to represent a single value within a defined range, such as progress or performance indicators. Gauge Chart using Chart.js:
+
 	// HTML: <canvas id="gaugeChart"></canvas>
 	const ctx = document.getElementById('gaugeChart').getContext('2d');
 	const data = {
@@ -233,6 +240,7 @@ Gauge Charts: Gauge charts resemble the dial of a gauge and are commonly used to
 
 
 Sankey Diagrams: Sankey diagrams visualize the flow of data or resources, with arrows representing the movement or quantity between different stages or categories. Sankey Diagram using D3.js:
+
 	// HTML: <svg id="sankeyDiagram"></svg>
 	const data = {
 	  nodes: [
@@ -306,6 +314,7 @@ Choropleth Maps: Choropleth maps use color shading or patterns to represent data
 
 
 Word Clouds: Word clouds display words or phrases, with the size or color of each word indicating its frequency or importance in a text or dataset. Wordcloud using wordcloud2.js:
+
 	<!-- HTML: -->
 	<div id="wordCloud"></div>
 	
@@ -339,6 +348,7 @@ Word Clouds: Word clouds display words or phrases, with the size or color of eac
 
 
 Box Plots: Box plots summarize the distribution of a dataset, displaying the median, quartiles, and outliers, allowing for a quick understanding of data dispersion. Box Plot using Plotly.js:
+
 	// HTML: <div id="boxPlot"></div>
 	const data = [
 	  {
@@ -350,6 +360,7 @@ Box Plots: Box plots summarize the distribution of a dataset, displaying the med
 	
 
 Network Graphs: Network graphs display relationships or connections between entities using nodes (representing entities) and edges (representing connections). Network Graph using vis.js:
+
 	// HTML: <div id="networkGraph"></div>
 	const nodes = new vis.DataSet([
 	  { id: 1, label: 'Node 1' },
@@ -371,6 +382,7 @@ Network Graphs: Network graphs display relationships or connections between enti
 
 
 Radial Charts: Radial charts, such as radar charts or sunburst charts, display data in a circular layout, making it easier to compare multiple variables or categories. Radial Chart using Highcharts:
+
 	// HTML: <div id="radialChart"></div>
 	const data = {
 	  chart: {
