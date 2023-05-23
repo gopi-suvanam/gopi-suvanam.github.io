@@ -41,20 +41,20 @@ In conclusion, JavaScript can be used for functional programming by leveraging i
 
 Here are code some examples of functional programming in JavaScript:
 
-**Map function:**
+**Array functions:**
+JavaScript provides several special array functions that offer convenient ways to perform common operations on arrays. More detials in this post: [Funtional Style Code in JavaScript using Array Functions](/2023/05/23/Array-Function-in-JavaScript.html)
 
+    //map function
     const numbers = [1, 2, 3, 4, 5];
     const doubled = numbers.map(num => num * 2);
     console.log(doubled); // Output: [2, 4, 6, 8, 10]
 	
-**Filter function:**
-
+    //filter function
     const numbers = [1, 2, 3, 4, 5];
     const even = numbers.filter(num => num % 2 === 0);
     console.log(even); // Output: [2, 4]
 
-**Reduce function:**
-
+    //reduce function
     const numbers = [1, 2, 3, 4, 5];
     const sum = numbers.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
     console.log(sum); // Output: 15
