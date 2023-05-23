@@ -33,6 +33,8 @@ Higher-order functions: Higher-order functions are functions that take other fun
 
 Pure functions: Pure functions are functions that do not modify any data outside of their scope, and they always return the same output for the same input. In JavaScript, pure functions can be created using function expressions or arrow functions. Pure functions are easier to test, and they make the code more predictable and less error-prone.
 
+Closure: In JavaScript, a closure is created when a function is defined within another function and the inner function uses variables declared in the outer function's scope chain. 
+
 Recursion: Recursion is a powerful technique used in functional programming to solve complex problems by breaking them down into smaller sub-problems. JavaScript supports recursion, and it can be used to create more elegant and efficient solutions to certain problems.
 
 In conclusion, JavaScript can be used for functional programming by leveraging its support for first-class functions, immutable data structures, higher-order functions, pure functions, and recursion. By using these techniques, developers can create more modular, reusable, and predictable code, which can help to reduce bugs and improve the overall quality of the codebase.
@@ -59,14 +61,20 @@ JavaScript provides several special array functions that offer convenient ways t
     const sum = numbers.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
     console.log(sum); // Output: 15
 
-**Currying:**
-
-    function multiply(a) {
-      return function(b) {
-        return a * b;
-      };
-    }
-    console.log(multiply(2)(3)); // Output: 6
+**Closure:**
+	function outerFunction(name) {
+	  const outerVariable = "Hello "+name+"! I am in the outer function's scope.";
+	
+	  function innerFunction() {
+	    return(outerVariable);
+	  }
+	
+	  return innerFunction;
+	}
+	
+	const inner = outerFunction("User");
+	inner(); // Output: "Hello User! I am in the outer function's scope.
+For more details see: [Closure in JavaScript for Functional Programming](/2023/05/23/Closure-in-JavaScript-for-Function-Programming.html).
 
 **Higher-Order Functions:**
 
@@ -78,6 +86,7 @@ JavaScript provides several special array functions that offer convenient ways t
 
     const double = multiplyBy(2);
     console.log(double(5)); // Output: 10
+**Closure**
 
 These are just a few examples of functional programming in JavaScript. There are many other concepts and techniques that can be used to write functional code.
 
