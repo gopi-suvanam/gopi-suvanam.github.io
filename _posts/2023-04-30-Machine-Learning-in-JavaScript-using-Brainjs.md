@@ -73,3 +73,58 @@ Here's a simple example of how to use a CDN to load Brain.js in browsers by load
 	
 In this example, we include the Brain.js library using the CDN provided by jsDelivr in the head of the HTML document. We then create a neural network, define the training data, train the network, and use it to make predictions. The output of the network for each input is printed to the console.
 
+### Digit recognition model
+
+A more complex example would be to build digit recognition. Here's an example code snippet using brain.js in a browser environment to train a neural network on the MNIST dataset for handwritten digit recognition:
+
+	<!DOCTYPE html>
+	<html>
+	<head>
+	  <script src="https://unpkg.com/brain.js"></script>
+	  <script src="https://unpkg.com/mnist"></script>
+	</head>
+	<body>
+	  <script>
+	    // Load the MNIST dataset
+	    const set = mnist.set(8000, 2000);
+
+	    // Convert the dataset into suitable format for brain.js
+	    const trainingData = set.training.map((data) => ({
+	      input: data.input,
+	      output: data.output,
+	    }));
+	    const testingData = set.test.map((data) => ({
+	      input: data.input,
+	      output: data.output,
+	    }));
+
+	    // Create a new neural network
+	    const net = new brain.NeuralNetwork();
+
+	    // Train the network
+	    net.train(trainingData, {
+	      log: true,
+	      logPeriod: 100,
+	    });
+
+	    // Evaluate the network
+	    const accuracy = net.test(testingData);
+	    console.log('Accuracy:', accuracy);
+
+	    // Make predictions on new data
+	   const randomIndex = Math.floor(Math.random() * set.test.length);
+	   const randomTestData = set.test[randomIndex];
+
+	    console.log('New Image:');
+	    console.log('Input:', newImage.input);
+	    console.log('Predicted Output:', prediction);
+	  </script>
+	</body>
+	</html>
+
+
+The training part will take a few minutes, so you have to be patient when the data is loaded. In this example, we include the brain.js and mnist packages using the <script> tags from the CDN (Content Delivery Network). The rest of the code remains the same as the previous example.
+
+When you open this HTML file in a web browser, the browser will load brain.js and mnist packages from the CDN and execute the JavaScript code. The training and evaluation process will be logged in the browser console, and the prediction results will also be displayed in the console.
+
+Note: The browser environment may have certain limitations and security restrictions when it comes to loading external scripts or accessing local files. Make sure to adjust the code accordingly and consider the security implications of running machine learning code in a browser environment.
