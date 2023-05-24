@@ -39,6 +39,7 @@ Overall, Brain.js can be used in any application that requires machine learning 
 
 ### Code examples of Brain.js
 Here's a simple example of how to use a CDN to load Brain.js in browsers by loading the library from a CDN:
+
 	<!DOCTYPE html>
 	<html>
 	<head>
@@ -69,5 +70,6 @@ Here's a simple example of how to use a CDN to load Brain.js in browsers by load
 	  </script>
 	</body>
 	</html>
+	
 In this example, we include the Brain.js library using the CDN provided by jsDelivr in the head of the HTML document. We then create a neural network, define the training data, train the network, and use it to make predictions. The output of the network for each input is printed to the console.
 
