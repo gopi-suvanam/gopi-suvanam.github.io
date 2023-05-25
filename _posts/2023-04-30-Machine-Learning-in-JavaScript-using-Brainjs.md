@@ -125,7 +125,7 @@ Note: The browser environment may have certain limitations and security restrict
 ### Saving and Loading Models
 Usually, model building and using/applying the model does not happen in the same script. Thus there is a need to save the built model and use it in another script/application. This can be done using two functions: toJSON and fromJSON. In the above example, we can store the mode built as a JSON object in a file:
 	
-	const digitReconModel = net.toJSON()
+	const digitReconModel = JSON.stringify(net.toJSON());
 	//Download the file, push to cloud or store it IPFS. The code below shows how to store it in IPFS:
 	(async ()=>{
 	   node = await Ipfs.create()
@@ -143,5 +143,5 @@ This model can be loaded back and used:
 		  for await(const chunk of flow){
 			digitReconModelJSON += chunk.toString().split(",").map(x=>String.fromCharCode(parseInt(x))).join("");
 		  }
-		 digitReconModel = net.fromJSON(digitReconModelJSON);
+		 digitReconModel = net.fromJSON(JSON.parse(digitReconModelJSON));
 	})();
