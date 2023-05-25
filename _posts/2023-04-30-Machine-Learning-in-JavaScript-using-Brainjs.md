@@ -14,7 +14,7 @@ Some of the key features of Brain.js include:
 - Ability to save and load trained models.
 - Support for transfer learning, where you can use pre-trained models for new tasks.
 
-Brain.js has a large and active community of developers, and there are many examples and tutorials available online to help you get started with the library.
+Brain.js has a large and active community of developers, and there are many examples and tutorials available online to help you get started with the library. Brain.js is an alternative to [Tensforflow.js](/2023/04/11/Machine-learning-in-Javascript-using-TensorflowJS.html).
 
 ### Usecases of Brain.js
 Brain.js can be used in a wide range of machine learning applications, including:
