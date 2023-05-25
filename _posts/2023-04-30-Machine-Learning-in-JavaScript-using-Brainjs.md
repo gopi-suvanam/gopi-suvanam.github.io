@@ -121,3 +121,27 @@ In this example, we include the brain.js and mnist packages using the <script> t
 The training part will take a few minutes, so you have to be patient when the data is loaded.  The training and evaluation process will be logged in the browser console, and the prediction results will also be displayed in the console.
 
 Note: The browser environment may have certain limitations and security restrictions when it comes to loading external scripts or accessing local files. Make sure to adjust the code accordingly and consider the security implications of running machine learning code in a browser environment.
+	
+### Saving and Loading Models
+Usually, model building and using/applying the model does not happen in the same script. Thus there is a need to save the built model and use it in another script/application. This can be done using two functions: toJSON and fromJSON. In the above example, we can store the mode built as a JSON object in a file:
+	
+	const digitReconModel = net.toJSON()
+	//Download the file, push to cloud or store it IPFS. The code below shows how to store it in IPFS:
+	(async ()=>{
+	   node = await Ipfs.create()
+	  const results = await node.add(digitReconModel)
+	  const cid = results['cid']
+	  console.log("CID",cid)
+
+	})();
+	
+This model can be loaded back and used:
+	
+	(async ()=>{
+  		constant digitReconModelJSON='';
+		const flow=node.cat();
+		  for await(const chunk of flow){
+			digitReconModelJSON += chunk.toString().split(",").map(x=>String.fromCharCode(parseInt(x))).join("");
+		  }
+		 digitReconModel = net.fromJSON(digitReconModelJSON);
+	})();
