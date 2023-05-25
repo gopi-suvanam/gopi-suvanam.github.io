@@ -77,13 +77,11 @@ In this example, we include the Brain.js library using the CDN provided by jsDel
 
 A more complex example would be to build digit recognition. Here's an example code snippet using brain.js in a browser environment to train a neural network on the MNIST dataset for handwritten digit recognition:
 
-	<!DOCTYPE html>
-	<html>
-	<head>
-	  <script src="https://unpkg.com/brain.js"></script>
-	  <script src="https://unpkg.com/mnist"></script>
-	</head>
-	<body>
+	  <script src="https://cdn.jsdelivr.net/npm/brain.js"></script>
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/mnist/1.0.4/mnist.js"></script>
+	  
+In this example, we include the brain.js and mnist packages using the <script> tags from the CDN (Content Delivery Network). When you open this HTML file in a web browser, the browser will load brain.js and mnist packages from the CDN and execute the JavaScript code.  
+
 	  <script>
 	    // Load the MNIST dataset
 	    const set = mnist.set(8000, 2000);
@@ -119,12 +117,7 @@ A more complex example would be to build digit recognition. Here's an example co
 	    console.log('Input:', newImage.input);
 	    console.log('Predicted Output:', prediction);
 	  </script>
-	</body>
-	</html>
 
-
-The training part will take a few minutes, so you have to be patient when the data is loaded. In this example, we include the brain.js and mnist packages using the <script> tags from the CDN (Content Delivery Network). The rest of the code remains the same as the previous example.
-
-When you open this HTML file in a web browser, the browser will load brain.js and mnist packages from the CDN and execute the JavaScript code. The training and evaluation process will be logged in the browser console, and the prediction results will also be displayed in the console.
+The training part will take a few minutes, so you have to be patient when the data is loaded.  The training and evaluation process will be logged in the browser console, and the prediction results will also be displayed in the console.
 
 Note: The browser environment may have certain limitations and security restrictions when it comes to loading external scripts or accessing local files. Make sure to adjust the code accordingly and consider the security implications of running machine learning code in a browser environment.
