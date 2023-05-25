@@ -10,6 +10,15 @@ With fog computing exploding, Javascript is going to lead the programming langua
 
 From a programming paradigm perspective, Javascript can support imperative, object-oriented and functional paradigms. Thus it can accommodate a wide variety of developer mindsets.
 
+The usecases JavaScript can address on edge devices are endless. To name a few categories:
+1. [Augmented Reality](/2023/04/10/AR-in-JavaScript-using-React.html)
+2. [Machine Learning](/2023/04/11/Machine-learning-in-Javascript-using-TensorflowJS.html)
+3. [Robotics](/2023/05/03/JavaScript-forRobotics.html)
+4. [Scientific Computing](/2023/04/25/Scientific-Simulation-in-JavaScript.html)
+5. [Financial Computing](/2023/04/06/Option-Pricing-using-Black-Scholes-in-JavaScript.html)
+6. [Data Visualization](/2023/05/20/Data-Visualization-Techniques-using-JavaScript.html)
+7. [Blockchain Interaction](/2023/05/10/Integrating-Blockchain-in-Web-Application-MetaMask.html)
+
 I’m building a set of Javascript libraries that can help in computationally intensive tasks, which can be used in a fog computing framework. Checkout the git repository:
 https://github.com/gopi-suvanam/di-libs/. You can easily experiment in JavaScript using tool that I'm building called [JavaScript Notebook of simply JSNB](/jsnb).
 
