@@ -40,6 +40,10 @@ JavaScript can be used for [financial calculations](/2023/04/06/Option-Pricing-u
 - [Monte-Carlo Simulation of AMM](/jsnb/#./examples/AMM-Simulation.jsnb). Simulating Automate-Market-Making for assets in a decentralized exchange.
 - [Simple Simulation Example](/jsnb/#./examples/Simple-Simulation.jsnb). Simulation of a physical system - a ball bouncing off four walls.
 - [Bouncing Ball on Moving Boundary](/jsnb/#./examples/Dynamic-Simulation.jsnb). Simulation of a physical system - a ball bouncing off four walls but with one of the walls oscillating.
+- [Monte-Carlo Simulation of Football Odds](/jsnb/#./examples/Monet-Carlo-Simulation-of-Goals.jsnb). Simulation of football goals and probability of winning.
+
+### Scientific Computing
+- [Runge-Kutta Method for Solving Differential Equation](/jsnb/#./examples/Runge-Kutta-for-Differential-Equations.jsnb)
 
 For an updates on the tool checkout the github repo: [https://github.com/gopi-suvanam/jsnb](https://github.com/gopi-suvanam/jsnb)
 Happy experimenting!!! 
