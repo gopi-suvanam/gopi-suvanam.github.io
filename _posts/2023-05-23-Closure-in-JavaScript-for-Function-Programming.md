@@ -79,7 +79,9 @@ Now that we have the power function and mean function defined, we can easily cal
 	
 	console.log(mean(population.map(power_k(5))) //Output 5.333333333333333
 	
-There are several interesting uses of such closure. An more sophisticated example could be where one wants to simulate the behavior of gas with fixed volume and mass but varying temperature. Then the behavior can be enclosed as a function of temperature with the volume and mass encapsulated as data.
+There are several interesting uses of such closure. A more sophisticated example could be where one wants to simulate the behavior of gas with fixed volume and mass but varying temperature. Then the behavior can be enclosed as a function of temperature with the volume and mass encapsulated as data.
+
+A detailed discussion higher order function with an example involving closure is in this article: [Higher Order Functions in Functional Programming using JavaScript](/2023/05/26/Higher-Order-Functions-in-Functional-Programming-using-JavaScript.html).
 	
 
 
