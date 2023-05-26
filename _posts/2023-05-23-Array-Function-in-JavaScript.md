@@ -7,8 +7,7 @@ description: Some techniques to avoid writing for/while loops in JavaScript for 
 ### Loops vs Array Functions in JavaScript
 Loops are a fundamental programming construct used in many programming languages, including JavaScript. However, in some cases, loops can cause performance issues or lead to unexpected behavior in your code. Hence a [functional style code](/2023/03/13/JavaScript-for-Functional-Programming.html) using array functions can come in handy. Here are some ways to avoid loops in JavaScript:
 
-- Use Array Methods: JavaScript provides a variety of array methods that allow you to perform operations on arrays without using loops. For example, you can use map, red
-- uce, filter, and forEach methods to perform common array operations.
+- Use Array Methods: JavaScript provides a variety of array methods that allow you to perform operations on arrays without using loops. For example, you can use map, reduce, filter, and forEach methods to perform common array operations. These are [higher order functions](/2023/05/26/Higher-Order-Functions-in-Functional-Programming-using-JavaScript.html).
 
 - Use Recursion: Recursion is a technique where a function calls itself repeatedly until a certain condition is met. Recursion can be used to perform operations that would normally require loops. However, it is important to be careful with recursion as it can cause performance issues or lead to stack overflow errors if not used correctly.
 
