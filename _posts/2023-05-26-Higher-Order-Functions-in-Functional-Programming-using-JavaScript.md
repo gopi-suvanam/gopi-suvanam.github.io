@@ -95,7 +95,7 @@ Here's an implementation of the [Runge-Kutta method](https://en.wikipedia.org/wi
 	
 This function runge_kutta is a higher-order function that takes and input of a function representing dy/dt and returns another function that maps y as a function of t. Example usage: Solve the differential equation dy/dt = t^2 + y with initial condition y(0) = 1
 
-	function dydt = (t, y) => t * t + y;
+	const dydt = (t, y) => t * t + y; //Inline function definition
 	const y0 = 1;
 	const t0 = 0;
 	
@@ -103,7 +103,9 @@ This function runge_kutta is a higher-order function that takes and input of a f
 	
 	const f = runge_kutta(dydt, y0, t0, h);
 	console.log("Value of y at 1",f(1));
-	
+
+Experiment in this notebook: [Runge-Kutta Method for Differential Equations](/jsnb/#./examples/Runge-Kutta-for-Differential-Equations.jsnb).
+
 ### Example of Higher Order Function in Simulation
 
 Here's an example of a Monte Carlo simulation for football spread betting using a simple scoring model:
@@ -120,7 +122,7 @@ Here's an example of a Monte Carlo simulation for football spread betting using 
 	    if (goal_difference > 0) {
 	      home_wins++;
 	    } else if (goal_difference < 0) {
-	      awayWins++;
+	      away_wins++;
 	    } else {
 	      draws++;
 	    }
@@ -137,7 +139,7 @@ This function takes a variable number of simulations and a function simulateMatc
 
 	// Sample function to simulate a football match and return the goal difference
 	function simulate_match_on_strength(home_team_strength, away_team_strength) {
-	  ()=>{
+	  return ()=>{
 			
 		  // Generate random goal counts for each team
 		  const home_goals = Math.round(Math.random() * home_team_strength);
@@ -154,5 +156,5 @@ This returns a function that encapsulates 'Home Team Strength' and 'Away Team St
 	//Output win percentages on where home team is stronger than away team.
 	console.log(monte_carlo_simulation(1000,simulate_match_on_strength(2,1)))
 
-
+Experiment in this notebook: [Monte-Carlo Simulation of Goals](/jsnb/#./examples/Monet-Carlo-Simulation-of-Goals.jsnb)
 
