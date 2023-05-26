@@ -28,21 +28,19 @@ Callback Functions: Higher-order functions are often used to handle asynchronous
 
 Function Composition: Higher-order functions allow you to compose multiple functions together to create more complex operations. This can enhance code readability and maintainability.
 
-	function add(a, b) {
-	  return a + b;
-	}
-	
-	function multiply(a, b) {
-	  return a * b;
-	}
-	
-	function subtract(a, b) {
-	  return a - b;
-	}
+	// Example functions
+	const square = arr=>arr.map(x=>x*x)
+	const sum = arr=>arr.reduce((accumulator, num) =>  accumulator + num, 0);
+	// Function composition
+	const compose = (f, g) => (x) => f(g(x));
 	
 	// Compose functions to perform a series of operations
-	const result = subtract(multiply(add(2, 3), 4), 5);
-	console.log(result); // Output: 15
+	const sum_of_squares= compose(sum,square)
+	
+	// Usage example
+	const result = sum_of_squares([1,2,3]); 
+	
+	console.log(result) //14
 
 Iteration and Transformation: Higher-order functions like map(), filter(), and reduce() are commonly used for iterating over arrays, transforming data, and performing operations on array elements.
 
@@ -66,14 +64,10 @@ Iteration and Transformation: Higher-order functions like map(), filter(), and r
 
 Currying and Partial Application: Higher-order functions enable currying and partial application, allowing you to create new functions by pre-filling some arguments of an existing function.
 
-	function add(a, b, c) {
-	  return a + b + c;
-	}
+	// Currying using arrow functions 
+	const curryMultiply = (a) => (b) => (c) => a * b * c;
 	
-	const addTwoNumbers = add.bind(null, 2); // Partial application
-	const result = addTwoNumbers(3, 4); // Currying
-	
-	console.log(result); // Output: 9
+	console.log(curryMultiply(2)(3)(4)); // Output: 24
 
 ### Example of Solving Differential Equation using Higher Order Function
 
