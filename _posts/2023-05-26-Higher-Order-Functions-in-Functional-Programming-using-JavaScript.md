@@ -108,9 +108,9 @@ Experiment in this notebook: [Runge-Kutta Method for Differential Equations](/js
 
 ### Example of Higher Order Function in Simulation
 
-Here's an example of a Monte Carlo simulation for football spread betting using a simple scoring model:
+Here's an example of a Monte Carlo simulation for football odds calculation using a simple scoring model:
 
-	// Function to perform Monte Carlo simulation for spread betting
+	// Function to perform Monte Carlo simulation for odds calculation
 	function monte_carlo_simulation( num_simulations, simulate_match) {
 	  let home_wins = 0;
 	  let away_wins = 0;
