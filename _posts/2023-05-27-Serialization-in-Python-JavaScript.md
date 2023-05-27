@@ -21,7 +21,7 @@ Serialization plays a crucial role in several areas of software development:
 
 4. Remote Procedure Calls (RPC): Serialization is often used in RPC frameworks to transmit method invocations and their parameters between client and server applications. By serializing method arguments and return values, they can be transported over the network and executed remotely.
 
-###Common Serialization Formats and Technologies
+### Common Serialization Formats and Technologies
 
 Several serialization formats and technologies are commonly used in different contexts. Some of the popular ones include:
 
