@@ -112,59 +112,93 @@ Complex objects with parameters and functions require more complex formats for s
 Python (Using cPickle):
 
 	import cPickle as pickle
-	
-	# Complex data structure to be serialized
-	data = {
-	    'name': 'John Doe',
-	    'age': 30,
-	    'contacts': {
-	        'email': 'johndoe@example.com',
-	        'phone': '123-456-7890'
-	    },
-	    'friends': ['Jane', 'Alex', 'Sarah']
-	}
-	
+
+	# Class definition
+	class Person:
+	    def __init__(self, name, age, contacts, friends):
+		self.name = name
+		self.age = age
+		self.contacts = contacts
+		self.friends = friends
+
+	    def greet(self):
+		print(f"Hello, my name is {self.name}!")
+
+	    def add_friend(self, friend):
+		self.friends.append(friend)
+
+	# Create an instance of the Person class
+	person = Person('John Doe', 30, {'email': 'johndoe@example.com', 'phone': '123-456-7890'}, ['Jane', 'Alex', 'Sarah'])
+
+	# Call class methods
+	person.greet()
+	person.add_friend('Michael')
+
 	# Serialize data using cPickle
-	serialized_data = pickle.dumps(data)
-	
+	serialized_data = pickle.dumps(person)
+
 	# Save serialized data to a file
 	with open('serialized_data.pkl', 'wb') as file:
 	    file.write(serialized_data)
-	
+
 	# Deserialize data using cPickle
 	with open('serialized_data.pkl', 'rb') as file:
 	    deserialized_data = pickle.load(file)
-	
-	print(deserialized_data)
+
+	# Call class methods on the deserialized object
+	deserialized_data.greet()
+	print(deserialized_data.friends)
+
 
 JavaScript (Using Cryo):
 
 	const Cryo = require('cryo');
-	
-	// Complex data structure to be serialized
-	const data = {
-	    name: 'John Doe',
-	    age: 30,
-	    contacts: {
-	        email: 'johndoe@example.com',
-	        phone: '123-456-7890'
-	    },
-	    friends: ['Jane', 'Alex', 'Sarah']
-	};
-	
+
+	// Class definition
+	class Person {
+	    constructor(name, age, contacts, friends) {
+		this.name = name;
+		this.age = age;
+		this.contacts = contacts;
+		this.friends = friends;
+	    }
+
+	    greet() {
+		console.log(`Hello, my name is ${this.name}!`);
+	    }
+
+	    addFriend(friend) {
+		this.friends.push(friend);
+	    }
+	}
+
+	// Create an instance of the Person class
+	const person = new Person('John Doe', 30, { email: 'johndoe@example.com', phone: '123-456-7890' }, ['Jane', 'Alex', 'Sarah']);
+
+	// Call class methods
+	person.greet();
+	person.addFriend('Michael');
+
 	// Serialize data using Cryo
-	const serializedData = Cryo.stringify(data);
-	
+	const serializedData = Cryo.stringify(person);
+
 	// Save serialized data to a file or send it over the network
-	
+
 	// Deserialize data using Cryo
 	const deserializedData = Cryo.parse(serializedData);
-	
-	console.log(deserializedData);
 
-In both examples, we have a complex data structure (data) consisting of nested objects, arrays, and primitive values. We serialize this data using the respective libraries. In Python, cPickle is used to serialize the data by calling pickle.dumps(). The resulting serialized data is then written to a file using the write() method of a file object. To deserialize the data, we use pickle.load() to load the serialized data from the file.
+	// Call class methods on the deserialized object
+	deserializedData.greet();
+	console.log(deserializedData.friends);
 
-In JavaScript, we use the Cryo library to serialize and deserialize the data. Cryo.stringify() is used to serialize the data, and Cryo.parse() is used to deserialize it.
+
+In these examples, we have added two additional functions to the Person class: greet() and addFriend(). The greet() function prints a greeting message using the person's name, and the addFriend() function allows adding a new friend to the person's list of friends.
+
+After creating an instance of the Person class, we call these class methods to demonstrate their functionality. We then proceed with serialization and deserialization using the respective libraries.
+
+Upon deserialization, we can still call the class methods on the deserialized object, allowing us to retain the behavior and functionality of the original object.
+
+By adding functions to the class, we can define behavior that is associated with the object's data, making the class more versatile and providing additional functionality when working with serialized objects.
 
 Please note that cPickle and Cryo are just two examples of serialization libraries in Python and JavaScript, respectively. Other libraries and formats may offer different features and options for complex serialization.
 
