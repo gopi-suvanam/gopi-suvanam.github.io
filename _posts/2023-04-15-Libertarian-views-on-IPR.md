@@ -11,7 +11,7 @@ Other libertarians, however, argue that IPR laws are necessary to protect the fr
 I want to take the example of two types of libertarians: 1. Anarcho-capitalists like Murray Rothbard and 2. Geo-libertarians like Henry George. 
 Both of these have diametrically opposite views on land but have converging views on IPR (though motivated by different philosophies).
 
-Murray Rothbard, a prominent libertarian philosopher and economist, was critical of intellectual property rights (IPR) and believed that they were incompatible with libertarian principles. Rothbard argued that IPR laws were government-granted monopolies that violated the right of individuals to control and use their own property.
+Murray Rothbard, a prominent libertarian philosopher and economist,[ was critical of intellectual property rights (IPR) and believed that they were incompatible with libertarian principles](https://www.libertarianism.org/columns/libertarian-views-intellectual-property-rothbard-tucker-spooner-rand). Rothbard argued that IPR laws were government-granted monopolies that violated the right of individuals to control and use their own property.
 
 Rothbard believed that ideas and knowledge should be treated as "public domain" resources, freely accessible to all. He argued that IPR laws restricted the free flow of ideas and hindered innovation by limiting the ability of others to build upon existing knowledge and ideas.
 
@@ -21,8 +21,10 @@ Overall, Rothbard saw IPR laws as a form of government interference that violate
 
 Henry George, an American economist and social philosopher, believed in the principle of "natural rights," which held that all individuals had a right to the natural resources of the earth, including land. He believed that this right was inalienable and could not be restricted by governments or other entities.
 
-In the context of IPR, George may argued that individuals had a right to create and distribute their ideas and works freely, but that this right was limited by the natural rights of others. For example, a person may have the right to create a new invention or write a book, but they could not claim exclusive ownership over the ideas and knowledge contained within their creation. Others would have a natural right to build upon and use that knowledge for their own purposes.
+In the context of IPR, [George argued](https://cooperative-individualism.org/george-henry_on-patents-and-copyrights-1888.htm) that individuals had a right to create and distribute their ideas and works freely, but that this right was limited by the natural rights of others. For example, a person may have the right to create a new invention or write a book, but they could not claim exclusive ownership over the ideas and knowledge contained within their creation. Others would have a natural right to build upon and use that knowledge for their own purposes.
 
 Henry George, also comes to same conclusion as that of Rothbard that IPR will restrict freedom of others. According to Henry George, copyright is a valid right as the product being protected under copyright comes purely because of labour of the producer.
 
 Even though there is no consensus on IPR amongst libertarians, as a Geo-libertarian I believe that IPR, especially patents, are not compatible with individual freedom and hinder progress. I'm in Henry George's camp and fundamentally question the pure libertarian interpretation of Lockean Proviso. I think anything that comes from nature belongs to the whole mankind. Thus all inventions coming out of scientific process (which is just a way of understanding nature) belong to whole of humanity. Rights on creative endeavors like writing a book or composing a piece of music can be restricted through contract law.
+
+We have looked at IPR from a philosophical stand point, this post looks at it from utilitarian point of view: [How IPR Can Stifle Innovation](/2023/05/30/IPR-Stifles-Innovation.html).
