@@ -1,5 +1,5 @@
 ---
-title: How to Use Underscore JS for in JavaScript
+title: How to Use Underscore JS in JavaScript
 description: Underscore JS provides several utilites and functions for quick development in JavaScript. 
 tags: javascript
 layout: post
