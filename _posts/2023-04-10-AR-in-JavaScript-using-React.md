@@ -34,12 +34,12 @@ Add AR content: Add 3D models or other AR content that you want to display in th
 Run your app: Start your React app and test your AR experience in a supported browser or device.
 
 ### Code Examples for AR using React 
-Here's an example using AR.js to display a 3D model in AR:
-1. Install AR.js and A-Frame:
+Here's an example using [AR.js](https://ar-js-org.github.io/AR.js-Docs/) to display a 3D model in AR:
+Install AR.js and A-Frame:
 
 	npm install ar.js aframe
-	
-2. Create a new React component for the AR view:
+
+Create a new React component for the AR view:
 
 	import React, { Component } from 'react';
 	import 'aframe';
@@ -49,22 +49,22 @@ Here's an example using AR.js to display a 3D model in AR:
 	  render() {
 	    return (
 	      <a-scene embedded arjs>
-	        <a-marker preset="hiro">
-	          <a-entity
-	            gltf-model="url(path/to/your/model.glb)"
-	            scale="0.1 0.1 0.1"
-	            position="0 0 0"
-	          ></a-entity>
-	        </a-marker>
-	        <a-entity camera></a-entity>
+		<a-marker preset="hiro">
+		  <a-entity
+		    gltf-model="url(path/to/your/model.glb)"
+		    scale="0.1 0.1 0.1"
+		    position="0 0 0"
+		  ></a-entity>
+		</a-marker>
+		<a-entity camera></a-entity>
 	      </a-scene>
 	    );
 	  }
 	}
-	
+
 	export default ARView;
 
-3. Import the ARView component in your app and render it:
+Import the ARView component in your app and render it:
 
 	import React from 'react';
 	import ARView from './ARView';
@@ -79,15 +79,15 @@ Here's an example using AR.js to display a 3D model in AR:
 	
 	export default App;
 
-4. Start your React app and test the AR view in a supported browser or device. When you point your device's camera at a Hiro marker, the 3D model will be displayed in AR.
+Start your React app and test the AR view in a supported browser or device. When you point your device's camera at a Hiro marker, the 3D model will be displayed in AR. This App uses AR.js and A-Frame, for other AR libraries and frameworks see: [JavaScript AR Frameworks and Libraries](/2023/05/30/JavaScript-AR-Frameworks-Libraries.html).
 
 ### An Example of AR using WebAR.js using only HTML
-Here's an example of how to use the WebAR.js library to create an augmented reality experience with JavaScript:
+Here's an example of how to use the [WebAR.js]() library to create an augmented reality experience with JavaScript:
 First, you'll need to include the WebAR.js/AR.js library in your HTML file:
 
 	<script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
 
-Next, you'll need to create a new A-Frame scene with the AR.js component:
+Next, you'll need to create a new [A-Frame scene](https://aframe.io/) with the AR.js component:
 
 	<a-scene embedded arjs>
 	  <!-- AR content goes here -->
@@ -124,7 +124,9 @@ Here's the complete code for a simple AR.js example:
 	  </body>
 	</html>
 
-When you open this HTML file in a browser that supports AR.js, it will display the AR content when the camera is pointed at the "hiro" marker. You can try this out by printing the "hiro" marker from the AR.js website and holding it up to your device's camera.
+When you open this HTML file in a browser that supports AR.js, it will display the AR content when the camera is pointed at the "hiro" marker. You can try this out by printing the "hiro" marker from the AR.js website and holding it up to your device's camera. 
+
+Note: The versions and CDN links might change as both AR.js and A-Frame are continuously being developed. Please go to individual sites for the current documentation.
 
 
 
