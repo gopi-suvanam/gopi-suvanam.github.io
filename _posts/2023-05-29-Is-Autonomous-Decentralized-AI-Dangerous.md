@@ -6,7 +6,7 @@ description: Autonomous decentralized AI, a system or network of artificial inte
 
 ### What is Autonomous, Decentralized AI?
 
-Autonomous decentralized AI refers to a system or network of artificial intelligence agents that operate independently and make decisions without central control or authority. In this context, "autonomous" means that the AI agents have the ability to act and make decisions on their own, based on their programmed algorithms and learned behaviors. "Decentralized" refers to the absence of a central authority or controller governing the behavior and decision-making of the AI agents.
+Autonomous decentralized AI refers to a system or network of artificial intelligence agents that operate independently and make decisions without central control or authority. In this context, "autonomous" means that the AI agents have the ability to act and make decisions on their own, based on their programmed algorithms and learned behaviors. "Decentralized" refers to the [absence of a central authority or controller governing the behavior and decision-making of the AI agents](/2023/02/25/Decentralized-Artificial-Intelligence.html).
 
 In autonomous decentralized AI systems, multiple AI agents interact with each other, exchanging information, coordinating actions, and collectively solving complex problems. These systems often leverage distributed computing and communication technologies to enable collaboration among the agents.
 
@@ -45,7 +45,7 @@ Scalability and Robustness: Ensuring the scalability and robustness of autonomou
 Legal and Regulatory Considerations: The deployment of autonomous decentralized AI may raise legal and regulatory challenges. Clarifying liability, accountability frameworks, and ensuring compliance with existing laws and regulations becomes crucial in mitigating potential risks.
 
 ### Mitigants of Risks of Autonomous, Decentralized AI
-Autonomous AI, when developed and deployed responsibly, can offer numerous benefits without posing significant dangers. Here are some reasons why autonomous AI might not be dangerous:
+Autonomous AI, when developed and deployed responsibly, [can offer numerous benefits](/2023/05/17/Synergy-of-AI-with-BlockChain.html) without posing significant dangers. Here are some reasons why autonomous AI might not be dangerous:
 
 Precise Decision-Making: Autonomous AI systems can make decisions based on precise algorithms and vast amounts of data. This can lead to accurate and efficient decision-making in various domains, including healthcare, transportation, finance, and more.
 
