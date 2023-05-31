@@ -1,12 +1,12 @@
 ---
 title: IPFS - Decentralized File/Object Storage
 layout: post
-tags: p2p, decentralization
+tags: p2p, decentralization, javascript
 description: IPFS is a key component of decentralized computing. It provides a mechanism to store files/data in a decentralized way without the need for a server. This can help in builiding DApps (decentralized applications).
 ---
 
 ### What is IPFS?
-IPFS (InterPlanetary File System) is a decentralized and distributed protocol designed for storing and sharing files in a peer-to-peer network. It provides a way to address and retrieve content based on the content itself rather than its location on a specific server or network. As of 2023, IPFS is the most popular platform for storing files in a decentralized form. Along with along with [libp2p]() and [Smart Contracts](/2023/05/29/Interacting-with-Smart-Contracts-Ethereum-in-JavaScript.html), IPFS is a key building block of decentralized computing.
+IPFS (InterPlanetary File System) is a decentralized and distributed protocol designed for storing and sharing files in a peer-to-peer network. It provides a way to address and retrieve content based on the content itself rather than its location on a specific server or network. As of 2023, IPFS is the most popular platform for storing files in a decentralized form. Along with along with [libp2p](/2023/05/31/Libp2p-Decentralized-Applications.html) and [Smart Contracts](/2023/05/29/Interacting-with-Smart-Contracts-Ethereum-in-JavaScript.html), IPFS is a key building block of decentralized computing.
 
 Key features of IPFS include:
 
