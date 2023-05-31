@@ -6,7 +6,7 @@ description: Libp2p is a set of libraries useful for p2p computing. Libp2p provi
 ---
 
 ### What is libp2p?
-Libp2p is a modular networking stack and protocol suite developed by [Protocol Labs](https://protocol.ai/). Libp2p forms one of the building webs of decentralized computational architecture along with [IPFS]() and [Smart Contracts](/2023/05/29/Interacting-with-Smart-Contracts-Ethereum-in-JavaScript.html). It is designed to provide a set of network protocols and components that can be used to build decentralized applications and peer-to-peer (P2P) systems.
+Libp2p is a modular networking stack and protocol suite developed by [Protocol Labs](https://protocol.ai/). Libp2p forms one of the building webs of decentralized computational architecture along with [IPFS](/2023/05/31/IPFS-Decentralized-File-Storage.html) and [Smart Contracts](/2023/05/29/Interacting-with-Smart-Contracts-Ethereum-in-JavaScript.html). It is designed to provide a set of network protocols and components that can be used to build decentralized applications and peer-to-peer (P2P) systems.
 
 Here are some key aspects and features of Libp2p:
 
