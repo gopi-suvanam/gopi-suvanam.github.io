@@ -90,31 +90,31 @@ Scatter Plots: Scatter plots use Cartesian coordinates to display individual dat
 
 Area Charts: Area charts are similar to line charts but filled with color, allowing the visualization of cumulative data or the comparison of multiple data series. Area Chart using Chart.js:
 
-// HTML: <canvas id="areaChart"></canvas>
-const ctx = document.getElementById('areaChart').getContext('2d');
-const data = {
-  labels: ['Label 1', 'Label 2', 'Label 3'],
-  datasets: [{
-    label: 'Data',
-    data: [10, 20, 30],
-    backgroundColor: 'rgba(0, 123, 255, 0.4)',
-    borderColor: 'rgba(0, 123, 255, 1)',
-    borderWidth: 1
-  }]
-};
-new Chart(ctx, {
-  type: 'line',
-  data: data,
-  options: {
-    plugins: {
-      fillBetween: {
-        above: 'rgba(0, 123, 255, 0.4)',
-        below: 'rgba(0, 123, 255, 0)',
-        interpolate: true
-      }
-    }
-  }
-});
+	// HTML: <canvas id="areaChart"></canvas>
+	const ctx = document.getElementById('areaChart').getContext('2d');
+	const data = {
+	  labels: ['Label 1', 'Label 2', 'Label 3'],
+	  datasets: [{
+	    label: 'Data',
+	    data: [10, 20, 30],
+	    backgroundColor: 'rgba(0, 123, 255, 0.4)',
+	    borderColor: 'rgba(0, 123, 255, 1)',
+	    borderWidth: 1
+	  }]
+	};
+	new Chart(ctx, {
+	  type: 'line',
+	  data: data,
+	  options: {
+	    plugins: {
+	      fillBetween: {
+		above: 'rgba(0, 123, 255, 0.4)',
+		below: 'rgba(0, 123, 255, 0)',
+		interpolate: true
+	      }
+	    }
+	  }
+	});
 
 
 Heat Maps: Heat maps represent data using color gradients on a matrix. They are effective for displaying patterns or correlations within large datasets. Heat Map using D3.js:
