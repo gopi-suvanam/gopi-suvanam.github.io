@@ -156,5 +156,5 @@ This returns a function that encapsulates 'Home Team Strength' and 'Away Team St
 	//Output win percentages on where home team is stronger than away team.
 	console.log(monte_carlo_simulation(1000,simulate_match_on_strength(2,1)))
 
-Experiment in this notebook: [Monte-Carlo Simulation of Goals](/jsnb/#./examples/Monet-Carlo-Simulation-of-Goals.jsnb)
+Experiment in this notebook: [Monte-Carlo Simulation of Goals](/jsnb/#./examples/Monte-Carlo-Simulation-of-Goals.jsnb)
 
