@@ -21,7 +21,9 @@ Numerical analysis encompasses a wide range of mathematical problems, including 
 - Optimization: Numerical optimization algorithms are used to find the minimum or maximum of a given function, which is useful in various fields such as engineering, economics, and machine learning.
 
 ### Numerical Analysis in JavaScript
-Below are a few examples of numerical analysis techniques implemented in JavaScript. These examples demonstrate the implementation of the bisection method for finding the roots of equations to solving differential equations/doing integration. You can use this notebook for experimentation: [Numerical Analysis Recipes](/jsnb/#./examples/Numerical-Analysis-Recipes.jsnb){: .jsnb-link}. These algorithms used [Higher Order Functions](/2023/05/26/Higher-Order-Functions-in-Functional-Programming-using-JavaScript.html) in a [functional programming paradigm](/2023/03/13/JavaScript-for-Functional-Programming.html).
+Below are a few examples of numerical analysis techniques implemented in JavaScript. These examples demonstrate the implementation of the bisection method for finding the roots of equations to solving differential equations/doing integration. You can use this notebook for experimentation: [Numerical Analysis Recipes](/jsnb/#./examples/Numerical-Analysis-Recipes.jsnb){: .jsnb-link} 
+
+These algorithms use [Higher Order Functions](/2023/05/26/Higher-Order-Functions-in-Functional-Programming-using-JavaScript.html) in a [functional programming paradigm](/2023/03/13/JavaScript-for-Functional-Programming.html).
 
 #### [Bisection Method](https://en.wikipedia.org/wiki/Bisection_method) for Finding Solution to an Equation
 
