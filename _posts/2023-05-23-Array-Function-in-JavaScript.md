@@ -35,7 +35,7 @@ Here are some of the differences between recursion and for loops:
 In general, if the problem you are trying to solve has a natural recursive structure, then using recursion can lead to more elegant and easier to understand code. On the other hand, if you are iterating over a collection or sequence, then using a for loop is generally more efficient and flexible. However, as with any programming problem, the best approach depends on the specific requirements and constraints of the problem.
 
 ### Special Array Functions
-JavaScript provides several special array functions that offer convenient ways to perform common operations on arrays. Here are some commonly used special array functions:
+JavaScript provides several special array functions that offer convenient ways to perform common operations on arrays. Here are some commonly used special array functions. Experiment with these using the notebook: [Array Functions](/jsnb/#./examples/Array-Functions.jsnb){: .jsnb-link} 
 
 forEach: Executes a provided function once for each array element.
 	
@@ -76,7 +76,8 @@ every: Tests whether all elements in the array pass the test provided by a callb
 	});
 	console.log(allEven); // Output: false
 
-Experiment with these using the notebook: [Array Functions](/jsnb/#./examples/Array-Functions.jsnb)
+
+
 ### When to choose Array-functions?
 While for loops are more general purpose and can be used to solve a wide variety of problems, map and reduce are specialized methods designed to perform specific operations on arrays. Here are some differences between map and reduce and for loops:
 

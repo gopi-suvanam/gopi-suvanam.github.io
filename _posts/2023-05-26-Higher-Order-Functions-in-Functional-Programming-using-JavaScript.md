@@ -8,10 +8,9 @@ tags: javascript, functional programming
 Higher-order functions are functions that can take other functions as arguments or return functions as results. In JavaScript, functions are first-class citizens, which means they can be treated like any other value. This allows for the creation and manipulation of higher-order functions. We have looked at some of these functions when we talked about [Array functions](/2023/05/23/Array-Function-in-JavaScript.html) and [Closure](/2023/05/23/Closure-in-JavaScript-for-Function-Programming.html). This article is part of a series on higher [functional programming](/2023/03/13/JavaScript-for-Functional-Programming.html). 
 
 ### Uses
-
 Higher-order functions are used practically in various scenarios to write cleaner, more modular, and reusable code. Here are some practical use cases for higher-order functions:
 
-Callback Functions: Higher-order functions are often used to handle asynchronous operations and callbacks. For example, in event-driven programming or when making API calls, you can pass a callback function to a higher-order function that executes the callback once the operation is complete.
+**Callback Functions:** Higher-order functions are often used to handle asynchronous operations and callbacks. For example, in event-driven programming or when making API calls, you can pass a callback function to a higher-order function that executes the callback once the operation is complete.
 
 	function fetchData(url, callback) {
 	  // Perform asynchronous operation
@@ -26,7 +25,7 @@ Callback Functions: Higher-order functions are often used to handle asynchronous
 	fetchData('https://example.com/api', handleData);
 
 
-Function Composition: Higher-order functions allow you to compose multiple functions together to create more complex operations. This can enhance code readability and maintainability.
+**Function Composition:** Higher-order functions allow you to compose multiple functions together to create more complex operations. This can enhance code readability and maintainability.
 
 	// Example functions
 	const square = arr=>arr.map(x=>x*x)
@@ -42,7 +41,7 @@ Function Composition: Higher-order functions allow you to compose multiple funct
 	
 	console.log(result) //14
 
-Iteration and Transformation: Higher-order functions like map(), filter(), and reduce() are commonly used for iterating over arrays, transforming data, and performing operations on array elements.
+**Iteration and Transformation:** Higher-order functions like map(), filter(), and reduce() are commonly used for iterating over arrays, transforming data, and performing operations on array elements.
 
 	const numbers = [1, 2, 3, 4, 5];
 	
@@ -62,7 +61,7 @@ Iteration and Transformation: Higher-order functions like map(), filter(), and r
 	console.log(evenNumbers); // Output: [2, 4]
 	console.log(sum); // Output: 15
 
-Currying and Partial Application: Higher-order functions enable currying and partial application, allowing you to create new functions by pre-filling some arguments of an existing function.
+**Currying and Partial Application:** Higher-order functions enable currying and partial application, allowing you to create new functions by pre-filling some arguments of an existing function.
 
 	// Currying using arrow functions 
 	const curryMultiply = (a) => (b) => (c) => a * b * c;
@@ -70,8 +69,8 @@ Currying and Partial Application: Higher-order functions enable currying and par
 	console.log(curryMultiply(2)(3)(4)); // Output: 24
 
 ### Example of Solving Differential Equation using Higher Order Function
+Below an implementation of the [Runge-Kutta method](https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods) (specifically, the fourth-order Runge-Kutta method) in JavaScript. Experiment in this notebook: [Runge-Kutta Method for Differential Equations](/jsnb/#./examples/Runge-Kutta-for-Differential-Equations.jsnb){: .jsnb-link} 
 
-Here's an implementation of the [Runge-Kutta method](https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods) (specifically, the fourth-order Runge-Kutta method) in JavaScript:
 
 	function runge_kutta(dydt, y0, t0, h) {
 	  return t=>{
@@ -104,11 +103,9 @@ This function runge_kutta is a higher-order function that takes and input of a f
 	const f = runge_kutta(dydt, y0, t0, h);
 	console.log("Value of y at 1",f(1));
 
-Experiment in this notebook: [Runge-Kutta Method for Differential Equations](/jsnb/#./examples/Runge-Kutta-for-Differential-Equations.jsnb).
 
 ### Example of Higher Order Function in Simulation
-
-Here's an example of a Monte Carlo simulation for football odds calculation using a simple scoring model:
+Below is an example of a Monte Carlo simulation for football odds calculation using a simple scoring model. Experiment in this notebook: [Monte-Carlo Simulation of Goals](/jsnb/#./examples/Monte-Carlo-Simulation-of-Goals.jsnb){: .jsnb-link} 
 
 	// Function to perform Monte Carlo simulation for odds calculation
 	function monte_carlo_simulation( num_simulations, simulate_match) {
@@ -156,5 +153,4 @@ This returns a function that encapsulates 'Home Team Strength' and 'Away Team St
 	//Output win percentages on where home team is stronger than away team.
 	console.log(monte_carlo_simulation(1000,simulate_match_on_strength(2,1)))
 
-Experiment in this notebook: [Monte-Carlo Simulation of Goals](/jsnb/#./examples/Monte-Carlo-Simulation-of-Goals.jsnb)
 

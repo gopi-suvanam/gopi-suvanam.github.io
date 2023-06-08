@@ -36,7 +36,9 @@ where:
 
 ### Black-Scholes Implementation in JavaScript
 
-JavaScript can be used to implement Black-Scholes - a closed-form solution to option pricing.To price options using the Black-Scholes formula in JavaScript, you can follow these steps:
+JavaScript can be used to implement Black-Scholes - a closed-form solution to option pricing. For experimenting use the notebook: [Black-Scholes Formula for Option Pricing](https://decentralized-intelligence.com/jsnb/#./examples/Black-Scholes.jsnb){: .jsnb-link} 
+
+To price options using the Black-Scholes formula in JavaScript, you can follow these steps:
 
 1. Define the necessary variables: You will need to define the current stock price, the strike price, the time until expiration (in years), the risk-free interest rate, and the stock's annualized volatility.
 
@@ -85,7 +87,7 @@ Black-Scholes price can be obtained using the code:
 	  return (result );
 	} //end of black_scholes call
 	
-The above code not only gives the price of the option but also gives "greeks" i.e. sensitivities of the prices to various factors. The above code is part of the library <a href="https://github.com/gopi-suvanam/di-libs/"> Di-Libs </a>. For experimenting use the notebook: [https://decentralized-intelligence.com/jsnb/#./examples/Black-Scholes.jsnb](https://decentralized-intelligence.com/jsnb/#./examples/Black-Scholes.jsnb).
+The above code not only gives the price of the option but also gives "greeks" i.e. sensitivities of the prices to various factors. The above code is part of the library <a href="https://github.com/gopi-suvanam/di-libs/"> Di-Libs </a>. 
 
 Black-Scholes formula makes certain assumptions including the assumption of geometric Brownian motion of the underlying price. If some of the assumption are not valid then there may not be a closed-form solution. In that case, numeric methods like Monte-Carlo simulation will have to be used. There is a followup article on Option Pricing using simulation here: [Option Pricing using Simulation
 ](/2023/05/04/Monte-Carlo-Simulation-for-Option-Pricing.html)

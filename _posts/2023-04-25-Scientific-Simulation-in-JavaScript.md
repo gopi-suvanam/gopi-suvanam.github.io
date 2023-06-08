@@ -80,8 +80,10 @@ JavaScript provides a wide range of features and libraries that can be leveraged
 
 
 This example demonstrates a simple simulation of a bouncing ball using HTML5 canvas and JavaScript. The canvas element is used as a drawing surface, and JavaScript is used to update the position of the ball, redraw it, and handle its bouncing behavior. This is just a basic example, and JavaScript can be used to implement much more complex simulations with advanced graphics, physics, and interactivity depending on the requirements of the simulation.
-You can play with the simulation here: [https://decentralized-intelligence.com/jsnb/#./examples/Simple-Simulation.jsnb](https://decentralized-intelligence.com/jsnb/#./examples/Simple-Simulation.jsnb). This is a simple example. As you can notice the ball moves in the same loop over and over again in this simple simulation. But what if we make it more interesting by moving the border of the box as well. This can create an effect of chaos:
-[https://decentralized-intelligence.com/jsnb/#./examples/Dynamic-Simulation.jsnb](https://decentralized-intelligence.com/jsnb/#./examples/Dynamic-Simulation.jsnb)
+You can play with the simulation here: [https://decentralized-intelligence.com/jsnb/#./examples/Simple-Simulation.jsnb](https://decentralized-intelligence.com/jsnb/#./examples/Simple-Simulation.jsnb){: .jsnb-link} 
+
+This is a simple example. As you can notice the ball moves in the same loop over and over again in this simple simulation. But what if we make it more interesting by moving the border of the box as well. This can create an effect of chaos:
+[https://decentralized-intelligence.com/jsnb/#./examples/Dynamic-Simulation.jsnb](https://decentralized-intelligence.com/jsnb/#./examples/Dynamic-Simulation.jsnb){: .jsnb-link} 
 
 ### Monte-Carlo Simulation
 Monte Carlo simulation is a computational technique that uses random sampling and statistical modeling to simulate and analyze the behavior of complex systems or processes. It is named after the famous Monte Carlo casino in Monaco, known for its games of chance, as the technique relies on random sampling to approximate and estimate outcomes in situations where deterministic solutions are not easily feasible.
@@ -139,7 +141,7 @@ It is a common practice in financial analysis to calculate the value of a financ
 	prices.dist().transpose().plot('scatter')
 
 This code uses the libraries [DI-Libs](/di-libs/). For playing around with the code use this notebook:
-[https://decentralized-intelligence.com/jsnb/#./examples/Black-Scholes-Simulation.jsnb](https://decentralized-intelligence.com/jsnb/#./examples/Black-Scholes-Simulation.jsnb)
+[https://decentralized-intelligence.com/jsnb/#./examples/Black-Scholes-Simulation.jsnb](https://decentralized-intelligence.com/jsnb/#./examples/Black-Scholes-Simulation.jsnb){: .jsnb-link} 
 
 
 

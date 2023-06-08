@@ -57,8 +57,9 @@ PFS (InterPlanetary File System) and torrents are both decentralized file sharin
 Overall, IPFS and torrents have similarities in their decentralized nature and file sharing capabilities. However, IPFS offers a more versatile and extensible protocol for decentralized web applications, emphasizes content addressing, and aims to create a broader decentralized web ecosystem.
 
 ### Accesing IPFS Through JavaScript
-To access [IPFS through JavaScript in the browser](/jsnb/#./examples/IPFS-in-Browser.jsnb), you can utilize the IPFS JavaScript library, which provides an API for interacting with IPFS nodes. Here's an example of how you can use IPFS in the browser:
-
+To access [IPFS through JavaScript in the browser](/jsnb/#./examples/IPFS-in-Browser.jsnb), you can utilize the IPFS JavaScript library, which provides an API for interacting with IPFS nodes. Below is an example of how you can use IPFS in the browser. To experiment check this notebook: [IPFS in Browser](/jsnb/#./examples/IPFS-in-Browser.jsnb){: .jsnb-link} 
+	
+	
 Include the IPFS JavaScript library in your HTML file:
 
 	<script src="https://unpkg.com/ipfs/dist/index.min.js"></script>
@@ -94,6 +95,4 @@ Retrieve a file from IPFS:
 	  }
 	});
 	
-Interact with IPFS using other available methods such as ls, get, or addFromURL according to your specific needs. By utilizing the IPFS JavaScript library, you can leverage IPFS functionality in the browser to interact with decentralized file storage, retrieve content by its hash, and perform various operations provided by the IPFS protocol. To experiment check this notebook: [IPFS in Browser](/jsnb/#./examples/IPFS-in-Browser.jsnb)
-	
-	
+Interact with IPFS using other available methods such as ls, get, or addFromURL according to your specific needs. By utilizing the IPFS JavaScript library, you can leverage IPFS functionality in the browser to interact with decentralized file storage, retrieve content by its hash, and perform various operations provided by the IPFS protocol. 
