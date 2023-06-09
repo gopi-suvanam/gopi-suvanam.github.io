@@ -59,8 +59,8 @@ pre{
 }
 
 .jsnb-link{
-  
-  display: block;
+    box-sizing: border-box;
+    display: block;
     padding: 5px;
     text-decoration: none;
     background-color: #ffde00;
