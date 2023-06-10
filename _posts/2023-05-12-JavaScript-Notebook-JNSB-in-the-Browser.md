@@ -19,8 +19,7 @@ Key features include:
 
 JavaScript can be used for [financial calculations](/2023/04/06/Option-Pricing-using-Black-Scholes-in-JavaScript.html), [simulations/scientific calculations](/2023/04/25/Scientific-Simulation-in-JavaScript.html), [augmented reality (AR)](/2023/04/10/AR-in-JavaScript-using-React.html), [robotics](/2023/05/03/JavaScript-forRobotics.html), [machine learning](/2023/03/08/Machine-Learning-in-JavaScript.html), and [blockchain development](/2023/05/10/Integrating-Blockchain-in-Web-Application-MetaMask.html), to name a few use-cases. The below notebooks are samples/boilerplates to start experimenting/building some of these use-cases. Click on each link to play around with the code.
 
-    <iframe src="https://decentralized-intelligence.com/jsnb/examples/README" class="is-fullwidth" height="315px"
-    </iframe>
+<iframe src="https://decentralized-intelligence.com/jsnb/examples/README" class="is-fullwidth"></iframe>
 
 For updates on the tool checkout the github repo: [https://github.com/gopi-suvanam/jsnb](https://github.com/gopi-suvanam/jsnb)
 Happy experimenting!!! 
