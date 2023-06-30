@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Scribbler: Jupyter like JavaScript Notebook
+title: Scribbler - Jupyter like JavaScript Notebook
 description: Scribbler is tool to do experimentation in JavaScript like Jupyter for Python. JavaScript Notebooks can be used to test code while developing and also for scientific calculations.
 ---
 [Jump to the tool](/jsnb/#./examples/Hello-world.jsnb)
