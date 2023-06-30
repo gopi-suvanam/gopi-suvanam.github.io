@@ -36,7 +36,7 @@ where:
 
 ### Black-Scholes Implementation in JavaScript
 
-JavaScript can be used to implement Black-Scholes - a closed-form solution to option pricing. For experimenting use the notebook: [Black-Scholes Formula for Option Pricing](https://decentralized-intelligence.com/jsnb/#./examples/Black-Scholes.jsnb){: .jsnb-link} 
+JavaScript can be used to implement Black-Scholes - a closed-form solution to option pricing. For experimenting use the notebook in Scribbler: [Black-Scholes Formula for Option Pricing](https://decentralized-intelligence.com/jsnb/#./examples/Black-Scholes.jsnb){: .jsnb-link} 
 
 To price options using the Black-Scholes formula in JavaScript, you can follow these steps:
 
