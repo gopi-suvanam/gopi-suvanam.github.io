@@ -1,5 +1,5 @@
 ---
-title: Scribbler: JavaScript Notebook in the Browser
+title: Scribbler- JavaScript Notebook in the Browser
 layout: post
 description: Scribbler a JavaScript Notebook provides an easy way to build and experiment in JavaScript using only browser based computation, without the need to install any packages or tools on the PC/server. Several interesting use-cases panning across scientific computation, finance and machine learning can be built on top of Scribbler.
 ---
