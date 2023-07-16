@@ -42,7 +42,7 @@ To access MetaMask using JavaScript, you can utilize the MetaMask provider objec
         // Request user permission
         await window.ethereum.request({ method: 'eth_requestAccounts' });
 	
-This code will trigger a popup in the MetaMask extension asking the user to grant permission to access their Ethereum accounts. If the user approves, the promise will be resolved. Use this notebook to play around with this code on Scribbler: [https://decentralized-intelligence.com/jsnb/#./examples/Ethereum-Metamask.jsnb](https://decentralized-intelligence.com/jsnb/#./examples/Ethereum-Metamask.jsnb)
+This code will trigger a popup in the MetaMask extension asking the user to grant permission to access their Ethereum accounts. If the user approves, the promise will be resolved. Use this notebook to play around with this code on Scribbler: [Scribbler Notebook for Ethereum Interaction](https://app.scribbler.live/#./examples/Ethereum-Metamask.jsnb)
 
 3. Accessing MetaMask provider object:
 
