@@ -37,7 +37,7 @@ Health Monitoring: Brain.js can be used to build models that can monitor health 
 
 Overall, Brain.js can be used in any application that requires machine learning and can benefit from the ability to learn and adapt from data.
 
-Experiment in this notebook on Scribbler:[Decentralized ML Modeling Using Brain.js](/jsnb/#./examples/Decentralized-ML-Model-Storage.jsnb){: .jsnb-link} 
+Experiment in this notebook on Scribbler:[Decentralized ML Modeling Using Brain.js](https://app.scribbler.live/#./examples/Decentralized-ML-Model-Storage.jsnb){: .jsnb-link} 
 
 ### Code examples of Brain.js
 Here's a simple example of how to use a CDN to load Brain.js in browsers by loading the library from a CDN:
