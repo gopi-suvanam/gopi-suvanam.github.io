@@ -25,7 +25,7 @@ Overall, Underscore.js is a versatile and widely adopted library that provides d
 
 ### How to Use Underscore JS?
 
-For experimenting see this notebook on Scribbler: [Using Underscore JS](/jsnb/#./examples/Underscore-JS.jsnb){: .jsnb-link} 
+For experimenting see this notebook on Scribbler: [Using Underscore JS](https://app.scribbler.live/#./examples/Underscore-JS.jsnb){: .jsnb-link} 
 
 Here are code examples demonstrating how to include Underscore.js using a CDN (Content Delivery Network) in HTML. 
 
