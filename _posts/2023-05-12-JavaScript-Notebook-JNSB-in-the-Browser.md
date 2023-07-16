@@ -4,7 +4,7 @@ layout: post
 description: Scribbler a JavaScript Notebook provides an easy way to build and experiment in JavaScript using only browser based computation, without the need to install any packages or tools on the PC/server. Several interesting use-cases panning across scientific computation, finance and machine learning can be built on top of Scribbler.
 ---
 
-[JavaScript is a versatile programming language](/2023/02/22/Why-JavaScript-is-Great.html) and a [Jupyter like Notebook](/2023/01/01/Jupyter-like-JavaSript-Notebook.html) can further help in building solutions using JavaScript. [Scribbler](/jsnb/#./examples/Hello-world.jsnb) is one such tool to do experimentation in JavaScript like Jupyter for Python. JavaScript Notebooks built on Scribbler can be used to test code snippets and also for experimentation. 
+[JavaScript is a versatile programming language](/2023/02/22/Why-JavaScript-is-Great.html) and a [Jupyter like Notebook](/2023/01/01/Jupyter-like-JavaSript-Notebook.html) can further help in building solutions using JavaScript. [Scribbler](https://app.scribbler.live/#./examples/Hello-world.jsnb) is one such tool to do experimentation in JavaScript like Jupyter for Python. JavaScript Notebooks built on Scribbler can be used to test code snippets and also for experimentation. 
 Key features include:
 - Easy to use javascript experimentation tool.
 - Runs without backend (node.js/npm/pip install/ngnix etc etc). I call this a "nodeless" app for two reasons - 1. it does not require node and npm to use.. 2. it does not require a server (I didnt want to use the word "serverless" as that word has been polluted by Amazon).
@@ -21,5 +21,5 @@ JavaScript can be used for [financial calculations](/2023/04/06/Option-Pricing-u
 
 <iframe src="https://scribbler.live/examples/README" class="is-fullwidth" onload="this.style.height=(this.contentWindow.document.body.scrollHeight+20)+'px';"></iframe>
 
-For updates on the tool checkout the github repo: [https://github.com/gopi-suvanam/jsnb](https://github.com/gopi-suvanam/jsnb)
+For updates on the tool checkout the github repo: [https://github.com/gopi-suvanam/scribbler](https://github.com/gopi-suvanam/scribbler)
 Happy experimenting!!! 
