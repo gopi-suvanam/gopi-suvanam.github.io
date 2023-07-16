@@ -69,7 +69,7 @@ Higher-order functions are used practically in various scenarios to write cleane
 	console.log(curryMultiply(2)(3)(4)); // Output: 24
 
 ### Example of Solving Differential Equation using Higher Order Function
-Below an implementation of the [Runge-Kutta method](https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods) (specifically, the fourth-order Runge-Kutta method) in JavaScript. Experiment using this notebook on Scribbler: [Runge-Kutta Method for Differential Equations](/jsnb/#./examples/Runge-Kutta-for-Differential-Equations.jsnb){: .jsnb-link} 
+Below an implementation of the [Runge-Kutta method](https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods) (specifically, the fourth-order Runge-Kutta method) in JavaScript. Experiment using this notebook on Scribbler: [Runge-Kutta Method for Differential Equations](https://app.scribbler.live/#./examples/Runge-Kutta-for-Differential-Equations.jsnb){: .jsnb-link} 
 
 
 	function runge_kutta(dydt, y0, t0, h) {
