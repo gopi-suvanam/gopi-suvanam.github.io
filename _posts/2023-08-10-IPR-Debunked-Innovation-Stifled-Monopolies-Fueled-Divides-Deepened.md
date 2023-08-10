@@ -1,5 +1,5 @@
 ---
-title: IPR Debunked: Innovation Stifled, Monopolies Fueled, and Divides Deepened
+title: IPR Debunked - Innovation Stifled, Monopolies Fueled, and Divides Deepened
 description: Intellectual Property Rights (IPR) stifles innovation, fosters monopolies, hinders competition, obstructs access to technology and medicines, impedes creative expression, limits access to valuable content, and exacerbates economic disparities.
 layout: post
 ---
