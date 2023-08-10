@@ -4,7 +4,7 @@ description: Intellectual Property Rights (IPR) stifles innovation, fosters mono
 layout: post
 ---
 
-Intellectual Property Rights (IPR) play a pivotal role in modern economies, influencing innovation, creativity, and controling creators' and inventors' interests. Advocates of IPR underline several key arguments to support their importance. However, none of these arguments are foolprrof and there are raise valid counterarguments, emphasizing the need to strike down the traditional view on IPR and relook at IPR laws from a fresh perspective..
+Intellectual Property Rights (IPR) play a pivotal role in modern economies, influencing innovation, creativity, and controling creators' and inventors' interests. Advocates of IPR underline several key arguments to support their importance. However, none of these arguments are foolproof and there are raise valid counter-arguments, emphasizing the need to strike down the traditional view on IPR and relook at IPR laws from a fresh perspective..
 
 ### Incentive for Innovation:
 Supporters:
