@@ -4,12 +4,9 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>ZEN/OPS · Ecosystem Cockpit</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='6' y='6' width='52' height='52' fill='%23c8780a'/%3E%3Crect x='2' y='2' width='52' height='52' fill='%231a1a1a'/%3E%3Ctext x='28' y='42' font-family='monospace' font-size='38' font-weight='800' text-anchor='middle' fill='%23f4f1ea'%3EZ%3C/text%3E%3C/svg%3E">
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-
-  <link rel="icon" type="image/png" href="https://zenx.io/assets/zenx-logo-B24ZS5wu.png">
-
-
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -294,7 +291,9 @@
 
 <!-- ======================= TOP BAR ======================= -->
 <header class="border-b border-black/90 bg-[var(--paper)] sticky top-0 z-40">
-  <div class="flex items-stretch">
+
+  <!-- DESKTOP / TABLET (>= lg) -->
+  <div class="hidden lg:flex items-stretch">
     <!-- Brand block -->
     <div class="flex items-center gap-3 px-5 py-3 border-r border-black/90 min-w-[260px]">
       <div class="brand-x mono">Z</div>
@@ -331,6 +330,47 @@
     </div>
   </div>
 
+  <!-- MOBILE / SMALL (< lg) - compact 2-row layout -->
+  <div class="lg:hidden">
+    <!-- Row 1: hamburger + brand + clock -->
+    <div class="flex items-center border-b border-[var(--line)]">
+      <button id="mobileMenuBtn" aria-label="Open menu" class="px-3 py-3 border-r border-black/90 hover:bg-[var(--paper-2)]">
+        <svg width="20" height="14" viewBox="0 0 20 14" fill="none" stroke="currentColor" stroke-width="1.5">
+          <line x1="0" y1="1" x2="20" y2="1"/>
+          <line x1="0" y1="7" x2="20" y2="7"/>
+          <line x1="0" y1="13" x2="20" y2="13"/>
+        </svg>
+      </button>
+      <div class="flex items-center gap-2.5 px-3 py-2.5 flex-1 min-w-0">
+        <div class="brand-x mono flex-shrink-0" style="width:30px;height:30px;font-size:14px;">Z</div>
+        <div class="min-w-0">
+          <div class="mono text-[9px] tracking-[0.2em] text-[var(--ink-mute)] truncate">ZEN / OPERATIONS</div>
+          <div class="text-[13px] font-semibold leading-tight truncate">Ecosystem Cockpit</div>
+        </div>
+      </div>
+      <div class="flex items-center gap-1.5 px-3 py-2.5 border-l border-black/90 flex-shrink-0">
+        <div class="rec-dot"></div>
+        <span class="mono text-[11px]" id="clockMobile">--:--:--</span>
+      </div>
+    </div>
+
+    <!-- Row 2: compact status pills -->
+    <div class="flex items-stretch border-b border-[var(--line)] bg-[var(--paper)] overflow-x-auto">
+      <div class="flex items-center gap-1.5 px-3 py-2 border-r border-[var(--line)] flex-shrink-0">
+        <span class="dot dot-g" style="width:6px;height:6px;"></span>
+        <span class="mono text-[10px] tracking-[0.15em] text-[var(--ink-mute)]">SYS</span>
+        <span class="mono text-[10px] font-semibold">NOMINAL</span>
+      </div>
+      <div class="flex items-center gap-1.5 px-3 py-2 border-r border-[var(--line)] flex-shrink-0">
+        <span class="dot dot-a" style="width:6px;height:6px;"></span>
+        <span class="mono text-[10px] tracking-[0.15em] text-[var(--ink-mute)]">INFRA</span>
+        <span class="mono text-[10px] font-semibold">PARTIAL</span>
+      </div>
+      <button class="mono text-[10px] tracking-[0.15em] px-3 py-2 border-r border-[var(--line)] flex-shrink-0 hover:bg-[var(--paper-2)]">GLOBAL ⌄</button>
+      <button class="mono text-[10px] tracking-[0.15em] px-3 py-2 flex-shrink-0 bg-[var(--ink)] text-[var(--paper)] ml-auto">5s ●</button>
+    </div>
+  </div>
+
   <!-- Ticker -->
   <div class="border-t border-[var(--line)] bg-[var(--paper-2)] overflow-hidden">
     <div class="ticker-track py-1.5 whitespace-nowrap mono text-[11px] text-[var(--ink-soft)]">
@@ -358,10 +398,28 @@
 </header>
 
 <!-- ======================= MAIN LAYOUT ======================= -->
-<div class="flex">
+<div class="flex relative">
+
+  <!-- Mobile backdrop -->
+  <div id="mobileBackdrop" class="fixed inset-0 bg-black/40 z-30 hidden lg:hidden"></div>
 
   <!-- ============== SIDEBAR ============== -->
-  <aside class="w-[220px] border-r border-black/90 min-h-[calc(100vh-77px)] bg-[var(--paper)]">
+  <aside id="sidebar" class="w-[240px] lg:w-[220px] border-r border-black/90 bg-[var(--paper)]
+                              fixed lg:sticky top-0 lg:top-[77px] left-0
+                              h-screen lg:h-auto lg:min-h-[calc(100vh-77px)]
+                              z-40 lg:z-auto
+                              -translate-x-full lg:translate-x-0
+                              transition-transform duration-200
+                              overflow-y-auto">
+
+    <!-- Mobile-only close header -->
+    <div class="lg:hidden flex items-center justify-between px-4 py-3 border-b border-black/90">
+      <div class="flex items-center gap-2">
+        <div class="brand-x mono" style="width:28px;height:28px;font-size:13px;">Z</div>
+        <span class="mono text-[11px] tracking-[0.2em]">ZEN / OPERATIONS</span>
+      </div>
+      <button id="mobileCloseBtn" aria-label="Close menu" class="text-[18px] leading-none px-2">✕</button>
+    </div>
     <div class="px-4 py-4 border-b border-[var(--line)]">
       <div class="smallcaps mb-3">Navigation</div>
       <nav class="flex flex-col -mx-4">
@@ -433,58 +491,58 @@
   </aside>
 
   <!-- ============== MAIN ============== -->
-  <main class="flex-1 p-6 space-y-6 max-w-full overflow-hidden">
+  <main class="flex-1 p-3 sm:p-4 lg:p-6 space-y-4 lg:space-y-6 max-w-full overflow-hidden min-w-0">
 
     <!-- ============== EXECUTIVE STRIP ============== -->
     <section class="grid grid-cols-12 gap-4">
 
       <!-- Hero status -->
-      <div class="col-span-12 lg:col-span-6 bezel panel p-6 relative display">
+      <div class="col-span-12 lg:col-span-6 bezel panel p-4 sm:p-6 relative display">
         <span class="b-bl"></span><span class="b-br"></span>
         <div class="silk">// SYS.HEALTH.AGGREGATE</div>
         <div class="silk-r">REV 2.41 · OPS</div>
 
-        <div class="flex items-start justify-between mb-4">
-          <div>
+        <div class="flex items-start justify-between mb-4 gap-3">
+          <div class="min-w-0">
             <div class="smallcaps mb-2">Ecosystem Status</div>
             <div class="flex items-baseline gap-3">
-              <span class="serif text-[64px] leading-none">Operational</span>
+              <span class="serif text-[44px] sm:text-[56px] lg:text-[64px] leading-none">Operational</span>
               <span class="dot dot-g mb-3"></span>
             </div>
             <div class="text-[13px] text-[var(--ink-soft)] mt-2 max-w-md">
               All six product surfaces are accepting traffic. One foundational service (<span class="font-semibold">ZenTrust</span>) is reporting elevated latency. Mitigation in progress.
             </div>
           </div>
-          <div class="stamp">SIGNED · 14:42:08 UTC</div>
+          <div class="stamp hidden sm:inline-block flex-shrink-0">SIGNED · 14:42:08 UTC</div>
         </div>
 
         <!-- Mini KPIs row -->
-        <div class="grid grid-cols-4 gap-0 border-t border-[var(--line)] pt-4 mt-4">
-          <div class="border-r border-[var(--line)] pr-3">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-y-3 border-t border-[var(--line)] pt-4 mt-4">
+          <div class="sm:border-r border-[var(--line)] pr-3">
             <div class="smallcaps mb-1">Incidents</div>
-            <div class="megafig text-[28px]">02</div>
+            <div class="megafig text-[24px] sm:text-[28px]">02</div>
             <div class="mono text-[10px] text-[var(--ink-mute)] mt-0.5">↑ 1 vs 24h</div>
           </div>
-          <div class="border-r border-[var(--line)] px-3">
+          <div class="sm:border-r border-[var(--line)] sm:px-3">
             <div class="smallcaps mb-1">Impacted</div>
-            <div class="megafig text-[28px]">01</div>
+            <div class="megafig text-[24px] sm:text-[28px]">01</div>
             <div class="mono text-[10px] text-[var(--ink-mute)] mt-0.5">of 6 surfaces</div>
           </div>
-          <div class="border-r border-[var(--line)] px-3">
+          <div class="sm:border-r border-[var(--line)] sm:px-3 border-t sm:border-t-0 pt-3 sm:pt-0">
             <div class="smallcaps mb-1">Avg latency</div>
-            <div class="megafig text-[28px]">142<span class="text-[14px] text-[var(--ink-mute)]">ms</span></div>
+            <div class="megafig text-[24px] sm:text-[28px]">142<span class="text-[14px] text-[var(--ink-mute)]">ms</span></div>
             <div class="mono text-[10px] text-[var(--amber)] mt-0.5">↑ 14ms vs 1h</div>
           </div>
-          <div class="pl-3">
+          <div class="sm:pl-3 border-t sm:border-t-0 pt-3 sm:pt-0">
             <div class="smallcaps mb-1">Error budget</div>
-            <div class="megafig text-[28px]">87.4<span class="text-[14px] text-[var(--ink-mute)]">%</span></div>
+            <div class="megafig text-[24px] sm:text-[28px]">87.4<span class="text-[14px] text-[var(--ink-mute)]">%</span></div>
             <div class="mono text-[10px] text-[var(--ink-mute)] mt-0.5">remaining · 30d</div>
           </div>
         </div>
       </div>
 
       <!-- Ecosystem gauge -->
-      <div class="col-span-12 lg:col-span-3 bezel panel p-5 relative display">
+      <div class="col-span-12 sm:col-span-6 lg:col-span-3 bezel panel p-5 relative display">
         <span class="b-bl"></span><span class="b-br"></span>
         <div class="silk">// HEALTH.SCORE</div>
         <div class="silk-r">0–100</div>
@@ -524,7 +582,7 @@
       </div>
 
       <!-- Quick status list -->
-      <div class="col-span-12 lg:col-span-3 bezel panel p-0 relative">
+      <div class="col-span-12 sm:col-span-6 lg:col-span-3 bezel panel p-0 relative">
         <span class="b-bl"></span><span class="b-br"></span>
         <div class="silk">// SURFACE.MATRIX</div>
         <div class="silk-r">6 / 6 UP</div>
@@ -833,12 +891,12 @@
         </div>
 
         <!-- Rail mini-table -->
-        <div class="grid grid-cols-4 mt-5 border border-[var(--ink)] mono text-[11px]">
-          <div class="p-3 border-r border-[var(--line)]">
+        <div class="grid grid-cols-2 lg:grid-cols-4 mt-5 border border-[var(--ink)] mono text-[11px]">
+          <div class="p-3 border-r border-[var(--line)] border-b lg:border-b-0">
             <div class="flex items-center justify-between mb-1"><span class="font-semibold">ZenId</span><span class="dot dot-g"></span></div>
             <div class="text-[var(--ink-mute)]">p50 12ms · p99 41ms · 4.1M tok/h</div>
           </div>
-          <div class="p-3 border-r border-[var(--line)]">
+          <div class="p-3 lg:border-r border-[var(--line)] border-b lg:border-b-0">
             <div class="flex items-center justify-between mb-1"><span class="font-semibold">ZenVault</span><span class="dot dot-g"></span></div>
             <div class="text-[var(--ink-mute)]">p50 9ms · p99 28ms · 0 queue</div>
           </div>
@@ -1165,10 +1223,10 @@
     <footer class="border-t border-black/90 pt-4 pb-2 mt-4">
       <div class="grid grid-cols-12 gap-4 items-end">
         <div class="col-span-12 md:col-span-6">
-          <div class="serif text-[36px] leading-none">Stay calm under failure.</div>
+          <div class="serif text-[28px] sm:text-[36px] leading-none">Stay calm under failure.</div>
           <div class="text-[12px] text-[var(--ink-soft)] mt-2">The cockpit narrows your attention to what's actionable. Everything else fades.</div>
         </div>
-        <div class="col-span-12 md:col-span-6 grid grid-cols-4 gap-3 mono text-[10px] text-[var(--ink-mute)] tracking-[0.18em]">
+        <div class="col-span-12 md:col-span-6 grid grid-cols-2 sm:grid-cols-4 gap-3 mono text-[10px] text-[var(--ink-mute)] tracking-[0.18em]">
           <div>
             <div class="text-[var(--ink)] mb-1">BUILD</div>
             <div>2.41.0 · cockpit</div>
@@ -1191,7 +1249,7 @@
           </div>
         </div>
       </div>
-      <div class="mt-4 pt-2 border-t border-[var(--line)] flex items-center justify-between mono text-[10px] text-[var(--ink-mute)] tracking-[0.18em]">
+      <div class="mt-4 pt-2 border-t border-[var(--line)] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mono text-[10px] text-[var(--ink-mute)] tracking-[0.18em]">
         <span>ZEN/OPS · ECOSYSTEM COCKPIT · © 2026</span>
         <span class="flex items-center gap-2"><span class="dot dot-g" style="width:6px;height:6px;box-shadow:none"></span>STREAM ACTIVE · LATENCY 41ms</span>
       </div>
@@ -1200,7 +1258,7 @@
 </div>
 
 <script>
-  // Clock
+  // Clock (desktop + mobile)
   function tick() {
     const d = new Date();
     const h = String(d.getUTCHours()).padStart(2,'0');
@@ -1208,8 +1266,37 @@
     const s = String(d.getUTCSeconds()).padStart(2,'0');
     const el = document.getElementById('clock');
     if (el) el.textContent = `${h}:${m}:${s} UTC`;
+    const elM = document.getElementById('clockMobile');
+    if (elM) elM.textContent = `${h}:${m}:${s}`;
   }
   setInterval(tick, 1000); tick();
+
+  // Mobile menu toggle
+  (function(){
+    const btn = document.getElementById('mobileMenuBtn');
+    const close = document.getElementById('mobileCloseBtn');
+    const sidebar = document.getElementById('sidebar');
+    const backdrop = document.getElementById('mobileBackdrop');
+    if (!btn || !sidebar || !backdrop) return;
+
+    function open() {
+      sidebar.classList.remove('-translate-x-full');
+      backdrop.classList.remove('hidden');
+    }
+    function shut() {
+      sidebar.classList.add('-translate-x-full');
+      backdrop.classList.add('hidden');
+    }
+    btn.addEventListener('click', open);
+    if (close) close.addEventListener('click', shut);
+    backdrop.addEventListener('click', shut);
+    // close drawer when a nav link is tapped
+    sidebar.querySelectorAll('.nav-item').forEach(a => a.addEventListener('click', shut));
+    // reset on resize to desktop
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 1024) shut();
+    });
+  })();
 
   // Generate tick marks for the dial
   (function(){
