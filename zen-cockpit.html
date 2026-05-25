@@ -1,0 +1,1383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ZEN/OPS · Ecosystem Cockpit</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link rel="icon" type="image/png" href="https://zenx.io/assets/zenx-logo-B24ZS5wu.png">
+
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+<style>
+  :root {
+    --paper: #f4f1ea;
+    --paper-2: #ebe7dd;
+    --ink: #1a1a1a;
+    --ink-soft: #44423d;
+    --ink-mute: #8a8678;
+    --line: #d9d3c4;
+    --line-soft: #e5e0d2;
+    --green: #2f7d52;
+    --green-bg: #d4e5d9;
+    --amber: #c8780a;
+    --amber-bg: #f3e2c2;
+    --red: #b3261e;
+    --red-bg: #f1cfcb;
+    --blue: #2e4d7b;
+    --blue-bg: #cfdaeb;
+    --grey: #8a8678;
+  }
+
+  * { -webkit-font-smoothing: antialiased; }
+
+  html, body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Geist', sans-serif;
+    font-feature-settings: "ss01", "cv11";
+  }
+
+  /* Grid paper background */
+  body {
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(26,26,26,0.10) 1px, transparent 0),
+      linear-gradient(0deg, rgba(217,211,196,0.0), rgba(217,211,196,0.0));
+    background-size: 24px 24px;
+  }
+
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .serif { font-family: 'Instrument Serif', serif; font-style: italic; }
+
+  .panel {
+    background: rgba(244, 241, 234, 0.85);
+    backdrop-filter: blur(2px);
+    border: 1px solid var(--line);
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.7) inset,
+      0 0 0 1px rgba(0,0,0,0.02);
+  }
+  .panel-tight { border: 1px solid var(--line); background: var(--paper); }
+
+  /* Corner ticks like instrument bezels */
+  .bezel { position: relative; }
+  .bezel::before, .bezel::after,
+  .bezel > .b-tl, .bezel > .b-tr, .bezel > .b-bl, .bezel > .b-br {
+    content: ""; position: absolute; width: 10px; height: 10px;
+    border-color: var(--ink); pointer-events: none;
+  }
+  .bezel::before { top: -1px; left: -1px; border-top: 1.5px solid; border-left: 1.5px solid; }
+  .bezel::after  { top: -1px; right: -1px; border-top: 1.5px solid; border-right: 1.5px solid; }
+  .bezel > .b-bl { bottom: -1px; left: -1px; border-bottom: 1.5px solid var(--ink); border-left: 1.5px solid var(--ink); }
+  .bezel > .b-br { bottom: -1px; right: -1px; border-bottom: 1.5px solid var(--ink); border-right: 1.5px solid var(--ink); }
+
+  /* Status pills/dots */
+  .dot { width: 8px; height: 8px; border-radius: 999px; display:inline-block; box-shadow: 0 0 0 3px rgba(0,0,0,0.05); }
+  .dot-g { background: var(--green); box-shadow: 0 0 0 3px var(--green-bg), 0 0 8px rgba(47,125,82,0.5); }
+  .dot-a { background: var(--amber); box-shadow: 0 0 0 3px var(--amber-bg), 0 0 8px rgba(200,120,10,0.5); animation: pulse 1.8s ease-in-out infinite; }
+  .dot-r { background: var(--red); box-shadow: 0 0 0 3px var(--red-bg), 0 0 10px rgba(179,38,30,0.6); animation: pulse 1s ease-in-out infinite; }
+  .dot-b { background: var(--blue); box-shadow: 0 0 0 3px var(--blue-bg); }
+  .dot-x { background: var(--grey); }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.45; }
+  }
+  @keyframes blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0.15; }
+  }
+  @keyframes sweep {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  @keyframes scroll-up {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-50%); }
+  }
+  .blink { animation: blink 1.2s steps(1) infinite; }
+
+  /* Header brand mark */
+  .brand-x {
+    display:inline-flex; align-items:center; justify-content:center;
+    width: 38px; height: 38px; background: var(--ink); color: var(--paper);
+    font-weight: 800; letter-spacing: -0.02em;
+    box-shadow: 3px 3px 0 var(--amber);
+  }
+
+  /* "Display" subtle scanline */
+  .display {
+    background:
+      repeating-linear-gradient(0deg, rgba(26,26,26,0.025) 0 1px, transparent 1px 3px),
+      var(--paper);
+  }
+
+  /* Ticker */
+  .ticker-track { display: flex; gap: 3rem; animation: ticker 80s linear infinite; }
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* Sparkline polyline */
+  .spark { stroke-width: 1.5; fill: none; }
+
+  /* Hover label */
+  .hover-row:hover { background: var(--paper-2); }
+
+  /* Tag */
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    padding: 2px 6px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .tag-g { color: var(--green); border-color: var(--green); background: var(--green-bg); }
+  .tag-a { color: var(--amber); border-color: var(--amber); background: var(--amber-bg); }
+  .tag-r { color: var(--red);   border-color: var(--red);   background: var(--red-bg); }
+  .tag-b { color: var(--blue);  border-color: var(--blue);  background: var(--blue-bg); }
+
+  /* Numbered card label like printed circuit silkscreen */
+  .silk {
+    position: absolute; top: -1px; left: 10px;
+    transform: translateY(-50%);
+    background: var(--paper);
+    padding: 0 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--ink-mute);
+  }
+  .silk-r {
+    position: absolute; top: -1px; right: 10px;
+    transform: translateY(-50%);
+    background: var(--paper);
+    padding: 0 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--ink-mute);
+  }
+
+  /* Big metric numbers */
+  .megafig {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 0.9;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Dependency rail lines (decorative SVG) */
+  .rail-line { stroke: var(--ink); stroke-width: 1; fill: none; opacity: 0.5; }
+  .rail-line-active { stroke: var(--amber); stroke-width: 1.5; fill: none; stroke-dasharray: 3 3; animation: dash 1.4s linear infinite; }
+  @keyframes dash {
+    to { stroke-dashoffset: -12; }
+  }
+
+  /* Heatmap cell */
+  .heat { width: 14px; height: 14px; border: 1px solid var(--line-soft); }
+
+  /* Gauge */
+  .gauge-arc { fill: none; stroke-width: 8; stroke-linecap: butt; }
+
+  /* Cockpit dial sweep */
+  .sweep { transform-origin: center; animation: sweep 8s linear infinite; }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--paper); }
+  ::-webkit-scrollbar-thumb { background: var(--line); }
+  ::-webkit-scrollbar-thumb:hover { background: var(--ink-mute); }
+
+  /* Top crosshair decoration */
+  .crosshair {
+    position: fixed; pointer-events: none;
+    z-index: 5;
+  }
+
+  /* Active sidebar item */
+  .nav-item.active {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .nav-item.active .nav-num { color: var(--amber); }
+
+  .nav-item {
+    border-left: 2px solid transparent;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .nav-item:hover {
+    border-left-color: var(--ink);
+    background: var(--paper-2);
+  }
+  .nav-item.active { border-left-color: var(--amber); }
+
+  /* Card hover */
+  .product-card {
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .product-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 -2px var(--ink), 0 0 0 1px var(--line);
+  }
+
+  /* Underline link */
+  .ulink {
+    text-decoration: underline;
+    text-decoration-color: var(--ink-mute);
+    text-underline-offset: 3px;
+  }
+
+  /* "Live" recording dot */
+  .rec-dot {
+    width: 8px; height: 8px; border-radius: 999px; background: var(--red);
+    animation: pulse 1.2s infinite ease-in-out;
+  }
+
+  /* Stamp */
+  .stamp {
+    display:inline-block;
+    border: 1.5px solid var(--ink);
+    padding: 4px 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    transform: rotate(-2deg);
+  }
+
+  /* Grid for products */
+  .grid-prod {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 0;
+    border: 1px solid var(--ink);
+  }
+  .grid-prod > div { border-right: 1px dashed var(--line); border-bottom: 1px dashed var(--line); }
+  .grid-prod > div:nth-child(3n) { border-right: none; }
+  .grid-prod > div:nth-child(n+4) { /* second row */ }
+  .grid-prod > div:nth-last-child(-n+3) { border-bottom: none; }
+
+  /* small caps */
+  .smallcaps {
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--ink-mute);
+  }
+
+  /* Marker dot in timeline */
+  .tl-dot {
+    width: 10px; height: 10px; border-radius: 999px;
+    border: 2px solid var(--paper);
+    position: relative; z-index: 1;
+  }
+
+  /* Diagonal hatch pattern */
+  .hatch {
+    background-image: repeating-linear-gradient(
+      45deg, rgba(26,26,26,0.06) 0 1px, transparent 1px 6px
+    );
+  }
+</style>
+</head>
+<body class="min-h-screen">
+
+<!-- ======================= TOP BAR ======================= -->
+<header class="border-b border-black/90 bg-[var(--paper)] sticky top-0 z-40">
+  <div class="flex items-stretch">
+    <!-- Brand block -->
+    <div class="flex items-center gap-3 px-5 py-3 border-r border-black/90 min-w-[260px]">
+      <div class="brand-x mono">Z</div>
+      <div>
+        <div class="mono text-[11px] tracking-[0.2em] text-[var(--ink-mute)]">ZEN / OPERATIONS</div>
+        <div class="text-[15px] font-semibold leading-tight">Ecosystem Cockpit</div>
+      </div>
+    </div>
+
+    <!-- Status indicator strip -->
+    <div class="flex items-center px-5 gap-6 flex-1 border-r border-black/90">
+      <div class="flex items-center gap-2">
+        <span class="dot dot-g"></span>
+        <span class="mono text-[11px] tracking-[0.18em] text-[var(--ink-mute)]">SYSTEM</span>
+        <span class="mono text-[12px] font-semibold">NOMINAL</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="dot dot-a"></span>
+        <span class="mono text-[11px] tracking-[0.18em] text-[var(--ink-mute)]">INFRA</span>
+        <span class="mono text-[12px] font-semibold">PARTIAL</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <div class="rec-dot"></div>
+        <span class="mono text-[11px] tracking-[0.18em] text-[var(--ink-mute)]">LIVE</span>
+        <span class="mono text-[12px]" id="clock">--:--:-- UTC</span>
+      </div>
+    </div>
+
+    <!-- Right controls -->
+    <div class="flex items-stretch border-l border-black/90">
+      <button class="px-4 mono text-[11px] tracking-[0.18em] hover:bg-[var(--paper-2)] border-r border-[var(--line)]">REGION · GLOBAL ⌄</button>
+      <button class="px-4 mono text-[11px] tracking-[0.18em] hover:bg-[var(--paper-2)] border-r border-[var(--line)]">TENANT · ALL ⌄</button>
+      <button class="px-4 mono text-[11px] tracking-[0.18em] bg-[var(--ink)] text-[var(--paper)]">REFRESH · 5s ●</button>
+    </div>
+  </div>
+
+  <!-- Ticker -->
+  <div class="border-t border-[var(--line)] bg-[var(--paper-2)] overflow-hidden">
+    <div class="ticker-track py-1.5 whitespace-nowrap mono text-[11px] text-[var(--ink-soft)]">
+      <span><span class="text-[var(--green)]">▲</span> ZenPays TPS 18.2K (+4.2%)</span>
+      <span><span class="text-[var(--amber)]">▼</span> ZenTrust p95 latency 218ms (+62ms)</span>
+      <span><span class="text-[var(--green)]">▲</span> ZenWallet uptime 99.992% / 30d</span>
+      <span><span class="text-[var(--amber)]">◆</span> ZenRouting throughput dampened in eu-west-2</span>
+      <span><span class="text-[var(--green)]">▲</span> ZenCards auth success 99.81%</span>
+      <span><span class="text-[var(--blue)]">◇</span> ZenBanking scheduled maintenance 02:00 UTC tomorrow</span>
+      <span><span class="text-[var(--green)]">▲</span> ZenId token issuance 4.1M / 1h</span>
+      <span><span class="text-[var(--green)]">▲</span> ZenOTC matched volume $412.8M / 24h</span>
+      <span><span class="text-[var(--green)]">▲</span> ZenVault read p50 9ms</span>
+      <!-- duplicate for seamless loop -->
+      <span><span class="text-[var(--green)]">▲</span> ZenPays TPS 18.2K (+4.2%)</span>
+      <span><span class="text-[var(--amber)]">▼</span> ZenTrust p95 latency 218ms (+62ms)</span>
+      <span><span class="text-[var(--green)]">▲</span> ZenWallet uptime 99.992% / 30d</span>
+      <span><span class="text-[var(--amber)]">◆</span> ZenRouting throughput dampened in eu-west-2</span>
+      <span><span class="text-[var(--green)]">▲</span> ZenCards auth success 99.81%</span>
+      <span><span class="text-[var(--blue)]">◇</span> ZenBanking scheduled maintenance 02:00 UTC tomorrow</span>
+      <span><span class="text-[var(--green)]">▲</span> ZenId token issuance 4.1M / 1h</span>
+      <span><span class="text-[var(--green)]">▲</span> ZenOTC matched volume $412.8M / 24h</span>
+      <span><span class="text-[var(--green)]">▲</span> ZenVault read p50 9ms</span>
+    </div>
+  </div>
+</header>
+
+<!-- ======================= MAIN LAYOUT ======================= -->
+<div class="flex">
+
+  <!-- ============== SIDEBAR ============== -->
+  <aside class="w-[220px] border-r border-black/90 min-h-[calc(100vh-77px)] bg-[var(--paper)]">
+    <div class="px-4 py-4 border-b border-[var(--line)]">
+      <div class="smallcaps mb-3">Navigation</div>
+      <nav class="flex flex-col -mx-4">
+        <a class="nav-item active px-4 py-2 flex items-center gap-3" href="#">
+          <span class="nav-num mono text-[10px] text-[var(--ink-mute)]">01</span>
+          <span class="text-[13px]">Overview</span>
+        </a>
+        <a class="nav-item px-4 py-2 flex items-center gap-3" href="#">
+          <span class="nav-num mono text-[10px] text-[var(--ink-mute)]">02</span>
+          <span class="text-[13px]">Products</span>
+        </a>
+        <a class="nav-item px-4 py-2 flex items-center gap-3" href="#">
+          <span class="nav-num mono text-[10px] text-[var(--ink-mute)]">03</span>
+          <span class="text-[13px]">Infrastructure</span>
+        </a>
+        <a class="nav-item px-4 py-2 flex items-center gap-3" href="#">
+          <span class="nav-num mono text-[10px] text-[var(--ink-mute)]">04</span>
+          <span class="text-[13px]">Incidents</span>
+          <span class="tag tag-a ml-auto">2</span>
+        </a>
+        <a class="nav-item px-4 py-2 flex items-center gap-3" href="#">
+          <span class="nav-num mono text-[10px] text-[var(--ink-mute)]">05</span>
+          <span class="text-[13px]">Metrics</span>
+        </a>
+        <a class="nav-item px-4 py-2 flex items-center gap-3" href="#">
+          <span class="nav-num mono text-[10px] text-[var(--ink-mute)]">06</span>
+          <span class="text-[13px]">Logs</span>
+        </a>
+        <a class="nav-item px-4 py-2 flex items-center gap-3" href="#">
+          <span class="nav-num mono text-[10px] text-[var(--ink-mute)]">07</span>
+          <span class="text-[13px]">Audit Trail</span>
+        </a>
+      </nav>
+    </div>
+
+    <div class="px-4 py-4 border-b border-[var(--line)]">
+      <div class="smallcaps mb-3">Operator</div>
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 bg-[var(--ink)] text-[var(--paper)] flex items-center justify-center mono text-[11px]">OP</div>
+        <div>
+          <div class="text-[12px] font-semibold">OPS-CTRL-04</div>
+          <div class="mono text-[10px] text-[var(--ink-mute)]">Shift · 14:00 → 22:00</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="px-4 py-4">
+      <div class="smallcaps mb-3">Quick Actions</div>
+      <div class="flex flex-col gap-2">
+        <button class="text-left text-[12px] py-1.5 px-2 hover:bg-[var(--paper-2)] border border-[var(--line)] flex justify-between items-center">
+          <span>Declare incident</span><span class="mono text-[10px] text-[var(--ink-mute)]">⌘I</span>
+        </button>
+        <button class="text-left text-[12px] py-1.5 px-2 hover:bg-[var(--paper-2)] border border-[var(--line)] flex justify-between items-center">
+          <span>Page on-call</span><span class="mono text-[10px] text-[var(--ink-mute)]">⌘P</span>
+        </button>
+        <button class="text-left text-[12px] py-1.5 px-2 hover:bg-[var(--paper-2)] border border-[var(--line)] flex justify-between items-center">
+          <span>Run playbook</span><span class="mono text-[10px] text-[var(--ink-mute)]">⌘R</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="px-4 py-4 border-t border-[var(--line)] mt-4">
+      <div class="hatch border border-[var(--line)] p-3">
+        <div class="serif text-[20px] leading-none mb-1">Stay calm,</div>
+        <div class="serif text-[20px] leading-none">read carefully.</div>
+        <div class="mono text-[10px] text-[var(--ink-mute)] mt-2 tracking-[0.18em]">— SRE PRINCIPLE №1</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ============== MAIN ============== -->
+  <main class="flex-1 p-6 space-y-6 max-w-full overflow-hidden">
+
+    <!-- ============== EXECUTIVE STRIP ============== -->
+    <section class="grid grid-cols-12 gap-4">
+
+      <!-- Hero status -->
+      <div class="col-span-12 lg:col-span-6 bezel panel p-6 relative display">
+        <span class="b-bl"></span><span class="b-br"></span>
+        <div class="silk">// SYS.HEALTH.AGGREGATE</div>
+        <div class="silk-r">REV 2.41 · OPS</div>
+
+        <div class="flex items-start justify-between mb-4">
+          <div>
+            <div class="smallcaps mb-2">Ecosystem Status</div>
+            <div class="flex items-baseline gap-3">
+              <span class="serif text-[64px] leading-none">Operational</span>
+              <span class="dot dot-g mb-3"></span>
+            </div>
+            <div class="text-[13px] text-[var(--ink-soft)] mt-2 max-w-md">
+              All six product surfaces are accepting traffic. One foundational service (<span class="font-semibold">ZenTrust</span>) is reporting elevated latency. Mitigation in progress.
+            </div>
+          </div>
+          <div class="stamp">SIGNED · 14:42:08 UTC</div>
+        </div>
+
+        <!-- Mini KPIs row -->
+        <div class="grid grid-cols-4 gap-0 border-t border-[var(--line)] pt-4 mt-4">
+          <div class="border-r border-[var(--line)] pr-3">
+            <div class="smallcaps mb-1">Incidents</div>
+            <div class="megafig text-[28px]">02</div>
+            <div class="mono text-[10px] text-[var(--ink-mute)] mt-0.5">↑ 1 vs 24h</div>
+          </div>
+          <div class="border-r border-[var(--line)] px-3">
+            <div class="smallcaps mb-1">Impacted</div>
+            <div class="megafig text-[28px]">01</div>
+            <div class="mono text-[10px] text-[var(--ink-mute)] mt-0.5">of 6 surfaces</div>
+          </div>
+          <div class="border-r border-[var(--line)] px-3">
+            <div class="smallcaps mb-1">Avg latency</div>
+            <div class="megafig text-[28px]">142<span class="text-[14px] text-[var(--ink-mute)]">ms</span></div>
+            <div class="mono text-[10px] text-[var(--amber)] mt-0.5">↑ 14ms vs 1h</div>
+          </div>
+          <div class="pl-3">
+            <div class="smallcaps mb-1">Error budget</div>
+            <div class="megafig text-[28px]">87.4<span class="text-[14px] text-[var(--ink-mute)]">%</span></div>
+            <div class="mono text-[10px] text-[var(--ink-mute)] mt-0.5">remaining · 30d</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ecosystem gauge -->
+      <div class="col-span-12 lg:col-span-3 bezel panel p-5 relative display">
+        <span class="b-bl"></span><span class="b-br"></span>
+        <div class="silk">// HEALTH.SCORE</div>
+        <div class="silk-r">0–100</div>
+
+        <div class="flex flex-col items-center">
+          <svg viewBox="0 0 200 130" class="w-full max-w-[240px]">
+            <!-- background arc -->
+            <path d="M 20 110 A 80 80 0 0 1 180 110" class="gauge-arc" stroke="#e5e0d2"></path>
+            <!-- segments -->
+            <path d="M 20 110 A 80 80 0 0 1 65 41" class="gauge-arc" stroke="#b3261e" opacity="0.55"></path>
+            <path d="M 65 41 A 80 80 0 0 1 135 41" class="gauge-arc" stroke="#c8780a" opacity="0.55"></path>
+            <path d="M 135 41 A 80 80 0 0 1 180 110" class="gauge-arc" stroke="#2f7d52" opacity="0.85"></path>
+            <!-- tick marks -->
+            <g stroke="#1a1a1a" stroke-width="1">
+              <line x1="20" y1="110" x2="28" y2="106"/>
+              <line x1="65" y1="41" x2="72" y2="48"/>
+              <line x1="100" y1="30" x2="100" y2="40"/>
+              <line x1="135" y1="41" x2="128" y2="48"/>
+              <line x1="180" y1="110" x2="172" y2="106"/>
+            </g>
+            <!-- needle -->
+            <g transform="rotate(58 100 110)">
+              <line x1="100" y1="110" x2="100" y2="40" stroke="#1a1a1a" stroke-width="2"/>
+              <circle cx="100" cy="110" r="5" fill="#1a1a1a"/>
+              <circle cx="100" cy="110" r="2" fill="#f4f1ea"/>
+            </g>
+            <!-- labels -->
+            <text x="20" y="125" font-family="JetBrains Mono" font-size="8" fill="#8a8678">0</text>
+            <text x="95" y="22" font-family="JetBrains Mono" font-size="8" fill="#8a8678">50</text>
+            <text x="172" y="125" font-family="JetBrains Mono" font-size="8" fill="#8a8678">100</text>
+          </svg>
+          <div class="text-center -mt-2">
+            <div class="megafig text-[44px]">94<span class="text-[16px] text-[var(--ink-mute)]">.2</span></div>
+            <div class="mono text-[10px] tracking-[0.2em] text-[var(--ink-mute)]">COMPOSITE HEALTH</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick status list -->
+      <div class="col-span-12 lg:col-span-3 bezel panel p-0 relative">
+        <span class="b-bl"></span><span class="b-br"></span>
+        <div class="silk">// SURFACE.MATRIX</div>
+        <div class="silk-r">6 / 6 UP</div>
+
+        <div class="px-4 pt-5 pb-3 smallcaps border-b border-[var(--line)]">By Surface</div>
+        <ul class="divide-y divide-[var(--line)] mono text-[12px]">
+          <li class="flex items-center justify-between px-4 py-2.5 hover-row"><span class="flex items-center gap-2.5"><span class="dot dot-g"></span>ZenOTC</span><span class="text-[var(--green)]">99.99</span></li>
+          <li class="flex items-center justify-between px-4 py-2.5 hover-row"><span class="flex items-center gap-2.5"><span class="dot dot-g"></span>ZenPays</span><span class="text-[var(--green)]">99.98</span></li>
+          <li class="flex items-center justify-between px-4 py-2.5 hover-row"><span class="flex items-center gap-2.5"><span class="dot dot-a"></span>ZenWallet</span><span class="text-[var(--amber)]">99.81</span></li>
+          <li class="flex items-center justify-between px-4 py-2.5 hover-row"><span class="flex items-center gap-2.5"><span class="dot dot-g"></span>ZenPulse</span><span class="text-[var(--green)]">99.97</span></li>
+          <li class="flex items-center justify-between px-4 py-2.5 hover-row"><span class="flex items-center gap-2.5"><span class="dot dot-g"></span>ZenCards</span><span class="text-[var(--green)]">99.95</span></li>
+          <li class="flex items-center justify-between px-4 py-2.5 hover-row"><span class="flex items-center gap-2.5"><span class="dot dot-b"></span>ZenBanking</span><span class="text-[var(--blue)]">MAINT</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============== PRODUCT GRID ============== -->
+    <section class="bezel panel relative pt-1">
+      <span class="b-bl"></span><span class="b-br"></span>
+      <div class="silk">// 02 · PRODUCT.SURFACES</div>
+      <div class="silk-r">CARDS · 6</div>
+
+      <div class="flex items-end justify-between px-5 pt-5 pb-4">
+        <div>
+          <div class="serif text-[28px] leading-none">Product surfaces</div>
+          <div class="text-[12px] text-[var(--ink-soft)] mt-1">Live operational read for each customer-facing product.</div>
+        </div>
+        <div class="flex gap-2">
+          <button class="tag">FILTER · ALL ⌄</button>
+          <button class="tag">SORT · STATUS ⌄</button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-px bg-[var(--line)] border-t border-[var(--line)]">
+
+        <!-- card template repeated for each product -->
+        <!-- ZenOTC -->
+        <div class="product-card bg-[var(--paper)] p-5">
+          <div class="flex items-start justify-between mb-3">
+            <div>
+              <div class="mono text-[10px] tracking-[0.2em] text-[var(--ink-mute)]">SURFACE / 001</div>
+              <div class="text-[18px] font-semibold leading-tight mt-0.5">ZenOTC</div>
+            </div>
+            <span class="tag tag-g"><span class="dot dot-g mr-1.5" style="width:6px;height:6px;box-shadow:none"></span>HEALTHY</span>
+          </div>
+          <div class="grid grid-cols-2 gap-y-2.5 gap-x-4 mono text-[12px]">
+            <div><div class="text-[10px] text-[var(--ink-mute)] tracking-wider">UPTIME</div><div class="megafig text-[16px]">99.99<span class="text-[10px] text-[var(--ink-mute)]">%</span></div></div>
+            <div><div class="text-[10px] text-[var(--ink-mute)] tracking-wider">LATENCY</div><div class="megafig text-[16px]">88<span class="text-[10px] text-[var(--ink-mute)]">ms</span></div></div>
+            <div><div class="text-[10px] text-[var(--ink-mute)] tracking-wider">ERRORS</div><div class="megafig text-[16px]">0.04<span class="text-[10px] text-[var(--ink-mute)]">%</span></div></div>
+            <div><div class="text-[10px] text-[var(--ink-mute)] tracking-wider">VOLUME</div><div class="megafig text-[16px]">$412M<span class="text-[10px] text-[var(--ink-mute)]">/d</span></div></div>
+          </div>
+          <svg viewBox="0 0 200 40" class="w-full h-9 mt-3"><polyline class="spark" stroke="#2f7d52" points="0,28 10,24 20,26 30,20 40,22 50,18 60,20 70,16 80,18 90,14 100,16 110,12 120,14 130,10 140,12 150,8 160,10 170,6 180,8 200,4"/></svg>
+          <div class="border-t border-dashed border-[var(--line)] pt-2.5 mt-2 flex items-center justify-between text-[11px]">
+            <span class="text-[var(--ink-mute)] mono">DEPS</span>
+            <span class="mono">ZenId · ZenVault · ZenTrust</span>
+          </div>
+        </div>
+
+        <!-- ZenPays -->
+        <div class="product-card bg-[var(--paper)] p-5">
+          <div class="flex items-start justify-between mb-3">
+            <div>
+              <div class="mono text-[10px] tracking-[0.2em] text-[var(--ink-mute)]">SURFACE / 002</div>
+              <div class="text-[18px] font-semibold leading-tight mt-0.5">ZenPays</div>
+            </div>
+            <span class="tag tag-g"><span class="dot dot-g mr-1.5" style="width:6px;height:6px;box-shadow:none"></span>HEALTHY</span>
+          </div>
+          <div class="grid grid-cols-2 gap-y-2.5 gap-x-4 mono text-[12px]">
+            <div><div class="text-[10px] text-[var(--ink-mute)] tracking-wider">UPTIME</div><div class="megafig text-[16px]">99.98<span class="text-[10px] text-[var(--ink-mute)]">%</span></div></div>
+            <div><div class="text-[10px] text-[var(--ink-mute)] tracking-wider">LATENCY</div><div class="megafig text-[16px]">140<span class="text-[10px] text-[var(--ink-mute)]">ms</span></div></div>
+            <div><div class="text-[10px] text-[var(--ink-mute)] tracking-wider">ERRORS</div><div class="megafig text-[16px]">0.11<span class="text-[10px] text-[var(--ink-mute)]">%</span></div></div>
+            <div><div class="text-[10px] text-[var(--ink-mute)] tracking-wider">TPS</div><div class="megafig text-[16px]">18.2<span class="text-[10px] text-[var(--ink-mute)]">k</span></div></div>
+          </div>
+          <svg viewBox="0 0 200 40" class="w-full h-9 mt-3"><polyline class="spark" stroke="#2f7d52" points="0,24 10,22 20,26 30,18 40,20 50,16 60,22 70,14 80,18 90,12 100,16 110,10 120,14 130,8 140,12 150,10 160,8 170,12 180,6 200,8"/></svg>
+          <div class="border-t border-dashed border-[var(--line)] pt-2.5 mt-2 flex items-center justify-between text-[11px]">
+            <span class="text-[var(--ink-mute)] mono">DEPS</span>
+            <span class="mono">ZenId · ZenRouting · ZenVault</span>
+          </div>
+        </div>
+
+        <!-- ZenWallet -->
+        <div class="product-card bg-[var(--paper)] p-5">
+          <div class="flex items-start justify-between mb-3">
+            <div>
+              <div class="mono text-[10px] tracking-[0.2em] text-[var(--ink-mute)]">SURFACE / 003</div>
+              <div class="text-[18px] font-semibold leading-tight mt-0.5">ZenWallet</div>
+            </div>
+            <span class="tag tag-a"><span class="dot dot-a mr-1.5" style="width:6px;height:6px;box-shadow:none"></span>DEGRADED</span>
+          </div>
+          <div class="grid grid-cols-2 gap-y-2.5 gap-x-4 mono text-[12px]">
+            <div><div class="text-[10px] text-[var(--ink-mute)] tracking-wider">UPTIME</div><div class="megafig text-[16px]">99.81<span class="text-[10px] text-[var(--ink-mute)]">%</span></div></div>
+            <div><div class="text-[10px] text-[var(--ink-mute)] tracking-wider">LATENCY</div><div class="megafig text-[16px] text-[var(--amber)]">312<span class="text-[10px] text-[var(--ink-mute)]">ms</span></div></div>
+            <div><div class="text-[10px] text-[var(--ink-mute)] tracking-wider">ERRORS</div><div class="megafig text-[16px] text-[var(--amber)]">1.4<span class="text-[10px] text-[var(--ink-mute)]">%</span></div></div>
+            <div><div class="text-[10px] text-[var(--ink-mute)] tracking-wider">TPS</div><div class="megafig text-[16px]">9.7<span class="text-[10px] text-[var(--ink-mute)]">k</span></div></div>
+          </div>
+          <svg viewBox="0 0 200 40" class="w-full h-9 mt-3"><polyline class="spark" stroke="#c8780a" points="0,30 10,28 20,26 30,28 40,24 50,22 60,26 70,20 80,18 90,22 100,16 110,12 120,8 130,10 140,6 150,4 160,8 170,10 180,12 200,8"/></svg>
+          <div class="border-t border-dashed border-[var(--line)] pt-2.5 mt-2 flex items-center justify-between text-[11px]">
+            <span class="mono text-[var(--amber)] flex items-center gap-1.5">⚠ ZenTrust slow</span>
+            <span class="mono">ZenId · ZenVault · ZenTrust · ZenRouting</span>
+          </div>
+        </div>
+
+        <!-- ZenPulse -->
+        <div class="product-card bg-[var(--paper)] p-5">
+          <div class="flex items-start justify-between mb-3">
+            <div>
+              <div class="mono text-[10px] tracking-[0.2em] text-[var(--ink-mute)]">SURFACE / 004</div>
+              <div class="text-[18px] font-semibold leading-tight mt-0.5">ZenPulse</div>
+            </div>
+            <span class="tag tag-g"><span class="dot dot-g mr-1.5" style="width:6px;height:6px;box-shadow:none"></span>HEALTHY</span>
+          </div>
+          <div class="grid grid-cols-2 gap-y-2.5 gap-x-4 mono text-[12px]">
+            <div><div class="text-[10px] text-[var(--ink-mute)] tracking-wider">UPTIME</div><div class="megafig text-[16px]">99.97<span class="text-[10px] text-[var(--ink-mute)]">%</span></div></div>
+            <div><div class="text-[10px] text-[var(--ink-mute)] tracking-wider">LATENCY</div><div class="megafig text-[16px]">62<span class="text-[10px] text-[var(--ink-mute)]">ms</span></div></div>
+            <div><div class="text-[10px] text-[var(--ink-mute)] tracking-wider">ERRORS</div><div class="megafig text-[16px]">0.08<span class="text-[10px] text-[var(--ink-mute)]">%</span></div></div>
+            <div><div class="text-[10px] text-[var(--ink-mute)] tracking-wider">EVENTS</div><div class="megafig text-[16px]">2.1<span class="text-[10px] text-[var(--ink-mute)]">M/h</span></div></div>
+          </div>
+          <svg viewBox="0 0 200 40" class="w-full h-9 mt-3"><polyline class="spark" stroke="#2f7d52" points="0,22 10,18 20,24 30,16 40,20 50,14 60,18 70,12 80,16 90,10 100,14 110,8 120,12 130,14 140,8 150,12 160,6 170,10 180,8 200,6"/></svg>
+          <div class="border-t border-dashed border-[var(--line)] pt-2.5 mt-2 flex items-center justify-between text-[11px]">
+            <span class="text-[var(--ink-mute)] mono">DEPS</span>
+            <span class="mono">ZenVault · ZenRouting</span>
+          </div>
+        </div>
+
+        <!-- ZenCards -->
+        <div class="product-card bg-[var(--paper)] p-5">
+          <div class="flex items-start justify-between mb-3">
+            <div>
+              <div class="mono text-[10px] tracking-[0.2em] text-[var(--ink-mute)]">SURFACE / 005</div>
+              <div class="text-[18px] font-semibold leading-tight mt-0.5">ZenCards</div>
+            </div>
+            <span class="tag tag-g"><span class="dot dot-g mr-1.5" style="width:6px;height:6px;box-shadow:none"></span>HEALTHY</span>
+          </div>
+          <div class="grid grid-cols-2 gap-y-2.5 gap-x-4 mono text-[12px]">
+            <div><div class="text-[10px] text-[var(--ink-mute)] tracking-wider">UPTIME</div><div class="megafig text-[16px]">99.95<span class="text-[10px] text-[var(--ink-mute)]">%</span></div></div>
+            <div><div class="text-[10px] text-[var(--ink-mute)] tracking-wider">AUTH</div><div class="megafig text-[16px]">99.81<span class="text-[10px] text-[var(--ink-mute)]">%</span></div></div>
+            <div><div class="text-[10px] text-[var(--ink-mute)] tracking-wider">DECLINES</div><div class="megafig text-[16px]">2.1<span class="text-[10px] text-[var(--ink-mute)]">%</span></div></div>
+            <div><div class="text-[10px] text-[var(--ink-mute)] tracking-wider">TPS</div><div class="megafig text-[16px]">6.4<span class="text-[10px] text-[var(--ink-mute)]">k</span></div></div>
+          </div>
+          <svg viewBox="0 0 200 40" class="w-full h-9 mt-3"><polyline class="spark" stroke="#2f7d52" points="0,18 10,22 20,16 30,20 40,14 50,18 60,12 70,16 80,10 90,14 100,8 110,12 120,16 130,10 140,8 150,12 160,8 170,14 180,10 200,12"/></svg>
+          <div class="border-t border-dashed border-[var(--line)] pt-2.5 mt-2 flex items-center justify-between text-[11px]">
+            <span class="text-[var(--ink-mute)] mono">DEPS</span>
+            <span class="mono">ZenId · ZenTrust · ZenRouting</span>
+          </div>
+        </div>
+
+        <!-- ZenBanking -->
+        <div class="product-card bg-[var(--paper)] p-5 relative">
+          <div class="absolute top-0 right-0 hatch border-l border-b border-[var(--line)] px-2 py-1 mono text-[9px] tracking-[0.2em] text-[var(--blue)]">SCHED. MAINT</div>
+          <div class="flex items-start justify-between mb-3">
+            <div>
+              <div class="mono text-[10px] tracking-[0.2em] text-[var(--ink-mute)]">SURFACE / 006</div>
+              <div class="text-[18px] font-semibold leading-tight mt-0.5">ZenBanking</div>
+            </div>
+            <span class="tag tag-b"><span class="dot dot-b mr-1.5" style="width:6px;height:6px;box-shadow:none"></span>NOMINAL</span>
+          </div>
+          <div class="grid grid-cols-2 gap-y-2.5 gap-x-4 mono text-[12px]">
+            <div><div class="text-[10px] text-[var(--ink-mute)] tracking-wider">UPTIME</div><div class="megafig text-[16px]">99.94<span class="text-[10px] text-[var(--ink-mute)]">%</span></div></div>
+            <div><div class="text-[10px] text-[var(--ink-mute)] tracking-wider">LATENCY</div><div class="megafig text-[16px]">198<span class="text-[10px] text-[var(--ink-mute)]">ms</span></div></div>
+            <div><div class="text-[10px] text-[var(--ink-mute)] tracking-wider">ERRORS</div><div class="megafig text-[16px]">0.18<span class="text-[10px] text-[var(--ink-mute)]">%</span></div></div>
+            <div><div class="text-[10px] text-[var(--ink-mute)] tracking-wider">ACCOUNTS</div><div class="megafig text-[16px]">1.2<span class="text-[10px] text-[var(--ink-mute)]">M</span></div></div>
+          </div>
+          <svg viewBox="0 0 200 40" class="w-full h-9 mt-3"><polyline class="spark" stroke="#2e4d7b" points="0,16 10,20 20,14 30,18 40,12 50,16 60,18 70,14 80,18 90,12 100,16 110,10 120,14 130,18 140,12 150,16 160,14 170,18 180,12 200,16"/></svg>
+          <div class="border-t border-dashed border-[var(--line)] pt-2.5 mt-2 flex items-center justify-between text-[11px]">
+            <span class="text-[var(--blue)] mono">◇ window 02:00 → 02:30</span>
+            <span class="mono">ZenId · ZenVault · ZenRouting</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============== MIDDLE ROW: INFRA + INCIDENTS ============== -->
+    <section class="grid grid-cols-12 gap-4">
+
+      <!-- Infrastructure dependency map -->
+      <div class="col-span-12 xl:col-span-8 bezel panel p-6 relative display">
+        <span class="b-bl"></span><span class="b-br"></span>
+        <div class="silk">// 03 · INFRA.RAILS</div>
+        <div class="silk-r">DEPENDENCY MAP</div>
+
+        <div class="flex items-end justify-between mb-5">
+          <div>
+            <div class="serif text-[26px] leading-none">Foundational rails</div>
+            <div class="text-[12px] text-[var(--ink-soft)] mt-1">Upstream services. A wobble here cascades downstream.</div>
+          </div>
+          <div class="flex gap-2 mono text-[10px] tracking-[0.18em] text-[var(--ink-mute)]">
+            <span class="flex items-center gap-1.5"><span class="dot dot-g"></span>HEALTHY</span>
+            <span class="flex items-center gap-1.5"><span class="dot dot-a"></span>DEGRADED</span>
+            <span class="flex items-center gap-1.5"><span class="dot dot-r"></span>OUTAGE</span>
+          </div>
+        </div>
+
+        <!-- Dependency diagram -->
+        <div class="relative">
+          <svg viewBox="0 0 800 280" class="w-full" preserveAspectRatio="xMidYMid meet">
+            <!-- background grid -->
+            <defs>
+              <pattern id="dg" width="20" height="20" patternUnits="userSpaceOnUse">
+                <circle cx="0" cy="0" r="0.6" fill="#d9d3c4"/>
+              </pattern>
+            </defs>
+            <rect width="800" height="280" fill="url(#dg)"/>
+
+            <!-- Top row: products -->
+            <g font-family="JetBrains Mono" font-size="11" font-weight="600">
+              <!-- product chips -->
+              <g>
+                <rect x="40" y="20" width="100" height="32" fill="#f4f1ea" stroke="#1a1a1a" stroke-width="1"/>
+                <text x="90" y="40" text-anchor="middle" fill="#1a1a1a">ZenOTC</text>
+                <circle cx="130" cy="28" r="4" fill="#2f7d52"/>
+              </g>
+              <g>
+                <rect x="160" y="20" width="100" height="32" fill="#f4f1ea" stroke="#1a1a1a"/>
+                <text x="210" y="40" text-anchor="middle" fill="#1a1a1a">ZenPays</text>
+                <circle cx="250" cy="28" r="4" fill="#2f7d52"/>
+              </g>
+              <g>
+                <rect x="280" y="20" width="100" height="32" fill="#f3e2c2" stroke="#c8780a" stroke-width="1.5"/>
+                <text x="330" y="40" text-anchor="middle" fill="#1a1a1a">ZenWallet</text>
+                <circle cx="370" cy="28" r="4" fill="#c8780a"/>
+              </g>
+              <g>
+                <rect x="400" y="20" width="100" height="32" fill="#f4f1ea" stroke="#1a1a1a"/>
+                <text x="450" y="40" text-anchor="middle" fill="#1a1a1a">ZenPulse</text>
+                <circle cx="490" cy="28" r="4" fill="#2f7d52"/>
+              </g>
+              <g>
+                <rect x="520" y="20" width="100" height="32" fill="#f4f1ea" stroke="#1a1a1a"/>
+                <text x="570" y="40" text-anchor="middle" fill="#1a1a1a">ZenCards</text>
+                <circle cx="610" cy="28" r="4" fill="#2f7d52"/>
+              </g>
+              <g>
+                <rect x="640" y="20" width="120" height="32" fill="#cfdaeb" stroke="#2e4d7b"/>
+                <text x="700" y="40" text-anchor="middle" fill="#1a1a1a">ZenBanking</text>
+                <circle cx="750" cy="28" r="4" fill="#2e4d7b"/>
+              </g>
+            </g>
+
+            <!-- Connecting lines from products to rails -->
+            <g>
+              <!-- to ZenId (190) -->
+              <path class="rail-line" d="M 90 52 Q 90 110 190 168"/>
+              <path class="rail-line" d="M 210 52 Q 210 120 200 168"/>
+              <path class="rail-line" d="M 330 52 Q 330 110 220 168"/>
+              <path class="rail-line" d="M 570 52 Q 500 130 230 168"/>
+              <path class="rail-line" d="M 700 52 Q 500 110 240 168"/>
+
+              <!-- to ZenVault (360) -->
+              <path class="rail-line" d="M 90 52 Q 130 130 340 168"/>
+              <path class="rail-line" d="M 210 52 Q 250 130 360 168"/>
+              <path class="rail-line" d="M 330 52 Q 340 130 370 168"/>
+              <path class="rail-line" d="M 450 52 Q 420 130 380 168"/>
+              <path class="rail-line" d="M 700 52 Q 540 130 400 168"/>
+
+              <!-- to ZenTrust (530, degraded - amber dashed) -->
+              <path class="rail-line-active" d="M 90 52 Q 200 130 510 168"/>
+              <path class="rail-line-active" d="M 330 52 Q 410 130 530 168"/>
+              <path class="rail-line-active" d="M 570 52 Q 570 130 550 168"/>
+
+              <!-- to ZenRouting (700) -->
+              <path class="rail-line" d="M 210 52 Q 400 130 680 168"/>
+              <path class="rail-line" d="M 330 52 Q 500 130 700 168"/>
+              <path class="rail-line" d="M 450 52 Q 580 130 710 168"/>
+              <path class="rail-line" d="M 570 52 Q 640 130 720 168"/>
+              <path class="rail-line" d="M 700 52 Q 720 130 730 168"/>
+            </g>
+
+            <!-- Bottom row: rails / infrastructure -->
+            <g font-family="JetBrains Mono" font-size="11" font-weight="600">
+              <g>
+                <rect x="150" y="168" width="120" height="48" fill="#f4f1ea" stroke="#1a1a1a" stroke-width="1.5"/>
+                <text x="210" y="190" text-anchor="middle" fill="#1a1a1a">ZenId</text>
+                <text x="210" y="205" text-anchor="middle" font-size="9" fill="#8a8678">identity / auth</text>
+                <circle cx="258" cy="178" r="4" fill="#2f7d52"/>
+              </g>
+              <g>
+                <rect x="300" y="168" width="120" height="48" fill="#f4f1ea" stroke="#1a1a1a" stroke-width="1.5"/>
+                <text x="360" y="190" text-anchor="middle" fill="#1a1a1a">ZenVault</text>
+                <text x="360" y="205" text-anchor="middle" font-size="9" fill="#8a8678">ledger / kv</text>
+                <circle cx="408" cy="178" r="4" fill="#2f7d52"/>
+              </g>
+              <g>
+                <rect x="470" y="168" width="120" height="48" fill="#f3e2c2" stroke="#c8780a" stroke-width="1.5"/>
+                <text x="530" y="190" text-anchor="middle" fill="#1a1a1a">ZenTrust</text>
+                <text x="530" y="205" text-anchor="middle" font-size="9" fill="#8a8678">risk / fraud</text>
+                <circle cx="578" cy="178" r="4" fill="#c8780a">
+                  <animate attributeName="opacity" values="1;0.3;1" dur="1.5s" repeatCount="indefinite"/>
+                </circle>
+              </g>
+              <g>
+                <rect x="640" y="168" width="120" height="48" fill="#f4f1ea" stroke="#1a1a1a" stroke-width="1.5"/>
+                <text x="700" y="190" text-anchor="middle" fill="#1a1a1a">ZenRouting</text>
+                <text x="700" y="205" text-anchor="middle" font-size="9" fill="#8a8678">payment rails</text>
+                <circle cx="748" cy="178" r="4" fill="#2f7d52"/>
+              </g>
+            </g>
+
+            <!-- Bottom band labels -->
+            <g font-family="JetBrains Mono" font-size="9" fill="#8a8678">
+              <line x1="20" y1="248" x2="780" y2="248" stroke="#d9d3c4"/>
+              <text x="20" y="266">UPSTREAM RAILS · all six surfaces inherit from this layer</text>
+              <text x="780" y="266" text-anchor="end">↳ ZenTrust dampened → ZenWallet, ZenCards, ZenOTC at risk</text>
+            </g>
+          </svg>
+        </div>
+
+        <!-- Rail mini-table -->
+        <div class="grid grid-cols-4 mt-5 border border-[var(--ink)] mono text-[11px]">
+          <div class="p-3 border-r border-[var(--line)]">
+            <div class="flex items-center justify-between mb-1"><span class="font-semibold">ZenId</span><span class="dot dot-g"></span></div>
+            <div class="text-[var(--ink-mute)]">p50 12ms · p99 41ms · 4.1M tok/h</div>
+          </div>
+          <div class="p-3 border-r border-[var(--line)]">
+            <div class="flex items-center justify-between mb-1"><span class="font-semibold">ZenVault</span><span class="dot dot-g"></span></div>
+            <div class="text-[var(--ink-mute)]">p50 9ms · p99 28ms · 0 queue</div>
+          </div>
+          <div class="p-3 border-r border-[var(--line)] bg-[var(--amber-bg)]/40">
+            <div class="flex items-center justify-between mb-1"><span class="font-semibold">ZenTrust</span><span class="dot dot-a"></span></div>
+            <div class="text-[var(--ink-mute)]">p50 84ms · p99 <span class="text-[var(--amber)] font-semibold">412ms</span> · 1.2K backlog</div>
+          </div>
+          <div class="p-3">
+            <div class="flex items-center justify-between mb-1"><span class="font-semibold">ZenRouting</span><span class="dot dot-g"></span></div>
+            <div class="text-[var(--ink-mute)]">p50 18ms · p99 64ms · 0 retries</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Incident timeline -->
+      <div class="col-span-12 xl:col-span-4 bezel panel p-0 relative">
+        <span class="b-bl"></span><span class="b-br"></span>
+        <div class="silk">// 04 · INCIDENT.LOG</div>
+        <div class="silk-r">TAIL · LIVE</div>
+
+        <div class="flex items-end justify-between px-5 pt-5 pb-3 border-b border-[var(--line)]">
+          <div>
+            <div class="serif text-[24px] leading-none">Incident timeline</div>
+            <div class="text-[11px] text-[var(--ink-soft)] mt-1">Last 90 min · auto-scroll</div>
+          </div>
+          <div class="flex gap-1.5">
+            <button class="tag">ALL</button>
+            <button class="tag tag-a">AMBER</button>
+            <button class="tag tag-r">RED</button>
+          </div>
+        </div>
+
+        <div class="relative px-5 py-4 max-h-[440px] overflow-y-auto">
+          <!-- vertical guide -->
+          <div class="absolute top-4 bottom-4 left-[34px] w-px bg-[var(--line)]"></div>
+
+          <div class="space-y-4">
+
+            <div class="flex gap-3 items-start">
+              <div class="mono text-[10px] text-[var(--ink-mute)] w-12 pt-0.5 text-right">14:42</div>
+              <div class="tl-dot bg-[var(--amber)] mt-1 blink"></div>
+              <div class="flex-1 -mt-0.5">
+                <div class="flex items-center gap-2 mb-0.5">
+                  <span class="tag tag-a">AMBER · OPEN</span>
+                  <span class="mono text-[10px] text-[var(--ink-mute)]">INC-2041</span>
+                </div>
+                <div class="text-[13px] font-semibold leading-snug">ZenTrust latency elevated</div>
+                <div class="text-[11px] text-[var(--ink-soft)] mt-1 leading-relaxed">p99 climbed from 96ms → 412ms in eu-west-2. Risk scoring queue depth at 1.2K. Auto-failover armed.</div>
+                <div class="flex gap-1.5 mt-1.5">
+                  <span class="tag">ZenWallet</span>
+                  <span class="tag">ZenCards</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex gap-3 items-start">
+              <div class="mono text-[10px] text-[var(--ink-mute)] w-12 pt-0.5 text-right">14:38</div>
+              <div class="tl-dot bg-[var(--amber)] mt-1"></div>
+              <div class="flex-1 -mt-0.5">
+                <div class="flex items-center gap-2 mb-0.5">
+                  <span class="tag tag-a">AMBER · INV.</span>
+                  <span class="mono text-[10px] text-[var(--ink-mute)]">INC-2040</span>
+                </div>
+                <div class="text-[13px] font-semibold leading-snug">ZenWallet authorization timeouts</div>
+                <div class="text-[11px] text-[var(--ink-soft)] mt-1 leading-relaxed">0.4% of authorize() calls exceeding 2s deadline. Correlates to INC-2041.</div>
+              </div>
+            </div>
+
+            <div class="flex gap-3 items-start">
+              <div class="mono text-[10px] text-[var(--ink-mute)] w-12 pt-0.5 text-right">14:12</div>
+              <div class="tl-dot bg-[var(--green)] mt-1"></div>
+              <div class="flex-1 -mt-0.5">
+                <div class="flex items-center gap-2 mb-0.5">
+                  <span class="tag tag-g">GREEN · RES.</span>
+                  <span class="mono text-[10px] text-[var(--ink-mute)]">INC-2039</span>
+                </div>
+                <div class="text-[13px] font-semibold leading-snug">ZenRouting failover · ap-south-1</div>
+                <div class="text-[11px] text-[var(--ink-soft)] mt-1 leading-relaxed">Hot standby promoted. 23 minutes from detect to resolve.</div>
+              </div>
+            </div>
+
+            <div class="flex gap-3 items-start">
+              <div class="mono text-[10px] text-[var(--ink-mute)] w-12 pt-0.5 text-right">13:55</div>
+              <div class="tl-dot bg-[var(--blue)] mt-1"></div>
+              <div class="flex-1 -mt-0.5">
+                <div class="flex items-center gap-2 mb-0.5">
+                  <span class="tag tag-b">MAINT</span>
+                  <span class="mono text-[10px] text-[var(--ink-mute)]">CHG-118</span>
+                </div>
+                <div class="text-[13px] font-semibold leading-snug">ZenId rolling deploy · v4.2.1</div>
+                <div class="text-[11px] text-[var(--ink-soft)] mt-1 leading-relaxed">Canary 5% → 100% over 18 minutes. No regressions detected.</div>
+              </div>
+            </div>
+
+            <div class="flex gap-3 items-start">
+              <div class="mono text-[10px] text-[var(--ink-mute)] w-12 pt-0.5 text-right">13:10</div>
+              <div class="tl-dot bg-[var(--green)] mt-1"></div>
+              <div class="flex-1 -mt-0.5">
+                <div class="flex items-center gap-2 mb-0.5">
+                  <span class="tag tag-g">GREEN · RES.</span>
+                  <span class="mono text-[10px] text-[var(--ink-mute)]">INC-2038</span>
+                </div>
+                <div class="text-[13px] font-semibold leading-snug">ZenPulse webhook backlog cleared</div>
+                <div class="text-[11px] text-[var(--ink-soft)] mt-1 leading-relaxed">Queue drained from 84K → 0 in 4 minutes after worker scale.</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- AI correlation footer -->
+        <div class="border-t border-[var(--ink)] px-5 py-3 bg-[var(--paper-2)]">
+          <div class="flex items-start gap-2">
+            <div class="mono text-[9px] tracking-[0.2em] text-[var(--ink-mute)] mt-0.5">RCA·SUGGEST</div>
+            <div class="text-[12px] flex-1 leading-snug">
+              <span class="mono text-[var(--amber)] font-semibold">87%</span> probability <span class="font-semibold">ZenTrust</span> risk-scoring backlog is driving ZenWallet auth timeouts. Suggest: shed non-critical scoring traffic.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== METRICS ROW ============== -->
+    <section class="grid grid-cols-12 gap-4">
+
+      <!-- TPS Graph -->
+      <div class="col-span-12 lg:col-span-7 bezel panel p-5 relative display">
+        <span class="b-bl"></span><span class="b-br"></span>
+        <div class="silk">// 05 · TPS.AGGREGATE</div>
+        <div class="silk-r">WINDOW · 60m</div>
+        <div class="flex items-end justify-between mb-3">
+          <div>
+            <div class="smallcaps">Transactions per second</div>
+            <div class="flex items-baseline gap-3">
+              <span class="megafig text-[36px]">48,217</span>
+              <span class="mono text-[12px] text-[var(--green)]">▲ 4.2% / 1h</span>
+            </div>
+          </div>
+          <div class="flex gap-1.5">
+            <button class="tag">1H</button>
+            <button class="tag" style="background:var(--ink);color:var(--paper)">6H</button>
+            <button class="tag">24H</button>
+            <button class="tag">7D</button>
+          </div>
+        </div>
+        <div class="h-[180px]"><canvas id="tpsChart"></canvas></div>
+      </div>
+
+      <!-- Latency dial -->
+      <div class="col-span-12 sm:col-span-6 lg:col-span-3 bezel panel p-5 relative display">
+        <span class="b-bl"></span><span class="b-br"></span>
+        <div class="silk">// LAT.P95</div>
+        <div class="silk-r">ms</div>
+
+        <div class="relative">
+          <svg viewBox="0 0 200 200" class="w-full max-w-[200px] mx-auto">
+            <!-- outer ring with ticks -->
+            <circle cx="100" cy="100" r="86" fill="none" stroke="#1a1a1a" stroke-width="1"/>
+            <circle cx="100" cy="100" r="92" fill="none" stroke="#1a1a1a" stroke-width="0.5"/>
+            <!-- tick marks -->
+            <g stroke="#1a1a1a" stroke-width="1">
+              <!-- generated 24 ticks -->
+              <g id="ticks"></g>
+            </g>
+            <!-- inner background arc segments -->
+            <circle cx="100" cy="100" r="70" fill="none" stroke="#e5e0d2" stroke-width="6"/>
+            <circle cx="100" cy="100" r="70" fill="none" stroke="#2f7d52" stroke-width="6"
+                    stroke-dasharray="220 440" stroke-dashoffset="0" transform="rotate(-90 100 100)"/>
+            <!-- sweep -->
+            <g class="sweep" style="transform-origin:100px 100px;">
+              <line x1="100" y1="100" x2="100" y2="20" stroke="#c8780a" stroke-width="0.8" stroke-dasharray="2 4" opacity="0.6"/>
+            </g>
+            <!-- needle -->
+            <g transform="rotate(75 100 100)">
+              <line x1="100" y1="100" x2="100" y2="34" stroke="#1a1a1a" stroke-width="2"/>
+              <circle cx="100" cy="100" r="6" fill="#1a1a1a"/>
+              <circle cx="100" cy="100" r="2" fill="var(--paper)"/>
+            </g>
+            <text x="100" y="155" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="#8a8678">P95 · LATENCY</text>
+          </svg>
+          <div class="text-center mt-1">
+            <div class="megafig text-[34px]">218<span class="text-[12px] text-[var(--ink-mute)]"> ms</span></div>
+            <div class="mono text-[10px] text-[var(--amber)]">▲ 62ms vs baseline</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Error heatmap -->
+      <div class="col-span-12 sm:col-span-6 lg:col-span-2 bezel panel p-4 relative">
+        <span class="b-bl"></span><span class="b-br"></span>
+        <div class="silk">// ERR.MAP</div>
+        <div class="silk-r">24h</div>
+        <div class="smallcaps mb-3 mt-1">Error heatmap</div>
+        <div id="heatmap" class="grid grid-cols-6 gap-[2px] mb-3"></div>
+        <div class="flex items-center justify-between mono text-[9px] text-[var(--ink-mute)] tracking-wider">
+          <span>00:00</span><span>NOW</span>
+        </div>
+        <div class="flex items-center gap-1 mt-3 mono text-[9px] text-[var(--ink-mute)]">
+          <span>LOW</span>
+          <span class="heat" style="background:#d4e5d9"></span>
+          <span class="heat" style="background:#e6d09a"></span>
+          <span class="heat" style="background:#dba36a"></span>
+          <span class="heat" style="background:#b3261e"></span>
+          <span>HIGH</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ============== SECONDARY ROW ============== -->
+    <section class="grid grid-cols-12 gap-4">
+
+      <!-- Region map (stylized) -->
+      <div class="col-span-12 lg:col-span-5 bezel panel p-5 relative display">
+        <span class="b-bl"></span><span class="b-br"></span>
+        <div class="silk">// REGIONS</div>
+        <div class="silk-r">GEO · 9 ZONES</div>
+        <div class="flex items-end justify-between mb-3">
+          <div>
+            <div class="serif text-[22px] leading-none">Regional posture</div>
+            <div class="text-[11px] text-[var(--ink-soft)] mt-1">Edge availability across zones</div>
+          </div>
+        </div>
+
+        <!-- Abstract world map -->
+        <svg viewBox="0 0 500 230" class="w-full mb-2">
+          <defs>
+            <pattern id="rg" width="6" height="6" patternUnits="userSpaceOnUse">
+              <circle cx="3" cy="3" r="0.7" fill="#d9d3c4"/>
+            </pattern>
+          </defs>
+          <rect width="500" height="230" fill="url(#rg)"/>
+
+          <!-- continents as abstract blobs -->
+          <g fill="#ebe7dd" stroke="#1a1a1a" stroke-width="0.5">
+            <path d="M40,70 Q60,50 95,55 Q140,45 165,70 Q180,100 150,120 Q120,135 80,125 Q45,115 35,95 Z"/>
+            <path d="M180,40 Q240,30 290,50 Q330,55 340,85 Q335,115 300,130 Q260,140 220,125 Q185,115 175,90 Q170,60 180,40 Z"/>
+            <path d="M210,135 Q235,125 250,150 Q260,180 240,200 Q210,210 195,185 Q190,160 210,135 Z"/>
+            <path d="M345,90 Q380,80 405,95 Q420,115 405,140 Q380,155 350,145 Q335,125 345,90 Z"/>
+            <path d="M380,170 Q415,160 435,180 Q445,200 420,215 Q390,215 375,195 Q370,180 380,170 Z"/>
+          </g>
+
+          <!-- region markers -->
+          <g font-family="JetBrains Mono" font-size="8">
+            <g><circle cx="95" cy="85" r="5" fill="#2f7d52"/><circle cx="95" cy="85" r="9" fill="none" stroke="#2f7d52" opacity="0.4"/><text x="105" y="80" fill="#1a1a1a">us-east-1</text></g>
+            <g><circle cx="55" cy="105" r="5" fill="#2f7d52"/><text x="20" y="125" fill="#1a1a1a">us-west-2</text></g>
+            <g><circle cx="225" cy="65" r="5" fill="#2f7d52"/><text x="235" y="60" fill="#1a1a1a">eu-west-1</text></g>
+            <g><circle cx="265" cy="80" r="5" fill="#c8780a"/><circle cx="265" cy="80" r="9" fill="none" stroke="#c8780a" opacity="0.5"><animate attributeName="r" values="9;14;9" dur="1.8s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.5;0;0.5" dur="1.8s" repeatCount="indefinite"/></circle><text x="275" y="75" fill="#1a1a1a">eu-west-2 ⚠</text></g>
+            <g><circle cx="295" cy="105" r="5" fill="#2f7d52"/><text x="305" y="100" fill="#1a1a1a">eu-central</text></g>
+            <g><circle cx="375" cy="115" r="5" fill="#2f7d52"/><text x="385" y="110" fill="#1a1a1a">ap-east-1</text></g>
+            <g><circle cx="365" cy="140" r="5" fill="#2f7d52"/><text x="305" y="160" fill="#1a1a1a">ap-south-1</text></g>
+            <g><circle cx="410" cy="195" r="5" fill="#2f7d52"/><text x="345" y="210" fill="#1a1a1a">ap-southeast</text></g>
+            <g><circle cx="225" cy="175" r="5" fill="#2e4d7b"/><text x="160" y="195" fill="#1a1a1a">sa-east-1</text></g>
+          </g>
+        </svg>
+
+        <div class="grid grid-cols-3 gap-3 mono text-[11px] border-t border-[var(--line)] pt-3">
+          <div class="flex items-center gap-2"><span class="dot dot-g"></span> 7 healthy</div>
+          <div class="flex items-center gap-2"><span class="dot dot-a"></span> 1 degraded</div>
+          <div class="flex items-center gap-2"><span class="dot dot-b"></span> 1 maintenance</div>
+        </div>
+      </div>
+
+      <!-- Live event stream -->
+      <div class="col-span-12 lg:col-span-4 bezel panel p-0 relative">
+        <span class="b-bl"></span><span class="b-br"></span>
+        <div class="silk">// EVT.STREAM</div>
+        <div class="silk-r">TAIL -f</div>
+        <div class="flex items-center justify-between px-5 pt-5 pb-3 border-b border-[var(--line)]">
+          <div class="flex items-center gap-2">
+            <div class="serif text-[22px]">Live event stream</div>
+          </div>
+          <div class="flex items-center gap-2 mono text-[10px] text-[var(--ink-mute)]">
+            <span class="rec-dot"></span> REC
+          </div>
+        </div>
+        <div class="px-5 py-3 mono text-[11px] leading-[1.7] max-h-[330px] overflow-hidden relative">
+          <div id="logStream" class="space-y-0.5">
+            <!-- populated by JS -->
+          </div>
+          <div class="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-[var(--paper)] to-transparent pointer-events-none"></div>
+        </div>
+      </div>
+
+      <!-- SLO tracker -->
+      <div class="col-span-12 lg:col-span-3 bezel panel p-5 relative">
+        <span class="b-bl"></span><span class="b-br"></span>
+        <div class="silk">// SLO</div>
+        <div class="silk-r">30d</div>
+        <div class="serif text-[22px] leading-none mb-1">Error budget</div>
+        <div class="text-[11px] text-[var(--ink-soft)] mb-4">Burn vs allowance per surface.</div>
+
+        <div class="space-y-4">
+          <div>
+            <div class="flex justify-between mono text-[11px] mb-1.5"><span>ZenOTC</span><span class="text-[var(--ink-mute)]">98.2% left</span></div>
+            <div class="h-2 bg-[var(--paper-2)] relative"><div class="absolute inset-y-0 left-0 bg-[var(--green)]" style="width:98.2%"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between mono text-[11px] mb-1.5"><span>ZenPays</span><span class="text-[var(--ink-mute)]">91.7% left</span></div>
+            <div class="h-2 bg-[var(--paper-2)] relative"><div class="absolute inset-y-0 left-0 bg-[var(--green)]" style="width:91.7%"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between mono text-[11px] mb-1.5"><span>ZenWallet</span><span class="text-[var(--amber)]">42.1% left</span></div>
+            <div class="h-2 bg-[var(--paper-2)] relative"><div class="absolute inset-y-0 left-0 bg-[var(--amber)]" style="width:42.1%"></div><div class="absolute inset-y-0 right-0 hatch" style="width:30%"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between mono text-[11px] mb-1.5"><span>ZenPulse</span><span class="text-[var(--ink-mute)]">96.4% left</span></div>
+            <div class="h-2 bg-[var(--paper-2)] relative"><div class="absolute inset-y-0 left-0 bg-[var(--green)]" style="width:96.4%"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between mono text-[11px] mb-1.5"><span>ZenCards</span><span class="text-[var(--ink-mute)]">88.0% left</span></div>
+            <div class="h-2 bg-[var(--paper-2)] relative"><div class="absolute inset-y-0 left-0 bg-[var(--green)]" style="width:88%"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between mono text-[11px] mb-1.5"><span>ZenBanking</span><span class="text-[var(--ink-mute)]">94.5% left</span></div>
+            <div class="h-2 bg-[var(--paper-2)] relative"><div class="absolute inset-y-0 left-0 bg-[var(--green)]" style="width:94.5%"></div></div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ============== FOOTER STRIP ============== -->
+    <footer class="border-t border-black/90 pt-4 pb-2 mt-4">
+      <div class="grid grid-cols-12 gap-4 items-end">
+        <div class="col-span-12 md:col-span-6">
+          <div class="serif text-[36px] leading-none">Stay calm under failure.</div>
+          <div class="text-[12px] text-[var(--ink-soft)] mt-2">The cockpit narrows your attention to what's actionable. Everything else fades.</div>
+        </div>
+        <div class="col-span-12 md:col-span-6 grid grid-cols-4 gap-3 mono text-[10px] text-[var(--ink-mute)] tracking-[0.18em]">
+          <div>
+            <div class="text-[var(--ink)] mb-1">BUILD</div>
+            <div>2.41.0 · cockpit</div>
+            <div>commit a91e6f3</div>
+          </div>
+          <div>
+            <div class="text-[var(--ink)] mb-1">SOURCE</div>
+            <div>realtime · 5s tick</div>
+            <div>WS · zen-ops/main</div>
+          </div>
+          <div>
+            <div class="text-[var(--ink)] mb-1">ESCALATION</div>
+            <div>L2 · @ops-pri</div>
+            <div>L3 · @platform-lead</div>
+          </div>
+          <div>
+            <div class="text-[var(--ink)] mb-1">DOCS</div>
+            <div class="ulink">runbooks/</div>
+            <div class="ulink">postmortems/</div>
+          </div>
+        </div>
+      </div>
+      <div class="mt-4 pt-2 border-t border-[var(--line)] flex items-center justify-between mono text-[10px] text-[var(--ink-mute)] tracking-[0.18em]">
+        <span>ZEN/OPS · ECOSYSTEM COCKPIT · © 2026</span>
+        <span class="flex items-center gap-2"><span class="dot dot-g" style="width:6px;height:6px;box-shadow:none"></span>STREAM ACTIVE · LATENCY 41ms</span>
+      </div>
+    </footer>
+  </main>
+</div>
+
+<script>
+  // Clock
+  function tick() {
+    const d = new Date();
+    const h = String(d.getUTCHours()).padStart(2,'0');
+    const m = String(d.getUTCMinutes()).padStart(2,'0');
+    const s = String(d.getUTCSeconds()).padStart(2,'0');
+    const el = document.getElementById('clock');
+    if (el) el.textContent = `${h}:${m}:${s} UTC`;
+  }
+  setInterval(tick, 1000); tick();
+
+  // Generate tick marks for the dial
+  (function(){
+    const ticks = document.getElementById('ticks');
+    if (!ticks) return;
+    const svgNS = 'http://www.w3.org/2000/svg';
+    for (let i = 0; i < 36; i++){
+      const angle = (i * 10) * Math.PI / 180;
+      const r1 = 86, r2 = (i % 3 === 0) ? 78 : 82;
+      const x1 = 100 + Math.sin(angle) * r1;
+      const y1 = 100 - Math.cos(angle) * r1;
+      const x2 = 100 + Math.sin(angle) * r2;
+      const y2 = 100 - Math.cos(angle) * r2;
+      const l = document.createElementNS(svgNS, 'line');
+      l.setAttribute('x1', x1); l.setAttribute('y1', y1);
+      l.setAttribute('x2', x2); l.setAttribute('y2', y2);
+      l.setAttribute('stroke', '#1a1a1a');
+      l.setAttribute('stroke-width', i % 3 === 0 ? 1 : 0.5);
+      ticks.appendChild(l);
+    }
+  })();
+
+  // Heatmap (6 rows × 6 cols, mostly low with a few spikes)
+  (function(){
+    const hm = document.getElementById('heatmap');
+    if (!hm) return;
+    const palette = ['#d4e5d9','#cbdfd0','#e6d09a','#dba36a','#b3261e'];
+    // 36 cells
+    const intensities = [
+      0,0,0,1,0,0,
+      0,0,1,0,0,0,
+      0,1,0,0,0,1,
+      0,0,0,0,1,0,
+      0,0,1,2,0,0,
+      0,1,2,3,4,3
+    ];
+    intensities.forEach(v => {
+      const div = document.createElement('div');
+      div.className = 'heat';
+      div.style.background = palette[v];
+      hm.appendChild(div);
+    });
+  })();
+
+  // TPS chart
+  (function(){
+    const ctx = document.getElementById('tpsChart');
+    if (!ctx) return;
+    const labels = [];
+    const dataPays = [], dataOTC = [], dataWallet = [], dataCards = [];
+    const now = new Date();
+    for (let i = 60; i >= 0; i--) {
+      const t = new Date(now.getTime() - i * 60_000);
+      labels.push(`${String(t.getUTCHours()).padStart(2,'0')}:${String(t.getUTCMinutes()).padStart(2,'0')}`);
+      const base = 18000 + Math.sin(i/6) * 1200 + Math.random()*600;
+      dataPays.push(Math.round(base));
+      dataOTC.push(Math.round(8000 + Math.cos(i/8) * 900 + Math.random()*400));
+      dataWallet.push(Math.round(9700 + Math.sin(i/4 + 1) * 800 + Math.random()*300 - (i < 10 ? 1800 : 0)));
+      dataCards.push(Math.round(6400 + Math.sin(i/5 + 2) * 700 + Math.random()*350));
+    }
+
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [
+          { label: 'ZenPays', data: dataPays, borderColor: '#1a1a1a', backgroundColor: 'rgba(26,26,26,0.06)', tension: 0.35, borderWidth: 1.5, pointRadius: 0, fill: true },
+          { label: 'ZenWallet', data: dataWallet, borderColor: '#c8780a', backgroundColor: 'rgba(200,120,10,0.05)', tension: 0.35, borderWidth: 1.5, pointRadius: 0, fill: true },
+          { label: 'ZenOTC', data: dataOTC, borderColor: '#2f7d52', backgroundColor: 'rgba(47,125,82,0.04)', tension: 0.35, borderWidth: 1.5, pointRadius: 0, fill: true },
+          { label: 'ZenCards', data: dataCards, borderColor: '#2e4d7b', backgroundColor: 'rgba(46,77,123,0.04)', tension: 0.35, borderWidth: 1.5, pointRadius: 0, fill: true }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: {
+            display: true,
+            position: 'bottom',
+            align: 'start',
+            labels: {
+              boxWidth: 8,
+              boxHeight: 8,
+              padding: 14,
+              font: { family: 'JetBrains Mono', size: 10 },
+              color: '#44423d'
+            }
+          },
+          tooltip: {
+            backgroundColor: '#1a1a1a',
+            titleFont: { family: 'JetBrains Mono', size: 10 },
+            bodyFont: { family: 'JetBrains Mono', size: 11 },
+            padding: 10,
+            cornerRadius: 0
+          }
+        },
+        scales: {
+          x: {
+            grid: { color: '#e5e0d2', drawTicks: false },
+            ticks: {
+              color: '#8a8678',
+              font: { family: 'JetBrains Mono', size: 9 },
+              maxRotation: 0,
+              autoSkip: true,
+              maxTicksLimit: 8
+            },
+            border: { color: '#1a1a1a' }
+          },
+          y: {
+            grid: { color: '#e5e0d2' },
+            ticks: {
+              color: '#8a8678',
+              font: { family: 'JetBrains Mono', size: 9 },
+              callback: v => (v/1000).toFixed(0) + 'k'
+            },
+            border: { color: '#1a1a1a' }
+          }
+        }
+      }
+    });
+  })();
+
+  // Live event stream
+  (function(){
+    const container = document.getElementById('logStream');
+    if (!container) return;
+    const events = [
+      { sev: 'INF', svc: 'ZenPays', msg: 'auth.success rate=99.89% window=5s' },
+      { sev: 'WRN', svc: 'ZenTrust', msg: 'risk.queue depth=1213 (>800)' },
+      { sev: 'INF', svc: 'ZenId', msg: 'token.issued count=68421 region=eu-west-1' },
+      { sev: 'INF', svc: 'ZenVault', msg: 'read.p50=8ms read.p99=24ms' },
+      { sev: 'WRN', svc: 'ZenWallet', msg: 'authorize.timeout count=14 in 30s' },
+      { sev: 'INF', svc: 'ZenRouting', msg: 'route.swap origin=ap-south-1 target=ap-east-1' },
+      { sev: 'INF', svc: 'ZenPulse', msg: 'webhook.delivered batch=482 lag=104ms' },
+      { sev: 'INF', svc: 'ZenCards', msg: 'auth.declined reason=insufficient_funds count=23' },
+      { sev: 'DBG', svc: 'ZenOTC', msg: 'match.book depth=412 spread=$0.04' },
+      { sev: 'WRN', svc: 'ZenTrust', msg: 'scorer.lag p99=412ms baseline=96ms' },
+      { sev: 'INF', svc: 'ZenBanking', msg: 'sweep.scheduled accounts=1183 window=02:00Z' },
+      { sev: 'INF', svc: 'ZenVault', msg: 'snapshot.complete bytes=4.1GB duration=3.2s' }
+    ];
+
+    function fmtTime() {
+      const d = new Date();
+      return `${String(d.getUTCHours()).padStart(2,'0')}:${String(d.getUTCMinutes()).padStart(2,'0')}:${String(d.getUTCSeconds()).padStart(2,'0')}`;
+    }
+
+    function sevColor(s) {
+      if (s === 'WRN') return 'text-[var(--amber)]';
+      if (s === 'ERR') return 'text-[var(--red)]';
+      if (s === 'DBG') return 'text-[var(--ink-mute)]';
+      return 'text-[var(--ink-soft)]';
+    }
+
+    function addEvent() {
+      const e = events[Math.floor(Math.random() * events.length)];
+      const line = document.createElement('div');
+      line.className = 'whitespace-nowrap overflow-hidden';
+      line.innerHTML = `<span class="text-[var(--ink-mute)]">${fmtTime()}</span>  <span class="${sevColor(e.sev)} font-semibold">${e.sev}</span>  <span class="text-[var(--ink)] font-semibold">${e.svc}</span>  <span class="text-[var(--ink-soft)]">${e.msg}</span>`;
+      container.prepend(line);
+      while (container.children.length > 14) container.removeChild(container.lastChild);
+    }
+
+    // seed
+    for (let i = 0; i < 12; i++) addEvent();
+    setInterval(addEvent, 1800);
+  })();
+</script>
+
+</body>
+</html>
