@@ -1,7 +1,7 @@
 ---
-title: The Comfortable Lie- Why "At Least Astrology Gives Hope" Doesn't Hold Up
+title: The Comfortable Lie
 layout: post
-description: You deserve hope that's true. And the good news is, it's available. It just doesn't come from the stars.
+description: Why "At Least Astrology Gives Hope" Doesn't Hold Up
 ---
 
 There's a defense of astrology you've probably heard at a dinner party, usually delivered with a shrug and a half-smile: "Sure, maybe it's not *real*, but what's the harm? It gives people hope." It sounds gentle and reasonable. Who wants to be the person stomping on someone's small comfort?
