@@ -1,4 +1,3 @@
-
 ---
 title: The Comfortable Lie- Why "At Least Astrology Gives Hope" Doesn't Hold Up
 layout: post
