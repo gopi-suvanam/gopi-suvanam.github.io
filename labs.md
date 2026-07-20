@@ -62,7 +62,6 @@ LocalCode is an AI coding environment that combines modern coding agents with lo
 
 **Status:** In development.
 
----
 
 ## EntropyFlow
 
@@ -80,7 +79,6 @@ EntropyFlow is an experimental framework for building efficient inference system
 
 **Status:** Enterprise licensing and research collaborations.
 
----
 
 ## Finance 3.0
 
@@ -98,7 +96,6 @@ Finance 3.0 is a research and executive education initiative exploring the conve
 
 **Status:** Active.
 
----
 
 ## Research
 
@@ -113,7 +110,6 @@ Research spanning:
 
 Selected publications and working papers are available on this site.
 
----
 
 # Strategic Partnerships
 
