@@ -6,9 +6,8 @@ description: A technology lab building browser-native developer tools, AI infras
 
 A collection of technology ventures built at the intersection of AI, browser-native computing, developer tools, and financial infrastructure.
 
----
 
-## Scribbler
+## [Scribbler](https://scribbler.live)
 
 **Browser-native executable JavaScript notebooks**
 
@@ -26,7 +25,26 @@ Scribbler is an executable JavaScript notebook that runs entirely in the browser
 
 **Status:** Available for strategic acquisition, licensing, or OEM partnership.
 
----
+## [Voltrix](https://voltrix.scribbler.live)
+
+**High-performance quantitative finance library**
+
+Voltrix is a high-performance Python library and computation engine for quantitative finance. It provides fast, production-grade implementations of pricing models, risk analytics, simulations, and portfolio calculations for banks, fintechs, trading firms, and researchers.
+
+**Highlights**
+
+- Derivative pricing
+- Risk analytics and Value-at-Risk (VaR)
+- Monte Carlo simulation
+- Structured product pricing
+- Greeks and sensitivity analysis
+- Yield curves and fixed income analytics
+- Portfolio valuation
+- High-performance numerical computation
+- Python SDK and service APIs
+- Enterprise-ready architecture
+
+**Status:** Available for commercial licensing, OEM integration, and strategic partnerships.
 
 ## LocalCode
 
