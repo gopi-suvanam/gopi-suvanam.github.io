@@ -18,9 +18,9 @@ Property rights, in other words, rest on something easy to overlook: **political
 
 ## Nationalism as an Institutional Fact
 
-Thus, Property cannot exist without *nationalism*.
+Poperty, thus, cannot exist without *nationalism*.
 
-Here is the point worth making precisely, because the word invites misunderstanding:  not nationalism as sentiment, flag-waving, or emotional attachment to a homeland, but nationalism as a structural fact about the world. Humanity is divided into sovereign nations, and that division is not incidental to the property system. It is the architecture that makes the property system possible at all.
+Here is the point worth making precisely, because the word invites misunderstanding: *nationalism* not as sentiment, flag-waving, or emotional attachment to a homeland, but *nationalism* as a structural fact about the world. Humanity is divided into sovereign nations, and that division is not incidental to the property system. It is the architecture that makes the property system possible at all.
 
 The modern world is organized into sovereign jurisdictions. There is no single global institution that defines every property right or enforces every ownership claim. Instead there are Indian property rights, American property rights, British property rights, Singaporean property rights — each one the product of a distinct national legal order. Each jurisdiction determines what may be owned, who may own it, how ownership transfers, what happens on an owner's death, which contracts are enforceable, and what remedies exist when property is taken or damaged.
 
